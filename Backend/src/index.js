@@ -1,6 +1,7 @@
 const app = require("./app");
+const config = require("./config.js");
 const init = async () => {
-  await app.listen(3000);
-  console.log("Server on port 3000");
+  await app.listen(config.PORT);
+  console.log(`Server on Port ${config.PORT}`);
 };
 init();

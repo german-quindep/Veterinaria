@@ -14,7 +14,7 @@ const {
 } = require("../validations/validationsUsers");
 //JWT
 const jwt = require("jsonwebtoken");
-const KEY_TOKENS="SECRECT_TOKENS_ID";
+const config = require('../config');
 //NOMBRE DE LA TABLA
 const tabla = "username";
 //CONTROLLERS USERS
@@ -33,7 +33,7 @@ usersController.LoginUser = async (req, res, next) => {
         const desencriptar = await desencriptarPassword(password, encrypt);
         if (desencriptar) {
           //GENERO TOKEN
-          const token = jwt.sign({ id: username }, KEY_TOKENS, {
+          const token = jwt.sign({ id: username }, config.secretJWT, {
             expiresIn: 60 * 60 * 24, //EXPIRACIN DEL TOKEN EN DIA
           });
           res.json({ success: "Ingresado con exito", result, token });
@@ -69,7 +69,7 @@ usersController.RegisterUser = async (req, res, next) => {
     const response = await insertBd("tabla", set);
     if (response) {
       //GENERO TOKEN
-      const token = jwt.sign({ id: username }, KEY_TOKENS, {
+      const token = jwt.sign({ id: username }, config.secretJWT, {
         expiresIn: 60 * 60 * 24, //EXPIRACIN DEL TOKEN EN DIA
       });
       res.json({ message: "Se registro con exito", username, token });

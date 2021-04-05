@@ -1,11 +1,12 @@
 const mysql = require("mysql");
+const config = require('./config.js');
 const { promisify } = require("util");
 var pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "veterinaria",
-  port: 3306,
+  host: config.HOST_BD,
+  user: config.User_BD,
+  password: config.Password_BD,
+  database: config.Database,
+  port: config.Port_BD,
 });
 pool.getConnection(function (error, connection) {
   if (error) {
