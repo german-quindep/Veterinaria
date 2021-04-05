@@ -40,7 +40,7 @@ CrudDaoBD.allRegister = async (table) => {
     .catch((err) => {
       console.error(err);
     });
-    return data;
+  return data;
 };
 
 //ACTUALIZAR
@@ -58,7 +58,7 @@ CrudDaoBD.updateRegister = async (table, set, where) => {
 };
 //ELIMINAR
 CrudDaoBD.deleteRegister = async (table, where) => {
-  SQL = `DElETE FROM ${table} WHERE ${where};`;
+  SQL = `DELETE FROM ${table} WHERE ${where};`;
   const data = await pool
     .query(SQL)
     .then((result) => {
