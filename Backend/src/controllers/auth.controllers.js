@@ -40,7 +40,7 @@ authControllers.authLogin = async (req, res) => {
     } else {
       res.json({
         messageError: "Error al buscar el usuario intentelo mas tarde",
-        status: "202",
+        status: 202,
       });
     }
   }
@@ -48,8 +48,8 @@ authControllers.authLogin = async (req, res) => {
 
 //AUTH CLOSE LOGIN USERS
 
-authControllers.authLogout =(req,res)=>{
-    res.json('Close sesion');
-}
+authControllers.authLogout = (req, res) => {
+  jwt.res.json("Close sesion");
+};
 
 module.exports = authControllers;

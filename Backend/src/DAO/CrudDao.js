@@ -69,5 +69,19 @@ CrudDaoBD.deleteRegister = async (table, where) => {
     });
   return data;
 };
+//CONSULT CON JOIN
+CrudDaoBD.getJoinRegister = async (table, join, where) => {
+  //as user JOIN roles as rol ON user.IdRoles=rol.IdRol WHERE user.username="german"
+  SQL = `SELECT * FROM ${table} ${join} WHERE ${where};`;
+  const data = await pool
+    .query(SQL)
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  return data;
+};
 
 module.exports = CrudDaoBD;
