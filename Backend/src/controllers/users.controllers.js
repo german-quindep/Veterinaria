@@ -21,7 +21,7 @@ usersController.RegisterUser = async (req, res) => {
   if (errors) {
     res.json(errors);
   } else {
-    const set = await validationRol(res, username, email, password, roles);
+    const set = await validationRol(username, email, password, roles);
     const response = await insertBd(tabla, set);
     if (response) {
       //GENERO TOKEN
