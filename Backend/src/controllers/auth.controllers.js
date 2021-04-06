@@ -15,7 +15,7 @@ const config = require("../config");
 authControllers.authLogin = async (req, res) => {
   const { username, password } = req.body;
   //QUERY
-  const errors = ValidarLogin(username, password);
+  const errors = ValidarLogin(req.body);
   if (errors) {
     res.json(errors);
   } else {
@@ -49,7 +49,7 @@ authControllers.authLogin = async (req, res) => {
 //AUTH CLOSE LOGIN USERS
 
 authControllers.authLogout = (req, res) => {
-  jwt.res.json("Close sesion");
+  res.json("Close sesion");
 };
 
 module.exports = authControllers;

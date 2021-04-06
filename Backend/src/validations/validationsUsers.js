@@ -1,16 +1,12 @@
 const bcrypt = require("bcryptjs");
 const userValidation = {};
 //VALIDE REGISTER USERS
-userValidation.ValidarCamposRegistro = (
-  username,
-  email,
-  password,
-  verifyPassword
-) => {
+userValidation.ValidarCamposRegistro = (data) => {
+  const { username, email, password, verifyPassword} = data;
   const errors = [];
   if (!username || username.length < 2) {
     errors.push({
-      text: "Debe tener mas digitos el usuario",
+      text: "Falta el campo username, recuerde debe tener mas de dos digitos",
     });
   }
   if (
@@ -33,12 +29,14 @@ userValidation.ValidarCamposRegistro = (
       text: "No coincide la contraseña",
     });
   }
+  /*if(!typeof email !== 'string')*/ 
   if (errors.length > 0) {
     return errors;
   }
 };
 //VALIDATE LOGIN
-userValidation.ValidarLogin = (username, password) => {
+userValidation.ValidarLogin = (data) => {
+  const { username, password } = data;
   const errors = [];
   if (!username || username.length < 2) {
     errors.push({

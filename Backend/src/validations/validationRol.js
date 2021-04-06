@@ -1,6 +1,7 @@
 const {cifrarPassword}=require('../validations/validationsUsers');
 const {consultById} = require("../DAO/CrudDao");
-const validationRol = async(username,email,password,roles)=>{
+const validationRol = async(data)=>{
+  const { username, email, password, roles } = data;
     const cifrado = await cifrarPassword(password);
     var set="";
     if (roles) {

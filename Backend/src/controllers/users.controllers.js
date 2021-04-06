@@ -11,17 +11,12 @@ const validationRol = require("../validations/validationRol");
 const tabla = "username";
 //REGISTER USER
 usersController.RegisterUser = async (req, res) => {
-  const { username, email, password, verifyPassword, roles } = req.body;
-  const errors = ValidarCamposRegistro(
-    username,
-    email,
-    password,
-    verifyPassword
-  );
+  const { username } = req.body;
+  const errors = ValidarCamposRegistro(req.body);
   if (errors) {
     res.json(errors);
   } else {
-    const set = await validationRol(username, email, password, roles);
+    const set = await validationRol(req.body);
     const response = await insertBd(tabla, set);
     if (response) {
       //GENERO TOKEN
@@ -40,21 +35,16 @@ usersController.RegisterUser = async (req, res) => {
 };
 //UPDATE
 usersController.updateUser = async (req, res) => {
-  const { username, email, password, verifyPassword, roles } = req.body;
+  const { username } = req.body;
   //VERIFY TOKEN
   /*const idUser = req.UserToken;
   console.log(idUser);*/
   const { id } = req.params;
-  const errors = ValidarCamposRegistro(
-    username,
-    email,
-    password,
-    verifyPassword
-  );
+  const errors = ValidarCamposRegistro(req.body);
   if (errors) {
     res.json(errors);
   } else {
-    const set = await validationRol(username, email, password, roles);
+    const set = await validationRol(req.body);
     const where = `IdUser=${id}`;
     const response = await updateRegister(tabla, set, where);
     if (response) {
