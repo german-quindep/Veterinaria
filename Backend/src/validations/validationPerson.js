@@ -7,6 +7,7 @@ const validarPersona = (data) => {
       text: "Debe contener caracteres el nombre",
     });
   }
+  //EXPRESION REGULAR ADMITE LETRAS MAYUSCULA MINISCULA Y ESPACIOS
   if (!/^[A-Za-z\s]+$/i.test(Nombre)) {
     errors.push({
       text: "Solo se permite letras en el campo nombre",
@@ -45,6 +46,7 @@ const validarPersona = (data) => {
       text: "Debe contener un maximo de 10 digitos en la cedula",
     });
   }
+  //EXPRESION REGULAR ADMITE SOLO NUMEROS CON VARIOS DIGITOS SIN ESPACIOS
   if (!/^([0-9])*$/.test(Cedula)) {
     errors.push({
       text: "Debe contener solo numeros el campo cedula sin espacios",
@@ -77,11 +79,13 @@ const validarPersona = (data) => {
       text: "Debe contener caracteres entre 5 a 50  el campo direccion",
     });
   }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, CON ESPACIOS
   if (!/^[A-Za-z0-9\s]+$/g.test(Direccion)) {
     errors.push({
       text: "Debe contener caracteres el campo direccion",
     });
   }
+  //SI HAY ERRORES RETURNO LOS ERRORES
   if (errors.length > 0) {
     return errors;
   }

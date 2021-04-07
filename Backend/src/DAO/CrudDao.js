@@ -6,26 +6,28 @@ var SQL = "";
 //INSERTAR
 CrudDaoBD.insertBd = async (table, set) => {
   SQL = `INSERT INTO ${table} SET ${set};`;
+  //ASIGNO A DATA LO QUE ME ENVIE EL CALLBACK POOL
   const data = await pool
     .query(SQL)
     .then((result) => {
-      return result;
+      return result; //SI HAY EXITO ENVIO EL DATO
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err); //SI HAY ERROR QUEDA LA APP
     });
   return data;
 };
 //CONSULTAR UN ID
 CrudDaoBD.consultById = async (table, where) => {
   SQL = `SELECT * FROM ${table} WHERE ${where};`;
+  //ASIGNO A DATA LO QUE ME ENVIE EL CALLBACK POOL
   const data = await pool
     .query(SQL)
     .then((result) => {
-      return result;
+      return result; //SI HAY EXITO ENVIO EL DATO
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err); //SI HAY ERROR QUEDA LA APP
     });
   return data;
 };

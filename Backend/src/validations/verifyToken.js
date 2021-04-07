@@ -5,39 +5,41 @@ const verify = {};
 var table = "username";
 verify.verifyToken = async (req, res, next) => {
   try {
-    const token = req.headers["x-access-token"];
-    if (!token) {
+    const token = req.headers["x-access-token"]; //PREGUNTO SI VIENE DE LA CABEZERA EL TOKEN
+    if (!token) { //SI NO HAY TOKEN
       return res.status(401).json({
         auth: false,
         message: "Hace falta un token para hacer la peticion",
       });
     }
-    const decode = jwt.verify(token, config.SecretJWT);
+    const decode = jwt.verify(token, config.SecretJWT); //VERIFICO EL TOKEN
     req.UserToken = decode.id; //PARA UTILIZAR EL REQ EN OTROS LADOS EJEMPLO ESTA EN USERSCONTROLLERS UPDATE
     var set = `username="${req.UserToken}"`;
-    const userAutorizacion = await consultById(table, set);
+    const userAutorizacion = await consultById(table, set); //ENVIO LA CONSULTA
     if (!userAutorizacion)
-      return res.status(404).json({ message: "No encontrado el usuario" });
+      return res.status(404).json({ message: "No encontrado el usuario" }); //SI ESTA EN LA BD
     next();
   } catch (error) {
-    res.status(401).json({ message: "No esta autorizado" });
+    res.status(401).json({ message: "No esta autorizado" }); //ERROR
   }
 };
+//ROL ADMIN
 verify.verifyAdmin = async (req, res, next) => {
   try {
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;
     var where = `user.username="${req.UserToken}"`;
-    const rolAutorizacion = await getJoinRegister(table, join, where);
+    const rolAutorizacion = await getJoinRegister(table, join, where);//JOIN PARA LA CONSULTA
     const rolUser = rolAutorizacion[0]["Nombre"];
-    if (rolUser == "Administrador") {
+    if (rolUser == "Administrador") {//SI ES ADMIN 
       next();
       return;
-    }
+    }//SI NO ES ADMIN
     res.status(403).json({ message: "No tiene el rol suficiente" });
   } catch (error) {
     res.status(401).json({ message: "No esta autorizado" });
   }
 };
+//ROL EMPLEADO
 verify.verifyEmploye = async (req, res, next) => {
   try {
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;
@@ -53,6 +55,7 @@ verify.verifyEmploye = async (req, res, next) => {
     res.status(401).json({ message: "No esta autorizado" });
   }
 };
+//ROL CLIENTE
 verify.verifyClient = async (req, res, next) => {
   try {
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;

@@ -1,12 +1,19 @@
 const bcrypt = require("bcryptjs");
 const userValidation = {};
+const { consultById } = require("../DAO/CrudDao");
 //VALIDE REGISTER USERS
 userValidation.ValidarCamposRegistro = (data) => {
-  const { username, email, password, verifyPassword} = data;
+  const { username, email, password, verifyPassword, IdPersona } = data;
   const errors = [];
   if (!username || username.length < 2) {
     errors.push({
       text: "Falta el campo username, recuerde debe tener mas de dos digitos",
+    });
+  }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, SIN ESPACIOS
+  if (!/^[A-Za-z0-9]+$/g.test(username)) {
+    errors.push({
+      text: "Debe contener caracteres el campo direccion",
     });
   }
   if (
@@ -24,12 +31,29 @@ userValidation.ValidarCamposRegistro = (data) => {
       text: "Debe tener mas digitos su contraseña",
     });
   }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, SIN ESPACIOS
+  if (!/^[A-Za-z0-9]+$/g.test(password)) {
+    errors.push({
+      text: "Debe contener caracteres el campo direccion",
+    });
+  }
   if (!verifyPassword || password != verifyPassword) {
     errors.push({
       text: "No coincide la contraseña",
     });
   }
-  /*if(!typeof email !== 'string')*/ 
+  if (!IdPersona) {
+    errors.push({
+      text: "Debe estar registrado con sus datos personales",
+    });
+  }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, SIN ESPACIOS
+  if (!/^[A-Za-z0-9]+$/g.test(verifyPassword)) {
+    errors.push({
+      text: "Debe contener caracteres el campo direccion",
+    });
+  }
+  /*if(!typeof email !== 'string')*/
   if (errors.length > 0) {
     return errors;
   }
@@ -43,9 +67,21 @@ userValidation.ValidarLogin = (data) => {
       text: "Debe tener mas digitos el usuario",
     });
   }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, SIN ESPACIOS
+  if (!/^[A-Za-z0-9]+$/g.test(username)) {
+    errors.push({
+      text: "Debe contener caracteres el campo username",
+    });
+  }
   if (!password || password.length <= 4) {
     errors.push({
       text: "Debe tener mas digitos su contraseña",
+    });
+  }
+  //EXPRESION REGULAR QUE ADMITE NUMEROS, LETRAS MAYUS Y MINIS, SIN ESPACIOS
+  if (!/^[A-Za-z0-9]+$/g.test(password)) {
+    errors.push({
+      text: "Debe contener caracteres el campo password",
     });
   }
   if (errors.length > 0) {
