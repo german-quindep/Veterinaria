@@ -10,7 +10,7 @@ const { PersonRegisterMessage } = require("../middleware/errorsValidate"); //PRE
 const { checkCedulayTelefono } = require("../validations/checkPerson"); //PRESENTO ERROR DE DUPLICACIONES
 
 //GET
-routePerson.get('/Registrar-Persona');
+routePerson.get("/Registrar-Persona");
 //POST
 routePerson.post(
   "/Registrar-Persona",

@@ -1,34 +1,35 @@
-const controllerPerson = {};
+const controllerVeterinario = {};
 const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
-const table = "persona";
-//REGISTER PERSON
-controllerPerson.RegisterPerson = async (req, res) => {
+var table = "veterinario";
+
+//REGISTRAR
+controllerVeterinario.RegisterVeterinario = async (req, res) => {
   const { Nombre, Apellido, Cedula, Telefono, Direccion } = req.body;
   const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
   const response = await insertBd(table, set); //ENVIO A LA BD LO QUE INGRESO EL USUARIO
   if (response)
     //SI VIENE ALGO RESPONDO EXITO
     res.status(201).json({
-      message: `Se agrego con exito a ${Nombre} ${Apellido}`,
+      message: `Se agrego con exito al veterinario ${Nombre} ${Apellido}`,
     });
-  //return res.send(Cedula);
   //SI HAY ERRORES
   else
     res
       .status(500)
       .json({ messageError: "Error al registrar intentelo mas tarde" });
 };
-//UPDATE PERSON
-controllerPerson.UpdatePerson = async (req, res) => {
+
+//ACTUALIZAR
+controllerVeterinario.ActualizarVeterinario = async (req, res) => {
   const { Nombre, Apellido, Cedula, Telefono, Direccion } = req.body;
   const { id } = req.params;
   const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
-  const where = `IdPersona=${id}`;
+  const where = `IdVeterinario=${id}`;
   const response = await updateRegister(table, set, where); //ENVIO LA PETICION DE ACTUALIZAR CON LOS DATOS
   if (response)
     //SI OBTUVO EXITO
     res.status(201).json({
-      message: `Se actualizo con exito a ${Nombre} ${Apellido}`,
+      message: `Se actualizo con exito al veterinario ${Nombre} ${Apellido}`,
     });
   //SI OCURRIO UN ERROR
   else
@@ -36,14 +37,16 @@ controllerPerson.UpdatePerson = async (req, res) => {
       .status(500)
       .json({ messageError: "Error al actualizar intentelo mas tarde" });
 };
-//DELETE PERSON
-controllerPerson.deletePerson = async (req, res) => {
+
+//ELIMINAR
+
+controllerVeterinario.EliminarVeterinario = async (req, res) => {
   const { id } = req.params;
-  const where = `IdPersona=${id}`;
+  const where = `IdVeterinario=${id}`;
   const response = await deleteRegister(table, where); //ENVIO EL ID PARA ELIMINAR
   if (response)
     //SI OBTUVO EXITO
-    res.status(200).json({ message: "Se elimino con exito" });
+    res.status(200).json({ message: "Se elimino con exito al veterinario" });
   //SI DIO UN ERROR
   else
     res.status(500).json({
@@ -52,4 +55,4 @@ controllerPerson.deletePerson = async (req, res) => {
     });
 };
 
-module.exports = controllerPerson;
+module.exports = controllerVeterinario;

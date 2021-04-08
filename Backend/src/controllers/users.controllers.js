@@ -37,30 +37,28 @@ usersController.updateUser = async (req, res) => {
   const set = await validationRol(req.body); //VALIDO QUE INGRESE UN ROL VALIDO
   const where = `IdUser=${id}`;
   const response = await updateRegister(tabla, set, where); //ENVIO LOS DATOS PARA ACTUALIZAR
-  if (response) {
+  if (response)
     //SI HAY EXITO
     res.status(200).json({ message: "Se actualizo con exito", username });
-  } else {
-    //SI OCURRIO UN ERROR
+  //SI OCURRIO UN ERROR
+  else
     res
       .status(500)
       .json({ messageError: "Error al registrar intentelo mas tarde" });
-  }
 };
 //DELETE USER
 usersController.deleteUser = async (req, res) => {
   const { id } = req.params;
   const where = `IdUser=${id}`;
   const response = await deleteRegister(tabla, where); //ENVIO EL ID PARA ELIMINAR
-  if (response) {
+  if (response)
     //SI HAY EXITO
     res.status(204).json({ message: "Se elimino con exito" });
-  } else {
-    // SI OCURRIO UN ERROR
+  // SI OCURRIO UN ERROR
+  else
     res.status(500).json({
       messageError:
         "Ocurrio un error al eliminar, vuelva a intentarlo mas tarde",
     });
-  }
 };
 module.exports = usersController;

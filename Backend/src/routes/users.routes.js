@@ -24,7 +24,7 @@ routerUser.post(
 //PUT
 routerUser.put(
   "/actualizar/:id",
-  [checkRoles, chekUserOrEmail, regisErrorMessage],
+  [checkRoles, chekUserOrEmail, regisErrorMessage, PersonIdCheck],
   updateUser
 );
 //DELETE
