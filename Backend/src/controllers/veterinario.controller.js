@@ -26,7 +26,7 @@ controllerVeterinario.ActualizarVeterinario = async (req, res) => {
   const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
   const where = `IdVeterinario=${id}`;
   const response = await updateRegister(table, set, where); //ENVIO LA PETICION DE ACTUALIZAR CON LOS DATOS
-  if (response)
+  if (response.affectedRows > 0)
     //SI OBTUVO EXITO
     res.status(201).json({
       message: `Se actualizo con exito al veterinario ${Nombre} ${Apellido}`,
@@ -44,7 +44,7 @@ controllerVeterinario.EliminarVeterinario = async (req, res) => {
   const { id } = req.params;
   const where = `IdVeterinario=${id}`;
   const response = await deleteRegister(table, where); //ENVIO EL ID PARA ELIMINAR
-  if (response)
+  if (response.affectedRows > 0)
     //SI OBTUVO EXITO
     res.status(200).json({ message: "Se elimino con exito al veterinario" });
   //SI DIO UN ERROR

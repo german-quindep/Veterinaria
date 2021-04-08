@@ -25,7 +25,7 @@ controllerPerson.UpdatePerson = async (req, res) => {
   const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
   const where = `IdPersona=${id}`;
   const response = await updateRegister(table, set, where); //ENVIO LA PETICION DE ACTUALIZAR CON LOS DATOS
-  if (response)
+  if (response.affectedRows > 0)
     //SI OBTUVO EXITO
     res.status(201).json({
       message: `Se actualizo con exito a ${Nombre} ${Apellido}`,
@@ -41,7 +41,7 @@ controllerPerson.deletePerson = async (req, res) => {
   const { id } = req.params;
   const where = `IdPersona=${id}`;
   const response = await deleteRegister(table, where); //ENVIO EL ID PARA ELIMINAR
-  if (response)
+  if (response.affectedRows > 0)
     //SI OBTUVO EXITO
     res.status(200).json({ message: "Se elimino con exito" });
   //SI DIO UN ERROR

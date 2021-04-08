@@ -4,6 +4,7 @@ const { RegisterHistorialMessage } = require("../middleware/errorsValidate");
 const {
   Registrar,
   Actualizar,
+  Eliminar
 } = require("../controllers/historial.controllers");
 routeHistorial.post(
   "/Registrar-Historial",
@@ -15,6 +16,6 @@ routeHistorial.put(
   RegisterHistorialMessage,
   Actualizar
 );
-routeHistorial.delete("/Eliminar-Registro/:id");
+routeHistorial.delete("/Eliminar-Historial/:id",Eliminar);
 
 module.exports = routeHistorial;

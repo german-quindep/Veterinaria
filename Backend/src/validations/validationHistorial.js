@@ -1,7 +1,7 @@
 const validateHistorial = (data) => {
   const errors = [];
   const expresionString = /^[A-Za-z0-9\s]+$/g;
-  const validarFecha = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+  const validarFecha = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
   const { Fecha, Motivo, Diagnostico } = data;
   //FECHA VALIDATE
   if (!validarFecha.test(Fecha))

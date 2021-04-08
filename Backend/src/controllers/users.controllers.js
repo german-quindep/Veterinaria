@@ -37,7 +37,7 @@ usersController.updateUser = async (req, res) => {
   const set = await validationRol(req.body); //VALIDO QUE INGRESE UN ROL VALIDO
   const where = `IdUser=${id}`;
   const response = await updateRegister(tabla, set, where); //ENVIO LOS DATOS PARA ACTUALIZAR
-  if (response)
+  if (response.affectedRows > 0)
     //SI HAY EXITO
     res.status(200).json({ message: "Se actualizo con exito", username });
   //SI OCURRIO UN ERROR
@@ -51,7 +51,7 @@ usersController.deleteUser = async (req, res) => {
   const { id } = req.params;
   const where = `IdUser=${id}`;
   const response = await deleteRegister(tabla, where); //ENVIO EL ID PARA ELIMINAR
-  if (response)
+  if (response.affectedRows > 0)
     //SI HAY EXITO
     res.status(204).json({ message: "Se elimino con exito" });
   // SI OCURRIO UN ERROR

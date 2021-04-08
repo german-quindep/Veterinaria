@@ -45,6 +45,10 @@ userValidation.ValidarCamposRegistro = (data) => {
     errors.push({
       text: "Debe estar registrado con sus datos personales",
     });
+  if (!/^([0-9])*$/.test(IdPersona))
+    errors.push({
+      text: "Debe ser solamente numero el identificador",
+    });
   /*if(!typeof email !== 'string')*/
   if (errors.length > 0) return errors;
 };
