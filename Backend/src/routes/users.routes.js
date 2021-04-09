@@ -11,23 +11,23 @@ const {
   paramsRegisterUSer,
   PersonIdCheck,
 } = require("../validations/checkRol.js"); //SE VERIFICA EL ROL Y EMAIL SI EXISTEN
-const { regisErrorMessage } = require("../middleware/errorsValidate");
+const { regisUsersVerify } = require("../middleware/errorsValidate");
 const routerUser = Router();
 //GET
 routerUser.get("/Registrarse/:id", paramsRegisterUSer);
 //POST
 routerUser.post(
-  "/Registrarse",
-  [checkRoles, chekUserOrEmail, regisErrorMessage, PersonIdCheck],
+  "/Registrar-User",
+  [regisUsersVerify,checkRoles, chekUserOrEmail, PersonIdCheck],
   RegisterUser
 );
 //PUT
 routerUser.put(
-  "/actualizar/:id",
-  [checkRoles, chekUserOrEmail, regisErrorMessage, PersonIdCheck],
+  "/actualizar-User/:id",
+  [regisUsersVerify,checkRoles, chekUserOrEmail, PersonIdCheck],
   updateUser
 );
 //DELETE
-routerUser.delete("/eliminar/:id", [verifyToken, verifyAdmin], deleteUser);
+routerUser.delete("/Eliminar-User/:id", deleteUser);
 
 module.exports = routerUser;

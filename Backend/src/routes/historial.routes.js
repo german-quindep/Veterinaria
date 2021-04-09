@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const routeHistorial = Router();
-const { RegisterHistorialMessage } = require("../middleware/errorsValidate");
+const { ValidarHistorial } = require("../middleware/errorsValidate");
 const {
   Registrar,
   Actualizar,
@@ -8,12 +8,12 @@ const {
 } = require("../controllers/historial.controllers");
 routeHistorial.post(
   "/Registrar-Historial",
-  RegisterHistorialMessage,
+  ValidarHistorial,
   Registrar
 );
 routeHistorial.put(
   "/Actualizar-Historial/:id",
-  RegisterHistorialMessage,
+  ValidarHistorial,
   Actualizar
 );
 routeHistorial.delete("/Eliminar-Historial/:id",Eliminar);

@@ -7,4 +7,11 @@ module.exports = {
   Database: process.env.Database || "veterinaria",
   Port_BD: process.env.Port_BD || 3306,
   URL_API: process.env.URL_API || "/api",
+  ExpresionString: process.env.ExpresionString || /^[A-Za-z\s]+$/i,
+  ExpresionNumber: process.env.ExpresionNumber || /^([0-9])*$/,
+  ExpresionStringSpace: process.env.ExpresionStringSpace || /^[A-Za-z0-9\s]+$/g,
+  ExpresionEmail:
+    process.env.ExpresionEmail ||
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 };
+
