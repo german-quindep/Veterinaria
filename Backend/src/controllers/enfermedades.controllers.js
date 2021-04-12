@@ -12,8 +12,7 @@ controllerEnferme.Registrar = async (req, res) => {
   const { Descripcion, Sintomas, IdHistorial } = req.body;
   const set = `Descripcion='${Descripcion}',Sintomas='${Sintomas}',IdHistorial=${IdHistorial}`;
   const resp = await insertBd(table, set);
-  if (resp)
-    res.status(200).json({ message: "Exito al registrar" });
+  if (resp) res.status(200).json({ message: "Exito al registrar" });
   else
     res.status(400).json({ message: "Ocurrio un error vuelva a intentarlo" });
 };

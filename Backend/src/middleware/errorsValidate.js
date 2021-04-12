@@ -1,14 +1,14 @@
 const messageErrors = {};
 const {
   validateForm,
-  CedulaYTelefono,
+  CedulaTelefono,
   verifyEmail,
   validatePassword,
   confirPassword,
   verifyFecha,
   verifyID,
 } = require("../validations/validationsForm");
-const config = require("../config");
+const config = require("../expresionRegular"); //CONFIG DE EXPRESIONES REGULARES
 //REGISTRO DE CAMPOS USER
 messageErrors.regisUsersVerify = (req, res, next) => {
   const { username, email, password, verifyPassword, IdPersona } = req.body;
@@ -39,9 +39,9 @@ messageErrors.PersonRegisterMessage = (req, res, next) => {
   //VALIDACION FORM NOMBRE APELLIDO CEDULA TELEFONO DIRECCION
   validateForm(Nombre, 3, 25, "nombre", config.ExpresionString);
   validateForm(Apellido, 3, 25, "apellido", config.ExpresionString);
-  CedulaYTelefono(Cedula, 10, "cedula", config.ExpresionNumber);
-  CedulaYTelefono(Telefono, 10, "telefono", config.ExpresionNumber);
-  validateForm(Direccion, 5, 50, "direccion", config.ExpresionStringSpace);
+  CedulaTelefono(Cedula, 10, "cedula", config.ExpresionNumber);
+  CedulaTelefono(Telefono, 10, "telefono", config.ExpresionNumber);
+  validateForm(Direccion, 5, 50, "direccion", /^[A-Za-z0-9\s]+$/g);
   next(); //SI SE CUMPLE QUE SIGA LA SIGUIENTE FUNCION
 };
 //REGISTRO CAMPO HISTORIAL
@@ -55,9 +55,41 @@ messageErrors.ValidarHistorial = (req, res, next) => {
 //REGISTRO CAMPO ENFERMEDADES
 messageErrors.validarEnfermedades = (req, res, next) => {
   const { Descripcion, Sintomas, IdHistorial } = req.body;
-  validateForm(Descripcion, 3, 255, "descripcion", config.ExpresionString);
+  validateForm(Descripcion, 3, 255, "descripcion", /^[A-Za-z0-9\s]+$/g);
   validateForm(Sintomas, 3, 255, "sintomas", /^[A-Za-z0-9\s]+$/g);
   verifyID(IdHistorial, "Id Historial", config.ExpresionNumber);
+  next();
+};
+//VALIDAR CAMPO DE MASCOTAS
+messageErrors.validarMascotas = (req, res, next) => {
+  const {
+    Nombre,
+    FechaNacimiento,
+    Edad,
+    Raza,
+    Color,
+    Peso,
+    Especie,
+    IdUser,
+    IdVeterinario,
+    IdHistorial,
+  } = req.body;
+  validateForm(Nombre, 3, 20, "Nombre de la mascota", /^[A-Za-z0-9\s]+$/g);
+  verifyFecha(FechaNacimiento);
+  validateForm(Edad,1, 3, "Edad de la mascota", config.ExpresionNumber);
+  validateForm(Raza, 3, 20, "Raza de la mascota", config.ExpresionString);
+  validateForm(
+    Color,
+    3,
+    25,
+    "Color de la mascota",
+    config.ExpresionString
+  );
+  validateForm(Peso,1, 3, "Peso de la mascota", config.ExpresionNumber);
+  validateForm(Especie, 3, 20, "Especie", config.ExpresionString);
+  verifyID(IdUser, "usuario", config.ExpresionNumber);
+  verifyID(IdVeterinario, "veterinario", config.ExpresionNumber);
+  verifyID(IdHistorial, "historial", config.ExpresionNumber);
   next();
 };
 module.exports = messageErrors;

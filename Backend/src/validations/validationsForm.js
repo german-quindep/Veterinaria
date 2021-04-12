@@ -1,5 +1,7 @@
+const expresionRegular = require("../expresionRegular");
+
 const validations = {};
-//VALIDAR CAMPOS 
+//VALIDAR CAMPOS
 validations.validateForm = (
   nombre,
   min,
@@ -61,15 +63,16 @@ validations.confirPassword = (
     );
 };
 //VERIFY CEDULA Y TELEFONO
-validations.CedulaYTelefono = (nombre, max, descripcion, expresionRegular) => {
+validations.CedulaTelefono = (nombre, max, descripcion, expresionRegular) => {
   if (typeof nombre !== "string")
     throw new Error(`El campo ${descripcion} debe contener numeros`);
   if (!expresionRegular.test(nombre))
     throw new Error(`El campo ${descripcion} debe tener caracteres`);
   if (!nombre || nombre.length < max)
-    throw new Error(`El campo ${descripcion} debe tener digitos de 10 numeros`);
+    throw new Error(
+      `El campo ${descripcion} debe tener digitos de ${max} numeros`
+    );
 };
-
 //VERIFY ID
 validations.verifyID = (nombre, descripcion, expresionRegular) => {
   if (!nombre) throw new Error(`El campo ${descripcion} debe estar registrado`);
