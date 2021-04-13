@@ -9,8 +9,7 @@ var table = "enfermedades";
 
 //REGISTRAR
 controllerEnferme.Registrar = async (req, res) => {
-  const { Descripcion, Sintomas, IdHistorial } = req.body;
-  const set = `Descripcion='${Descripcion}',Sintomas='${Sintomas}',IdHistorial=${IdHistorial}`;
+  const set = setData(req.body);
   const resp = await insertBd(table, set);
   if (resp) res.status(200).json({ message: "Exito al registrar" });
   else
@@ -19,9 +18,8 @@ controllerEnferme.Registrar = async (req, res) => {
 
 //ACTUALIZAR
 controllerEnferme.Actualizar = async (req, res) => {
-  const { Descripcion, Sintomas, IdHistorial } = req.body;
   const { id } = req.params;
-  const set = `Descripcion='${Descripcion}',Sintomas='${Sintomas}',IdHistorial=${IdHistorial}`;
+  const set = setData(req.body);
   const where = `IdEnfermedades=${id}`;
   const resp = await updateRegister(table, set, where);
   if (resp.affectedRows > 0)
@@ -40,6 +38,11 @@ controllerEnferme.Eliminar = async (req, res) => {
     res.status(400).json({ message: "Ocurrio un error vuelva a intentarlo" });
 };
 
-//ELIMINAR
+//OBTENER LA DATA
+const setData = (data) => {
+  const { Descripcion, Sintomas, IdHistorial } = data;
+  const set = `Descripcion='${Descripcion}',Sintomas='${Sintomas}',IdHistorial=${IdHistorial}`;
+  return set;
+};
 
 module.exports = controllerEnferme;

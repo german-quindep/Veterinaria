@@ -3,13 +3,12 @@ const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
 const table = "persona";
 //REGISTER PERSON
 controllerPerson.RegisterPerson = async (req, res) => {
-  const { Nombre, Apellido, Cedula, Telefono, Direccion } = req.body;
-  const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
+  const set = setData(req.body);
   const response = await insertBd(table, set); //ENVIO A LA BD LO QUE INGRESO EL USUARIO
   if (response)
     //SI VIENE ALGO RESPONDO EXITO
     res.status(201).json({
-      message: `Se agrego con exito a ${Nombre} ${Apellido}`,
+      message: `Se agrego con exito a ${req.body.Nombre} ${req.body.Apellido}`,
     });
   //return res.send(Cedula);
   //SI HAY ERRORES
@@ -20,15 +19,14 @@ controllerPerson.RegisterPerson = async (req, res) => {
 };
 //UPDATE PERSON
 controllerPerson.UpdatePerson = async (req, res) => {
-  const { Nombre, Apellido, Cedula, Telefono, Direccion } = req.body;
   const { id } = req.params;
-  const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
+  const set = setData(req.body);
   const where = `IdPersona=${id}`;
   const response = await updateRegister(table, set, where); //ENVIO LA PETICION DE ACTUALIZAR CON LOS DATOS
   if (response.affectedRows > 0)
     //SI OBTUVO EXITO
     res.status(201).json({
-      message: `Se actualizo con exito a ${Nombre} ${Apellido}`,
+      message: `Se actualizo con exito a ${req.body.Nombre} ${req.body.Apellido}`,
     });
   //SI OCURRIO UN ERROR
   else
@@ -50,6 +48,12 @@ controllerPerson.deletePerson = async (req, res) => {
       messageError:
         "Ocurrio un error al eliminar, vuelva a intentarlo mas tarde",
     });
+};
+//OBTENER LA DATA
+const setData = (data) => {
+  const { Nombre, Apellido, Cedula, Telefono, Direccion } = data;
+  const set = `Nombre='${Nombre}',Apellido='${Apellido}',Cedula=${Cedula},Telefono=${Telefono},Direccion='${Direccion}'`;
+  return set;
 };
 
 module.exports = controllerPerson;

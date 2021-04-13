@@ -76,20 +76,23 @@ messageErrors.validarMascotas = (req, res, next) => {
   } = req.body;
   validateForm(Nombre, 3, 20, "Nombre de la mascota", /^[A-Za-z0-9\s]+$/g);
   verifyFecha(FechaNacimiento);
-  validateForm(Edad,1, 3, "Edad de la mascota", config.ExpresionNumber);
+  validateForm(Edad, 1, 3, "Edad de la mascota", config.ExpresionNumber);
   validateForm(Raza, 3, 20, "Raza de la mascota", config.ExpresionString);
-  validateForm(
-    Color,
-    3,
-    25,
-    "Color de la mascota",
-    config.ExpresionString
-  );
-  validateForm(Peso,1, 3, "Peso de la mascota", config.ExpresionNumber);
+  validateForm(Color, 3, 25, "Color de la mascota", config.ExpresionString);
+  validateForm(Peso, 1, 3, "Peso de la mascota", config.ExpresionNumber);
   validateForm(Especie, 3, 20, "Especie", config.ExpresionString);
   verifyID(IdUser, "usuario", config.ExpresionNumber);
   verifyID(IdVeterinario, "veterinario", config.ExpresionNumber);
   verifyID(IdHistorial, "historial", config.ExpresionNumber);
+  next();
+};
+//VALIDAR CAMPOS DE VACUNA
+messageErrors.validarVacunas = (req, res,next) => {
+  const { Fecha, Tipo_Vacuna, Num_Dosis, IdMascota } = req.body;
+  verifyFecha(Fecha);
+  validateForm(Tipo_Vacuna, 5, 100, "Tipo de vacuna", config.ExpresionString);
+  validateForm(Num_Dosis, 1, 3, "Numero de dosis", config.ExpresionNumber);
+  verifyID(IdMascota, "Mascota", config.ExpresionNumber);
   next();
 };
 module.exports = messageErrors;

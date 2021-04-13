@@ -19,62 +19,34 @@ mascotasControllers.todasLasMascotas = async (req, res) => {
 };
 //REGISTRAR MASCOTAS
 mascotasControllers.registerMascotas = async (req, res) => {
-  const {
-    Nombre,
-    FechaNacimiento,
-    Edad,
-    Raza,
-    Color,
-    Peso,
-    Especie,
-    IdUser,
-    IdVeterinario,
-    IdHistorial,
-  } = req.body;
-  var set = `Nombre='${Nombre}',FechaNacimiento='${FechaNacimiento}',Edad=${Edad},Raza='${Raza}',Color='${Color}',Peso=${Peso},Especie='${Especie}',IdUser=${IdUser},IdVeterinario=${IdVeterinario},IdHistorial=${IdHistorial}`;
+  const set = setData(req.body);
   const resp = await insertBd(table, set);
   if (resp)
     res
       .status(200)
-      .json({ message: `Se registro con exito a la mascota ${Nombre}` });
+      .json({ message: `Se registro con exito a la mascota ${req.body.Nombre}` });
   else
-    res
-      .status(400)
-      .json({
-        message:
-          "Ocurrio un error vuelva al registrar intentelo mas tarde o verifique los datos",
-      });
+    res.status(400).json({
+      message:
+        "Ocurrio un error vuelva al registrar intentelo mas tarde o verifique los datos",
+    });
 };
 //ACTUALIZAR MASCOTAS
 mascotasControllers.ActualizarMascotas = async (req, res) => {
-  const {
-    Nombre,
-    FechaNacimiento,
-    Edad,
-    Raza,
-    Color,
-    Peso,
-    Especie,
-    IdUser,
-    IdVeterinario,
-    IdHistorial,
-  } = req.body;
-  var set = `Nombre='${Nombre}',FechaNacimiento='${FechaNacimiento}',Edad=${Edad},Raza='${Raza}',Color='${Color}',Peso=${Peso},Especie='${Especie}',IdUser=${IdUser},IdVeterinario=${IdVeterinario},IdHistorial=${IdHistorial}`;
+  const set = setData(req.body);
   var where = `IdMascota=${req.params.id}`;
   const resp = await updateRegister(table, set, where);
   if (resp.affectedRows > 0)
     //SI HAY EXITO
     res
       .status(200)
-      .json({ message: `Se actualizo con exito a la mascota ${Nombre}` });
+      .json({ message: `Se actualizo con exito a la mascota ${req.body.Nombre}` });
   //SI OCURRIO UN ERROR
   else
-    res
-      .status(500)
-      .json({
-        messageError:
-          "Error al actualizar intentelo mas tarde o verifique los datos",
-      });
+    res.status(500).json({
+      messageError:
+        "Error al actualizar intentelo mas tarde o verifique los datos",
+    });
 };
 //UNA MASCOTAS
 mascotasControllers.UnaMascota = async (req, res) => {
@@ -99,5 +71,21 @@ mascotasControllers.EliminarMascotas = async (req, res) => {
         "Ocurrio un error al eliminar, vuelva a intentarlo mas tarde",
     });
 };
-
+//OBTENGO LA DATA
+const setData = (data) => {
+  const {
+    Nombre,
+    FechaNacimiento,
+    Edad,
+    Raza,
+    Color,
+    Peso,
+    Especie,
+    IdUser,
+    IdVeterinario,
+    IdHistorial,
+  } = data;
+  const set = `Nombre='${Nombre}',FechaNacimiento='${FechaNacimiento}',Edad=${Edad},Raza='${Raza}',Color='${Color}',Peso=${Peso},Especie='${Especie}',IdUser=${IdUser},IdVeterinario=${IdVeterinario},IdHistorial=${IdHistorial}`;
+  return set;
+};
 module.exports = mascotasControllers;
