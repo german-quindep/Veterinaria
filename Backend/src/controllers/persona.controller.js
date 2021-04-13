@@ -1,6 +1,20 @@
 const controllerPerson = {};
-const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
+const {
+  insertBd,
+  updateRegister,
+  deleteRegister,
+  allRegister,
+} = require("../DAO/CrudDao");
 const table = "persona";
+
+controllerPerson.getAllPerson = async (req, res) => {
+  const resp = await allRegister(table);
+  if (resp.length > 0) res.status(200).json(resp);
+  else
+    res
+      .status(400)
+      .json({ message: `Aun no existen registros de las personas` });
+};
 //REGISTER PERSON
 controllerPerson.RegisterPerson = async (req, res) => {
   const set = setData(req.body);

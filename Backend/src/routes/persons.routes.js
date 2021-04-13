@@ -4,13 +4,14 @@ const {
   RegisterPerson,
   UpdatePerson,
   deletePerson,
+  getAllPerson,
 } = require("../controllers/persona.controller"); //CRUD CONTROLLER
 const routePerson = Router();
 const { PersonRegisterMessage } = require("../middleware/errorsValidate"); //PRESENTO ERRORES DE VALIDACIONES
 const { checkCedulayTelefono } = require("../validations/checkPerson"); //PRESENTO ERROR DE DUPLICACIONES
 
 //GET
-routePerson.get("/Registrar-Persona");
+routePerson.get("/Todas-Persona",getAllPerson);
 //POST
 routePerson.post(
   "/Registrar-Persona",
