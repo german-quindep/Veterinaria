@@ -1,4 +1,4 @@
-export interface ICliente{
+export interface IUsuarios{
     IdUser?:Number,
     Username?:String,
     Email?:String,
