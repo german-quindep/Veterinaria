@@ -2,6 +2,7 @@ const controllerPerson = {};
 const {
   insertBd,
   updateRegister,
+  consultById,
   deleteRegister,
   allRegister,
 } = require("../DAO/CrudDao");
@@ -15,6 +16,17 @@ controllerPerson.getAllPerson = async (req, res) => {
       .status(400)
       .json({ message: `Aun no existen registros de las personas` });
 };
+//GET ONE PERSONA
+controllerPerson.getOnePerson= async(req,res)=>{
+  const { id } = req.params;
+  const where = `IdPersona=${id}`;
+  const resp = await consultById(table,where);
+  if (resp.length > 0) res.status(200).json(resp);
+  else
+    res
+      .status(400)
+      .json({ message: `Aun no existen registros de la persona` });
+}
 //REGISTER PERSON
 controllerPerson.RegisterPerson = async (req, res) => {
   const set = setData(req.body);

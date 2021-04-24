@@ -1,0 +1,48 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-success d-flex ml-auto my-2"
+  data-toggle="modal"
+  data-target="#ModalVeterinario"
+  [routerLink]="['/Veterinario/Agregar-Veterinario/']"
+>
+  <i class="fas fa-user-plus"> </i>Registrar
+</button>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">IdVeterinario</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Cedula</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let veterinario of allVeterinario">
+      <th>{{ veterinario.IdVeterinario }}</th>
+      <th>{{ veterinario.Nombre }}</th>
+      <th>{{ veterinario.Apellido }}</th>
+      <th>{{ veterinario.Cedula }}</th>
+      <th>{{ veterinario.Telefono }}</th>
+      <th>{{ veterinario.Direccion }}</th>
+      <th>
+        <button
+          title="Editar"
+          class="btn btn-outline-warning mx-1"
+          data-toggle="modal"
+          data-target="#ModalVeterinario"
+          [routerLink]="['/Veterinario/Editar-Veterinario/', veterinario.IdVeterinario]"
+        >
+          <i class="fas fa-edit"></i>
+        </button>
+        <button title="Eliminar" class="btn btn-outline-danger mx-1"(click)="eliminarVeterinario(veterinario.IdVeterinario)">
+          <i class="fas fa-user-times"></i>
+        </button>
+      </th>
+    </tr>
+  </tbody>
+</table>
+<app-formulario-veterinario></app-formulario-veterinario>

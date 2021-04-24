@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { VeterinarioComponent } from './../../components/veterinario/veterinario.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'Veterinario', component: VeterinarioComponent }
+  { path: 'Veterinario', component: VeterinarioComponent },
+  { path: 'Veterinario/Agregar-Veterinario', component: VeterinarioComponent },
+  {
+    path: 'Veterinario/Editar-Veterinario/:id',
+    component: VeterinarioComponent,
+  },
 ];
 
 @NgModule({

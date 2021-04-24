@@ -64,8 +64,6 @@ validations.confirPassword = (
 };
 //VERIFY CEDULA Y TELEFONO
 validations.CedulaTelefono = (nombre, max, descripcion, expresionRegular) => {
-  if (typeof nombre !== "string")
-    throw new Error(`El campo ${descripcion} debe contener numeros`);
   if (!expresionRegular.test(nombre))
     throw new Error(`El campo ${descripcion} debe tener caracteres`);
   if (!nombre || nombre.length < max)

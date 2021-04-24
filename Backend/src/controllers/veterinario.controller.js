@@ -1,7 +1,26 @@
 const controllerVeterinario = {};
-const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
+const {
+  insertBd,
+  updateRegister,
+  deleteRegister,
+  allRegister,
+  consultById,
+} = require("../DAO/CrudDao");
 var table = "veterinario";
 
+//GET ALL VETERINARIO
+controllerVeterinario.getAllVeterinario = async (req, res) => {
+  const response = await allRegister(table);
+  if (response.length > 0) res.status(200).json(response);
+  else res.status(400).json({ message: "No hay datos aun registrados" });
+};
+//UN VETERINARIO
+controllerVeterinario.oneVeterinario = async (req, res) => {
+  const where = `IdVeterinario=${req.params.id}`;
+  const response = await consultById(table, where);
+  if (response.length > 0) res.status(200).json(response);
+  else res.status(400).json({ message: "No hay datos aun registrados" });
+};
 //REGISTRAR
 controllerVeterinario.RegisterVeterinario = async (req, res) => {
   const set = setData(req.body);

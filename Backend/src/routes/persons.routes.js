@@ -4,6 +4,7 @@ const {
   RegisterPerson,
   UpdatePerson,
   deletePerson,
+  getOnePerson,
   getAllPerson,
 } = require("../controllers/persona.controller"); //CRUD CONTROLLER
 const routePerson = Router();
@@ -12,6 +13,8 @@ const { checkCedulayTelefono } = require("../validations/checkPerson"); //PRESEN
 
 //GET
 routePerson.get("/Todas-Persona",getAllPerson);
+//GET ONE PERSON
+routePerson.get('/one-Persona/:id',getOnePerson)
 //POST
 routePerson.post(
   "/Registrar-Persona",
@@ -20,7 +23,7 @@ routePerson.post(
 );
 routePerson.put(
   "/Actualizar-Persona/:id",
-  [PersonRegisterMessage, checkCedulayTelefono],
+  [PersonRegisterMessage],
   UpdatePerson
 );
 routePerson.delete("/Eliminar-Persona/:id", deletePerson);

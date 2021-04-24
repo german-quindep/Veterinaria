@@ -29,6 +29,13 @@ const routes: Routes = [
         (m) => m.HistorialModule
       ),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./mascotas/mascotas.module').then(
+        (m) => m.MascotasModule
+      ),
+  },
 ];
 
 @NgModule({

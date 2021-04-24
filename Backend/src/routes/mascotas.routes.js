@@ -6,6 +6,7 @@ const {
   ActualizarMascotas,
   EliminarMascotas,
   registerMascotas,
+  verDetallesMascotas,
 } = require("../controllers/mascotas.controllers");
 const { validarMascotas } = require("../middleware/errorsValidate");
 const routeMascotas = Router();
@@ -23,5 +24,6 @@ routeMascotas.put(
 routeMascotas.get("/Mascotas-one/:id", UnaMascota);
 //ELIMINAR
 routeMascotas.delete("/Eliminar-Mascotas/:id", EliminarMascotas);
-
+//VER DETALLES
+routeMascotas.get("/Detalles-Mascotas/:id", verDetallesMascotas);
 module.exports = routeMascotas;

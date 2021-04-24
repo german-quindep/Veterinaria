@@ -1,0 +1,74 @@
+<button
+  type="button"
+  class="btn btn-success d-flex ml-auto my-2"
+  [routerLink]="['/Mascotas/Registrar/']"
+>
+  <i class="fas fa-user-plus"> </i>Registrar
+</button>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">IdMascotas</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Fecha de nacimiento</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Raza</th>
+      <th scope="col">Color</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Especie</th>
+     <!--- <th scope="col">IdUsuario</th>
+      <th scope="col">IdVeterinario</th>
+      <th scope="col">IdHistorial</th>-->
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mascota of Mascotas">
+      <th scope="col">{{ mascota.IdMascota }}</th>
+      <th>{{ mascota.Nombre }}</th>
+      <th ng-controller="ctrlFecha">
+        {{ mascota.FechaNacimiento | date: "yyyy-MM-d" }}
+      </th>
+      <th>{{ mascota.Edad }} años</th>
+      <th>{{ mascota.Raza }}</th>
+      <th>{{ mascota.Color }}</th>
+      <th>{{ mascota.Peso }}</th>
+      <th>{{ mascota.Especie }}</th>
+     <!--- <th>{{ mascota.IdUser }}</th>
+      <th>{{ mascota.IdVeterinario }}</th>
+      <th>{{ mascota.IdHistorial }}</th>-->
+      <th>
+        <button
+          type="button"
+          class="btn btn-outline-warning mx-1 my-1"
+          [routerLink]="['/Mascotas/Editar/', mascota.IdMascota]"
+          title="Editar"
+        >
+          <i class="fas fa-edit"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger mx-1 my-1"
+          (click)="this.eliminarMascotas(mascota.IdMascota)"
+          title="Eliminar"
+        >
+          <i class="fas fa-user-times"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary mx-1 my-1"
+          data-toggle="modal"
+          data-target="#DetallesModalMascotas"
+          title="Detalles de la mascotas"
+          (click)="this.verMasDetalles(mascota.IdMascota)"
+        >
+          <i class="fas fa-info-circle"></i>
+        </button>
+      </th>
+    </tr>
+  </tbody>
+</table>
+
+<app-detalles-mascotas
+  [Mascotas]="this.oneMascotas"
+></app-detalles-mascotas>

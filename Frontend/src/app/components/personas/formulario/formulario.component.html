@@ -1,0 +1,200 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-success d-flex ml-auto my-2"
+  data-toggle="modal"
+  data-target="#ModalPersonas"
+  (click)="registrarModal()"
+>
+  <i class="fas fa-user-plus"> </i>Registrar
+</button>
+<!--     LIST PERSONAS   -->
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Cedula</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of Personas">
+      <th scope="row">{{ persona.IdPersona }}</th>
+      <td>{{ persona.Nombre }}</td>
+      <td>{{ persona.Apellido }}</td>
+      <td>{{ persona.Cedula }}</td>
+      <td>{{ persona.Telefono }}</td>
+      <td>{{ persona.Direccion }}</td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-outline-warning mr-2"
+          data-toggle="modal"
+          data-target="#ModalPersonas"
+          (click)="this.selectedPersona(persona)"
+        >
+          <i class="fas fa-edit"></i>Editar
+        </button>
+        <a
+          class="btn btn-outline-danger"
+          (click)="this.personaComponent.eliminar(persona.IdPersona)"
+        >
+          <i class="fas fa-user-times"></i>Eliminar
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal FORMULARIO -->
+<div
+  class="modal fade"
+  id="ModalPersonas"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalPersonaLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        [ngClass]="
+          this.editarPersona
+            ? 'modal-header bg-warning text-white text text-center'
+            : 'modal-header bg-success text-white text text-center'
+        "
+      >
+        <h5 class="modal-title" id="ModalPersonaLabel">
+          {{ this.editarPersona ? "Editar Persona" : "Registrar Persona" }}
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="formPersona"
+          (ngSubmit)="registerAndEditFormulario()"
+          errorTailor
+        >
+          <div class="mb-3">
+            <input
+              [hidden]="true"
+              type="text"
+              formControlName="IdPersona"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formPersona.get('Nombre').touched &&
+                formPersona.get('Nombre').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Nombre"
+              [controlErrorsTpl]="messageError"
+              placeholder="Nombre"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formPersona.get('Apellido').touched &&
+                formPersona.get('Apellido').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Apellido"
+              [controlErrorsTpl]="messageError"
+              placeholder="Apellido"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formPersona.get('Cedula').touched &&
+                formPersona.get('Cedula').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Cedula"
+              [controlErrorsTpl]="messageError"
+              placeholder="Cedula"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formPersona.get('Telefono').touched &&
+                formPersona.get('Telefono').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Telefono"
+              [controlErrorsTpl]="messageError"
+              placeholder="Telefono"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formPersona.get('Direccion').touched &&
+                formPersona.get('Direccion').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Direccion"
+              [controlErrorsTpl]="messageError"
+              placeholder="Direccion"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="formPersona.invalid"
+              class="btn"
+              type="submit"
+              [appEstado]="this.editarPersona"
+            ></button>
+            <button
+              type="reset"
+              class="btn btn-outline-info"
+              tittle="Limpiar"
+              (click)="limpiarFormulario()"
+            >
+              <i class="fas fa-eraser"></i>
+              Limpiar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              <i class="fas fa-times"></i>
+              Cerrar
+            </button>
+          </div>
+        </form>
+        <!---   MENSAJES DE ERRORES   -->
+        <ng-template let-error let-text="text" #messageError>
+          <i *ngIf="error?.minlength" class="text-danger">
+            <b>Error: </b> No cumples con los caracteres minimos que son
+            {{ error?.minlength?.requiredLength }}, ingresastes solo
+            {{ error?.minlength?.actualLength }}</i
+          >
+        </ng-template>
+        <!------>
+      </div>
+    </div>
+  </div>
+</div>

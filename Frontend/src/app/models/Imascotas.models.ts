@@ -1,5 +1,5 @@
 export interface IMascotas{
-    IdMascotas?:Number,
+    IdMascota?:Number,
     Nombre?:String,
     FechaNacimiento?:String,
     Edad?:Number,

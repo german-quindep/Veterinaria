@@ -14,7 +14,6 @@ import { SectionModule } from './module/section/section.module';
     FooterModule,
     AppRoutingModule,
   ],
-
   providers: [],
   bootstrap: [AppComponent],
 })

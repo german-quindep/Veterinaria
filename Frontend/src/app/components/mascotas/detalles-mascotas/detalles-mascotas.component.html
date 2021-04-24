@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="DetallesModalMascotas"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="DetallesModalMascotasLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info text text-white">
+        <h5 class="modal-title" id="DetallesModalMascotasLabel">Detalles</h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngFor="let mascota of Mascotas">
+        <h6 class="text text-primary">Datos de la mascota:</h6>
+        <p>Nombre: {{ mascota.Nombre }}</p>
+        <p>Especie: {{ mascota.Especie }}</p>
+        <p>Raza: {{ mascota.Raza }}</p>
+        <hr />
+        <h6 class="text text-primary">Datos del usuario</h6>
+        <p>Usuario: {{ mascota.Usuario }}</p>
+        <p>Cedula del usuario:{{ mascota.Cedula_Usuario }}</p>
+        <hr />
+        <h6 class="text text-primary">Datos del veterinario</h6>
+        <p>Nombre del veterinario: {{ mascota.Nombre_Veterinario }}</p>
+        <p>Cedula del veterinario: {{ mascota.Cedula_Veterinario }}</p>
+        <hr />
+        <h6 class="text text-primary">Historial de la mascota</h6>
+        <p>Diagnostico: {{ mascota.Diagnostico }}</p>
+        <p>Motivo:{{ mascota.Motivo }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

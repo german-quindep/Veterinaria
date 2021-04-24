@@ -1,27 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import {IPersona}from '../../models/Ipersona.models';
-import {ApiRestService}from'../../services/api-rest.service';
+import { ApiRestService } from './../../services/api-rest.service';
+import { IPersona } from './../../models/Ipersona.models';
 @Component({
   selector: 'app-personas',
   templateUrl: './personas.component.html',
-  styleUrls: ['./personas.component.css']
+  styleUrls: ['./personas.component.css'],
 })
 export class PersonasComponent implements OnInit {
-
-  constructor(public serviApi:ApiRestService) { }
-  public Persona: IPersona;
-  public UnaPersona:IPersona;
-  url_post:string="Todas-Persona";
+  //VARIABLES
+  public Personas: IPersona;
+  url_post: string = 'Todas-Persona';
+  constructor(public serviApi: ApiRestService) {}
   ngOnInit(): void {
     this.getAllPersonas();
   }
+  //REGISTRO Y EDITAR
+  registerAndEdit(form) {
+    if (!form.IdPersona) {
+      //REGISTRAR
+      this.serviApi.postApiData('Registrar-Persona', form).subscribe(
+        (res) => {
+          console.log(res);
+          this.getAllPersonas();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      //UPDATE
+      this.serviApi
+        .editApiData('Actualizar-Persona/', form.IdPersona, form)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.getAllPersonas();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    }
+  }
   //TRAER LAS PERSONAS
   getAllPersonas() {
-    this.serviApi.getAllDataApi(this.url_post).subscribe((res: IPersona) => {
-      this.Persona = res;
-      console.log(this.Persona)
-    });
+    this.serviApi.getAllDataApi(this.url_post).subscribe(
+      (res: IPersona) => {
+        this.Personas = res;
+      },
+      (error: any) => {
+        console.log('Hubo un error', error);
+      }
+    );
   }
-  //REGISTRAR PERSONAS
-
+  //ELIMINAR
+  eliminar(id: number) {
+    if (confirm('Esta seguro de eliminar al usuario: ' + id)) {
+      this.serviApi.deleteApiData('Eliminar-Persona/', id).subscribe(
+        (res) => {
+          console.log(res);
+          this.getAllPersonas();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+  }
 }

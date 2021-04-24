@@ -1,0 +1,207 @@
+<div class="container col-6 my-4">
+  <div
+    [ngClass]="this.editar ? 'card border-warning' : 'card border-primary'"
+  >
+    <div
+      [ngClass]="
+        this.editar ? 'card-header bg-warning' : 'card-header bg-primary'
+      "
+    >
+      <h5 class="text text-center text-white">
+        {{ this.editar ? "Editar Mascotas" : "Registrar Mascotas" }}
+      </h5>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="createMascotas"
+        (ngSubmit)="registerAndUpdateMascotas(createMascotas.value)"
+      >
+        <input
+          [hidden]="true"
+          type="text"
+          formControlName="IdMascota"
+          class="form-control"
+        />
+        <div class="row justify-content-center mx-auto my-2">
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Nombre').touched &&
+                createMascotas.get('Nombre').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Nombre"
+              [controlErrorsTpl]="messageError"
+              placeholder="Nombre"
+            />
+          </div>
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('FechaNacimiento').touched &&
+                createMascotas.get('FechaNacimiento').invalid
+              "
+              type="date"
+              class="form-control"
+              formControlName="FechaNacimiento"
+              [controlErrorsTpl]="messageError"
+              placeholder="YYY-MM-DD"
+            />
+          </div>
+        </div>
+        <div class="row justify-content-center mx-auto my-2">
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Edad').touched &&
+                createMascotas.get('Edad').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Edad"
+              [controlErrorsTpl]="messageError"
+              placeholder="Edad de la mascota"
+            />
+          </div>
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Raza').touched &&
+                createMascotas.get('Raza').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Raza"
+              [controlErrorsTpl]="messageError"
+              placeholder="Raza"
+            />
+          </div>
+        </div>
+        <div class="row justify-content-center mx-auto my-2">
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Color').touched &&
+                createMascotas.get('Color').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Color"
+              [controlErrorsTpl]="messageError"
+              placeholder="Color"
+            />
+          </div>
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Peso').touched &&
+                createMascotas.get('Peso').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Peso"
+              [controlErrorsTpl]="messageError"
+              placeholder="Peso"
+            />
+          </div>
+        </div>
+        <div class="row justify-content-center mx-auto my-2">
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('Especie').touched &&
+                createMascotas.get('Especie').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Especie"
+              [controlErrorsTpl]="messageError"
+              placeholder="Especie"
+            />
+          </div>
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('IdUser').touched &&
+                createMascotas.get('IdUser').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="IdUser"
+              [controlErrorsTpl]="messageError"
+              placeholder="IdUser"
+            />
+          </div>
+        </div>
+        <div class="row justify-content-center mx-auto my-2">
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('IdVeterinario').touched &&
+                createMascotas.get('IdVeterinario').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="IdVeterinario"
+              [controlErrorsTpl]="messageError"
+              placeholder="IdVeterinario"
+            />
+          </div>
+          <div class="col-5">
+            <input
+              [class.is-invalid]="
+                createMascotas.get('IdHistorial').touched &&
+                createMascotas.get('IdHistorial').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="IdHistorial"
+              [controlErrorsTpl]="messageError"
+              placeholder="IdHistorial"
+            />
+          </div>
+        </div>
+        <div class="row my-3 col-9 mx-auto">
+          <div class="col-4 justify-content-center mx-auto">
+            <button
+              [disabled]="createMascotas.invalid"
+              class="btn"
+              [appEstadoMascotas]="this.editar"
+              type="submit"
+            >
+            </button>
+          </div>
+          <div class="col-4 justify-content-center mx-auto">
+            <button
+              type="reset"
+              (click)="limpiarFormulario()"
+              class="btn btn-outline-primary btn-block shadow rounded"
+            >
+            <i class="fas fa-eraser"></i>
+            Limpiar
+            </button>
+          </div>
+          <div class="col-4 justify-content-center mx-auto">
+            <button
+              type="button"
+              class="btn btn-outline-secondary btn-block shadow rounded"
+              (click)="volverAlModulo()"
+            >
+            <i class="fas fa-undo-alt"></i>Volver
+            </button>
+          </div>
+        </div>
+      </form>
+      <!---   MENSAJES DE ERRORES   -->
+      <ng-template let-error let-text="text" #messageError>
+        <i *ngIf="error?.minlength" class="text-danger">
+          <b>Error: </b> No cumples con los caracteres minimos que son
+          {{ error?.minlength?.requiredLength }}, ingresastes solo
+          {{ error?.minlength?.actualLength }}</i
+        >
+      </ng-template>
+      <!------>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,149 @@
+<div
+  class="modal fade"
+  id="ModalVeterinario"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalVeterinarioLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        [ngClass]="
+          this.editarVetarinario
+            ? 'modal-header bg-warning text-white text text-center'
+            : 'modal-header bg-success text-white text text-center'
+        "
+      >
+        <h5 class="modal-title" id="ModalVeterinarioLabel">
+          {{ this.editarVetarinario ? "Editar Persona" : "Registrar Persona" }}
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="formVeterinario"
+          (ngSubmit)="registerAndEditVeterinario(formVeterinario.value)"
+          errorTailor
+        >
+          <div class="mb-3">
+            <input
+              [hidden]="true"
+              type="text"
+              formControlName="IdVeterinario"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVeterinario.get('Nombre').touched &&
+                formVeterinario.get('Nombre').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Nombre"
+              [controlErrorsTpl]="messageError"
+              placeholder="Nombre"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVeterinario.get('Apellido').touched &&
+                formVeterinario.get('Apellido').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Apellido"
+              [controlErrorsTpl]="messageError"
+              placeholder="Apellido"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVeterinario.get('Cedula').touched &&
+                formVeterinario.get('Cedula').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Cedula"
+              [controlErrorsTpl]="messageError"
+              placeholder="Cedula"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVeterinario.get('Telefono').touched &&
+                formVeterinario.get('Telefono').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Telefono"
+              [controlErrorsTpl]="messageError"
+              placeholder="Telefono"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVeterinario.get('Direccion').touched &&
+                formVeterinario.get('Direccion').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Direccion"
+              [controlErrorsTpl]="messageError"
+              placeholder="Direccion"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="formVeterinario.invalid"
+              class="btn"
+              type="submit"
+              [appDirectiveVeterinario]="this.editarVetarinario"
+            >
+              
+            </button>
+            <button
+              type="reset"
+              class="btn btn-outline-info"
+              tittle="Limpiar"
+              (click)="limpiarFormulario()"
+            >
+              <i class="fas fa-eraser"></i>
+              Limpiar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+            >
+              <i class="fas fa-times"></i>
+              Cerrar
+            </button>
+          </div>
+        </form>
+        <!---   MENSAJES DE ERRORES   -->
+        <ng-template let-error let-text="text" #messageError>
+          <i *ngIf="error?.minlength" class="text-danger">
+            <b>Error: </b> No cumples con los caracteres minimos que son
+            {{ error?.minlength?.requiredLength }}, ingresastes solo
+            {{ error?.minlength?.actualLength }}</i
+          >
+        </ng-template>
+        <!------>
+      </div>
+    </div>
+  </div>
+</div>
