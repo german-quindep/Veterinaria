@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuariosRoutingModule } from './usuarios-routing.module';
-import { ApiRestService } from './../../services/api-rest.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UsuariosComponent } from '../../components/usuarios/usuarios.component';
+//ROUTING
+import { UsuariosRoutingModule } from './usuarios-routing.module';
+//SERVICES
+import { ApiRestService } from './../../services/api-rest.service';
+//COMPONENTS
+import { UsuariosComponent } from '@Cusuarios/usuarios';
 
 @NgModule({
   declarations: [UsuariosComponent],

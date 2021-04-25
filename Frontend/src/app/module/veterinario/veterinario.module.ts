@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VeterinarioRoutingModule } from './veterinario-routing.module';
-import { ApiRestService } from './../../services/api-rest.service';
-import { HttpClientModule } from '@angular/common/http';
-import { VeterinarioComponent } from '../../components/veterinario/veterinario.component';
-import { FormularioVeterinarioComponent } from './../../components/veterinario/formulario-veterinario/formulario-veterinario.component';
-import { ListVeterinarioComponent } from './../../components/veterinario/list-veterinario/list-veterinario.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
-import { DirectiveVeterinarioDirective } from './../../components/veterinario/directive/directive-veterinario.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//ROUTING
+import { VeterinarioRoutingModule } from '@module/veterinario/veterinario-routing.module';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//COMPONENTS
+import { VeterinarioComponent } from '@Cveterinario/veterinario';
+import { FormularioVeterinarioComponent } from '@CVeterinario/form-veterinario';
+import { ListVeterinarioComponent } from '@CVeterinario/list-veterinario';
+//DIRECTIVES
+import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinario';
 @NgModule({
   declarations: [
     VeterinarioComponent,
@@ -17,7 +21,6 @@ import { DirectiveVeterinarioDirective } from './../../components/veterinario/di
     DirectiveVeterinarioDirective,
   ],
   imports: [
-  VeterinarioRoutingModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
     ErrorTailorModule.forRoot({
@@ -33,8 +36,13 @@ import { DirectiveVeterinarioDirective } from './../../components/veterinario/di
     FormsModule,
     HttpClientModule,
     CommonModule,
+    VeterinarioRoutingModule,
   ],
 
-  providers: [ApiRestService,FormularioVeterinarioComponent,ListVeterinarioComponent],
+  providers: [
+    ApiRestService,
+    FormularioVeterinarioComponent,
+    ListVeterinarioComponent,
+  ],
 })
 export class VeterinarioModule {}

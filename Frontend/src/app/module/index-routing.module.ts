@@ -4,37 +4,31 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./personas/personas.module').then(
-        (m) => m.PersonasModule
-      ),
+      import('@module/personas/personas.module').then((m) => m.PersonasModule),
   },
   {
     path: '',
     loadChildren: () =>
-      import('./usuarios/usuarios.module').then(
-        (m) => m.UsuariosModule
-      ),
+      import('@module/usuarios/usuarios.module').then((m) => m.UsuariosModule),
   },
   {
     path: '',
     loadChildren: () =>
-      import('./veterinario/veterinario.module').then(
+      import('@module/veterinario/veterinario.module').then(
         (m) => m.VeterinarioModule
       ),
   },
   {
     path: '',
     loadChildren: () =>
-      import('./historial/historial.module').then(
+      import('@module/historial/historial.module').then(
         (m) => m.HistorialModule
       ),
   },
   {
     path: '',
     loadChildren: () =>
-      import('./mascotas/mascotas.module').then(
-        (m) => m.MascotasModule
-      ),
+      import('@module/mascotas/mascotas.module').then((m) => m.MascotasModule),
   },
 ];
 

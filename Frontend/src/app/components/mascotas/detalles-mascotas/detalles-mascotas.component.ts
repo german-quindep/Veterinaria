@@ -6,7 +6,7 @@ import { Component, OnInit,Input } from '@angular/core';
   styleUrls: ['./detalles-mascotas.component.css']
 })
 export class DetallesMascotasComponent implements OnInit {
-  @Input() Mascotas:any;
+  @Input() MascotasDetalles:any;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,13 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HistorialRoutingModule } from './historial-routing.module';
-import { ApiRestService } from './../../services/api-rest.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HistorialComponent } from './../../components/historial/historial.component';
+//ROUTING
+import { HistorialRoutingModule } from '@module/historial/historial-routing.module';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//COMPONENTS
+import { HistorialComponent } from '@Chistorial/historial';
+import { FormularioHistorialComponent } from '@Chistorial/form-historial';
+import { ListHistorialComponent } from '@Chistorial/list-historial';
+//DIRECTIVES
 
 @NgModule({
-  declarations: [HistorialComponent],
+  declarations: [
+    HistorialComponent,
+    FormularioHistorialComponent,
+    ListHistorialComponent,
+  ],
   imports: [HistorialRoutingModule, HttpClientModule, CommonModule],
-  providers: [ApiRestService],
+
+  providers: [
+    ApiRestService,
+    ListHistorialComponent,
+    FormularioHistorialComponent,
+  ],
 })
 export class HistorialModule {}

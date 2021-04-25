@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersMenuComponent } from './../../components/users-menu/users-menu.component';
+import { UsersMenuComponent } from '@Cusers-menu/users-menu.component';
 
 @NgModule({
   declarations: [UsersMenuComponent],

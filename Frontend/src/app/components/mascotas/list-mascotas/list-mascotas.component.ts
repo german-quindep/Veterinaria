@@ -1,54 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { MascotasComponent } from './../mascotas.component';
-import { IMascotas } from '../../../models/Imascotas.models';
-import { ApiRestService } from './../../../services/api-rest.service';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//MODELS
+import { IMascotas } from '@models/Imascotas.models';
+import { MascotasComponent } from '@Cmascotas/mascotas';
+
 @Component({
   selector: 'app-list-mascotas',
   templateUrl: './list-mascotas.component.html',
   styleUrls: ['./list-mascotas.component.css'],
 })
 export class ListMascotasComponent implements OnInit {
-  public Mascotas: IMascotas;
+  @Input() Mascotas: any;
+  @Output() idMascota = new EventEmitter<string>();
   public oneMascotas: IMascotas;
   date;
-  constructor(
-    public mascotaCompo: MascotasComponent,
-    private apiRest: ApiRestService
-  ) {}
+  constructor(private apiRest: ApiRestService) {}
 
-  ngOnInit(): void {
-    this.getAllMascotas();
-  }
-  //TRAER TODAS LAS MASCOTAS
-  getAllMascotas() {
-    this.apiRest.getAllDataApi('Mascotas-All').subscribe(
-      (res: IMascotas) => {
-        this.Mascotas = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  ngOnInit(): void {}
+
   //TRANSFORMAR FECHA
   ctrlFecha($escope) {
     $escope.dt = new Date();
   }
-  //ELIMINAR MASCOTAS
-  eliminarMascotas(id: number) {
-    if (confirm(`Estas seguro de eliminar al id: ${id}`)) {
-      this.apiRest.deleteApiData('Eliminar-Mascotas/', id).subscribe(
-        (res) => {
-          console.log(res);
-          this.getAllMascotas;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    }
-  }
-  //VER MAS DETALLES
+  //VER MAS DETALLES ENVIARLO AL MODAL DETALLES-MASCOTAS
   verMasDetalles(id: string) {
     this.apiRest.getOneDataApi('Detalles-Mascotas/', id).subscribe(
       (res: IMascotas) => {
@@ -58,5 +33,8 @@ export class ListMascotasComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  obtenerIdMascota(id) {
+    this.idMascota.emit(id);
   }
 }

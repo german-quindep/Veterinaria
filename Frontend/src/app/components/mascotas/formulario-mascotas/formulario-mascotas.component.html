@@ -1,7 +1,5 @@
 <div class="container col-6 my-4">
-  <div
-    [ngClass]="this.editar ? 'card border-warning' : 'card border-primary'"
-  >
+  <div [ngClass]="this.editar ? 'card border-warning' : 'card border-primary'">
     <div
       [ngClass]="
         this.editar ? 'card-header bg-warning' : 'card-header bg-primary'
@@ -120,7 +118,7 @@
               placeholder="Especie"
             />
           </div>
-          <div class="col-5">
+          <div class="col-5 input-group">
             <input
               [class.is-invalid]="
                 createMascotas.get('IdUser').touched &&
@@ -128,14 +126,28 @@
               "
               type="text"
               class="form-control"
+              [attr.disabled]="true"
               formControlName="IdUser"
               [controlErrorsTpl]="messageError"
               placeholder="IdUser"
+              arial-label="IdUser"
+              aria-describedby="buscar-usuario"
             />
+            <div class="input-group-prepend text-left">
+              <button
+                class="btn btn-info"
+                type="button"
+                id="buscar-usuario"
+                data-toggle="modal"
+                data-target="#ModalConsultUser"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="row justify-content-center mx-auto my-2">
-          <div class="col-5">
+          <div class="col-5 input-group">
             <input
               [class.is-invalid]="
                 createMascotas.get('IdVeterinario').touched &&
@@ -143,12 +155,26 @@
               "
               type="text"
               class="form-control"
+              [attr.disabled]="true"
               formControlName="IdVeterinario"
               [controlErrorsTpl]="messageError"
               placeholder="IdVeterinario"
+              arial-label="IdVeterinario"
+              aria-describedby="buscar-veterinario"
             />
+            <div class="input-group-prepend text-left">
+              <button
+                class="btn btn-info"
+                type="button"
+                id="buscar-veterinario"
+                data-toggle="modal"
+                data-target="#ModalConsultVeterinario"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </div>
-          <div class="col-5">
+          <div class="col-5 input-group">
             <input
               [class.is-invalid]="
                 createMascotas.get('IdHistorial').touched &&
@@ -157,9 +183,23 @@
               type="text"
               class="form-control"
               formControlName="IdHistorial"
+              [attr.disabled]="true"
               [controlErrorsTpl]="messageError"
               placeholder="IdHistorial"
+              arial-label="IdHistorial"
+              aria-describedby="buscar-historial"
             />
+            <div class="input-group-prepend text-left">
+              <button
+                class="btn btn-info"
+                type="button"
+                id="buscar-Historial"
+                data-toggle="modal"
+                data-target="#ModalConsultHistorial"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div class="row my-3 col-9 mx-auto">
@@ -169,8 +209,7 @@
               class="btn"
               [appEstadoMascotas]="this.editar"
               type="submit"
-            >
-            </button>
+            ></button>
           </div>
           <div class="col-4 justify-content-center mx-auto">
             <button
@@ -178,8 +217,8 @@
               (click)="limpiarFormulario()"
               class="btn btn-outline-primary btn-block shadow rounded"
             >
-            <i class="fas fa-eraser"></i>
-            Limpiar
+              <i class="fas fa-eraser"></i>
+              Limpiar
             </button>
           </div>
           <div class="col-4 justify-content-center mx-auto">
@@ -188,7 +227,7 @@
               class="btn btn-outline-secondary btn-block shadow rounded"
               (click)="volverAlModulo()"
             >
-            <i class="fas fa-undo-alt"></i>Volver
+              <i class="fas fa-undo-alt"></i>Volver
             </button>
           </div>
         </div>
@@ -205,3 +244,12 @@
     </div>
   </div>
 </div>
+<app-list-usuarios (idUserModal)="obtenerIdUser($event)"></app-list-usuarios>
+<!----VETERINARIO-->
+<app-list-mascotas-veterinario
+  (idVeterinarioModal)="obtenerIdVeterinario($event)"
+></app-list-mascotas-veterinario>
+<!----HISTORIAL-->
+<app-list-mascotas-historial
+  (idHistorialModal)="obtenerIdHistorial($event)"
+></app-list-mascotas-historial>

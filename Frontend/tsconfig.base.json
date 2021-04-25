@@ -3,6 +3,82 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      /********VETERINARIO**********/
+      "@Cveterinario/veterinario": [
+        "src/app/components/veterinario/veterinario.component"
+      ],
+      "@CVeterinario/list-veterinario": [
+        "src/app/components/veterinario/list-veterinario/list-veterinario.component"
+      ],
+      "@CVeterinario/form-veterinario": [
+        "src/app/components/veterinario/formulario-veterinario/formulario-veterinario.component"
+      ],
+      "@CVeterinario/directive-veterinario": [
+        "src/app/components/veterinario/directive/directive-veterinario.directive"
+      ],
+      /********USUARIOS**********/
+      "@Cusuarios/usuarios": ["src/app/components/usuarios/usuarios.component"],
+      /********PERSONAS**********/
+      "@Cpersonas/personas": ["src/app/components/personas/personas.component"],
+      "@Cpersonas/list-personas": [
+        "src/app/components/personas/list-personas/list-personas.component"
+      ],
+      "@Cpersonas/form-persona": [
+        "src/app/components/personas/formulario/formulario.component"
+      ],
+      "@Cpersonas/directive-persona": [
+        "src/app/components/personas/directives/estado.directive"
+      ],
+      /********HISTORIAL**********/
+      "@Chistorial/historial": [
+        "src/app/components/historial/historial.component"
+      ],
+      "@Chistorial/list-historial": [
+        "src/app/components/historial/list-historial/list-historial.component"
+      ],
+      "@Chistorial/form-historial": [
+        "src/app/components/historial/formulario-historial/formulario-historial.component"
+      ],
+      /********MASCOTAS**********/
+      "@Cmascotas/mascotas": ["src/app/components/mascotas/mascotas.component"],
+      "@Cmascotas/list-usuarios-mascotas": [
+        "src/app/components/mascotas/list-usuarios/list-usuarios.component"
+      ],
+      "@Cmascotas/list-veterinario-mascotas": [
+        "src/app/components/mascotas/list-mascotas-veterinario/list-mascotas-veterinario.component"
+      ],
+      "@Cmascotas/list-historial-mascotas": [
+        "src/app/components/mascotas/list-mascotas-historial/list-mascotas-historial.component"
+      ],
+      "@Cmascotas/list-mascotas": [
+        "src/app/components/mascotas/list-mascotas/list-mascotas.component"
+      ],
+      "@Cmascotas/form-mascotas": [
+        "src/app/components/mascotas/formulario-mascotas/formulario-mascotas.component"
+      ],
+      "@Cmascotas/directives-mascotas": [
+        "src/app/components/mascotas/directives/estado-mascotas.directive"
+      ],
+      "@Cmascotas/detalle-mascotas": [
+        "src/app/components/mascotas/detalles-mascotas/detalles-mascotas.component"
+      ],
+
+      /********MENU DE USUARIOS**********/
+      "@Cusers-menu/*": ["src/app/components/users-menu/*"],
+      /********SECTIONS**********/
+      "@Csection/*": ["src/app/components/section/*"],
+      /********NAVBAR**********/
+      "@Cnavbar/*": ["src/app/components/navbar/*"],
+      /********FOOTER**********/
+      "@Cfooter/*": ["src/app/components/footer/*"],
+      /********SERVICES**********/
+      "@services/*": ["src/app/services/*"],
+      /********MODELS**********/
+      "@models/*": ["src/app/models/*"],
+      /********MODULE**********/
+      "@module/*": ["src/app/module/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,9 +88,6 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   }
 }

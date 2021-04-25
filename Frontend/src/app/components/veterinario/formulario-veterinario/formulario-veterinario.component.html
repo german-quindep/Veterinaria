@@ -23,6 +23,7 @@
           class="close text-white"
           data-dismiss="modal"
           aria-label="Close"
+          (click)="volverAlModulo()"
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -30,7 +31,7 @@
       <div class="modal-body">
         <form
           [formGroup]="formVeterinario"
-          (ngSubmit)="registerAndEditVeterinario(formVeterinario.value)"
+          (ngSubmit)="enviarForm()"
           errorTailor
         >
           <div class="mb-3">
@@ -128,6 +129,7 @@
               type="button"
               class="btn btn-outline-secondary"
               data-dismiss="modal"
+              (click)="volverAlModulo()"
             >
               <i class="fas fa-times"></i>
               Cerrar

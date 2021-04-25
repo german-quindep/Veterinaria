@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ApiRestService } from './../../../services/api-rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ListVeterinarioComponent } from './../list-veterinario/list-veterinario.component';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//COMPONENTS
+import { VeterinarioComponent } from '@Cveterinario/veterinario';
 @Component({
   selector: 'app-formulario-veterinario',
   templateUrl: './formulario-veterinario.component.html',
@@ -18,7 +20,7 @@ export class FormularioVeterinarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private aRoute: ActivatedRoute,
-    public allList: ListVeterinarioComponent
+    public compoVete:VeterinarioComponent,
   ) {
     this.formVeterinario = this.crearFormGroup();
     this.idVeterinario = this.aRoute.snapshot.paramMap.get('id');
@@ -27,40 +29,13 @@ export class FormularioVeterinarioComponent implements OnInit {
     this.setEditVeterinarioForm();
   }
   //REGISTRAR VETERINARIO
-  registerAndEditVeterinario(form) {
-    //ACTUALIZAR
-    if (form.IdVeterinario) {
-      this.apiRest
-        .editApiData('Actualizar-Veterinario/', form.IdVeterinario, form)
-        .subscribe(
-          (res) => {
-            console.log(res);
-            this.formVeterinario.reset();
-            //this.volverAlModulo();
-            this.allList.getAllVeterinario();
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-      //REGISTRAR
-    } else {
-      this.apiRest.postApiData('Regitrar-Veterinario', form).subscribe(
-        (res) => {
-          console.log(res);
-          this.formVeterinario.reset();
-          this.allList.getAllVeterinario();
-          //this.volverAlModulo();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    }
+  enviarForm() {
+    this.compoVete.registerUpdateVeterinario(this.formVeterinario.value);
+    this.limpiarFormulario();
   }
   //VOLVER AL MODULO PRINCIPAL
   volverAlModulo() {
-    this.router.navigate(['/Veterinario']);
+    this.router.navigate(['/Veterinario/']);
   }
   //LIMPIAR FORMULARIO
   limpiarFormulario() {

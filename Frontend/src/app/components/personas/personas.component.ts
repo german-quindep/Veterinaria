@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiRestService } from './../../services/api-rest.service';
-import { IPersona } from './../../models/Ipersona.models';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//MODELS
+import { IPersona } from '@models/Ipersona.models';
 @Component({
   selector: 'app-personas',
   templateUrl: './personas.component.html',

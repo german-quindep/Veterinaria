@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VeterinarioComponent } from './../../components/veterinario/veterinario.component';
+//COMPONENTS
+import { VeterinarioComponent } from '@Cveterinario/veterinario';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'Veterinario', component: VeterinarioComponent },

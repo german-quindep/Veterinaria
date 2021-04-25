@@ -1,17 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PersonasRoutingModule } from './personas-routing.module';
-import { ApiRestService } from './../../services/api-rest.service';
 import { HttpClientModule } from '@angular/common/http';
-import { PersonasComponent } from '../../components/personas/personas.component';
-import { FormularioComponent } from '../../components/personas/formulario/formulario.component';
-import { UsersMenuModule } from '../users-menu/users-menu.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
-import { EstadoDirective } from './../../components/personas/directives/estado.directive';
-
+//ROUTING
+import { PersonasRoutingModule } from '@module/personas/personas-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
+//SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//COMPONENTS
+import { PersonasComponent } from '@Cpersonas/personas';
+import { FormularioComponent } from '@Cpersonas/form-persona';
+import { ListPersonasComponent } from '@Cpersonas/list-personas';
+//DIRECTIVES
+import { EstadoDirective } from '@Cpersonas/directive-persona';
 @NgModule({
-  declarations: [PersonasComponent, FormularioComponent, EstadoDirective],
+  declarations: [
+    PersonasComponent,
+    FormularioComponent,
+    ListPersonasComponent,
+    EstadoDirective,
+  ],
   imports: [
     ReactiveFormsModule,
     ErrorTailorModule.forRoot({
@@ -30,6 +39,6 @@ import { EstadoDirective } from './../../components/personas/directives/estado.d
     HttpClientModule,
     CommonModule,
   ],
-  providers: [ApiRestService, FormularioComponent],
+  providers: [ApiRestService,ListPersonasComponent, FormularioComponent],
 })
 export class PersonasModule {}

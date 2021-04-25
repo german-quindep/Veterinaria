@@ -3,6 +3,7 @@ const {
   RegisterUser,
   updateUser,
   deleteUser,
+  getAllUser,
 } = require("../controllers/users.controllers");
 const { verifyToken, verifyAdmin } = require("../validations/verifyToken"); //SE VERIFICA EL TOKEN CON ROLES
 const {
@@ -13,18 +14,20 @@ const {
 } = require("../validations/checkRol.js"); //SE VERIFICA EL ROL Y EMAIL SI EXISTEN
 const { regisUsersVerify } = require("../middleware/errorsValidate");
 const routerUser = Router();
+//GET ALL USER
+routerUser.get("/all-users", getAllUser);
 //GET
 routerUser.get("/Registrarse/:id", paramsRegisterUSer);
 //POST
 routerUser.post(
   "/Registrar-User",
-  [regisUsersVerify,checkRoles, chekUserOrEmail, PersonIdCheck],
+  [regisUsersVerify, checkRoles, chekUserOrEmail, PersonIdCheck],
   RegisterUser
 );
 //PUT
 routerUser.put(
   "/actualizar-User/:id",
-  [regisUsersVerify,checkRoles, chekUserOrEmail, PersonIdCheck],
+  [regisUsersVerify, checkRoles, chekUserOrEmail, PersonIdCheck],
   updateUser
 );
 //DELETE

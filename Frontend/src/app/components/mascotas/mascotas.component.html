@@ -4,7 +4,8 @@
       <h1>AQUI VA EL MENU DE USUARIOS</h1>
     </div>
     <div class="col-lg-9">
-    <app-list-mascotas
+    <app-list-mascotas [Mascotas]="Mascotas"
+    (idMascota)="eliminarMascotas($event)"
     ></app-list-mascotas>
     </div>
   </div>

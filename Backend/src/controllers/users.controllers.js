@@ -1,5 +1,10 @@
 const usersController = {};
-const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
+const {
+  insertBd,
+  updateRegister,
+  deleteRegister,
+  allRegister,
+} = require("../DAO/CrudDao");
 //JWT
 const jwt = require("jsonwebtoken");
 //CONFIG
@@ -7,7 +12,12 @@ const config = require("../config");
 const validationRol = require("../validations/validationRol");
 //NAME TABLE BD
 const tabla = "username";
-
+//GET USERS
+usersController.getAllUser = async (req, res) => {
+  const resp = await allRegister(tabla);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay usuarios` });
+};
 //REGISTER USER
 usersController.RegisterUser = async (req, res) => {
   const { username } = req.body;
