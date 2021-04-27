@@ -22,7 +22,6 @@ export class FormularioMascotasComponent implements OnInit {
     private _fb: FormBuilder,
     private aRoute: ActivatedRoute,
     private datePipe: DatePipe,
-    //private compoMascota:MascotasComponent
   ) {
     this.createMascotas = this.createFormBuilder();
     //OBTENGO EL ID

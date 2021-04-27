@@ -40,6 +40,9 @@
       "@Chistorial/form-historial": [
         "src/app/components/historial/formulario-historial/formulario-historial.component"
       ],
+      "@Chistorial/directive-historial": [
+        "src/app/components/historial/directive/historial-directive.directive"
+      ],
       /********MASCOTAS**********/
       "@Cmascotas/mascotas": ["src/app/components/mascotas/mascotas.component"],
       "@Cmascotas/list-usuarios-mascotas": [
@@ -62,6 +65,36 @@
       ],
       "@Cmascotas/detalle-mascotas": [
         "src/app/components/mascotas/detalles-mascotas/detalles-mascotas.component"
+      ],
+      /*************ENFERMEDADES****************/
+      "@Cenfermedades/enfermedades": [
+        "src/app/components/enfermedades/enfermedades.component"
+      ],
+      "@Cenfermedades/form-enfermedades": [
+        "src/app/components/enfermedades/form-enfermedades/form-enfermedades.component"
+      ],
+      "@Cenfermedades/list-enfermedades": [
+        "src/app/components/enfermedades/list-enfermedades/list-enfermedades.component"
+      ],
+      "@Cenfermedades/directive-enfermedades": [
+        "src/app/components/enfermedades/directive/directive-enfermedades.directive"
+      ],
+      /************VACUNAS*********************/
+      "@Cvacunas/vacunas": ["src/app/components/vacunas/vacunas.component"],
+      "@Cvacunas/form-vacunas": [
+        "src/app/components/vacunas/form-vacunas/form-vacunas.component"
+      ],
+      "@Cvacunas/list-vacunas": [
+        "src/app/components/vacunas/list-vacunas/list-vacunas.component"
+      ],
+      "@Cvacunas/consult-mascotas": [
+        "src/app/components/vacunas/consult-mascotas/consult-mascotas.component"
+      ],
+      "@Cvacunas/detalle-vacunas-mascotas": [
+        "src/app/components/vacunas/detalle-mascotas-vacunas/detalle-mascotas-vacunas.component"
+      ],
+      "@Cvacunas/directive-vacunas": [
+        "src/app/components/vacunas/directive/directive-vacuna.directive"
       ],
 
       /********MENU DE USUARIOS**********/

@@ -30,6 +30,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('@module/mascotas/mascotas.module').then((m) => m.MascotasModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/enfermedades/enfermedades.module').then(
+        (m) => m.EnfermedadesModule
+      ),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/vacunas/vacunas.module').then((m) => m.VacunasModule),
+  },
 ];
 
 @NgModule({

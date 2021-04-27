@@ -1,6 +1,24 @@
 const controllerVacunas = {};
-const { insertBd, updateRegister, deleteRegister } = require("../DAO/CrudDao");
+const {
+  insertBd,
+  updateRegister,
+  deleteRegister,
+  allRegister,
+  consultById,
+} = require("../DAO/CrudDao");
 var table = "vacunas";
+
+controllerVacunas.getAllVacunas = async (req, res) => {
+  const resp = await allRegister(table);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay datos aun` });
+};
+controllerVacunas.getIdVacunas = async (req, res) => {
+  const where = `IdVacunas=${req.params.id}`;
+  const resp = await consultById(table, where);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay datos aun` });
+};
 controllerVacunas.registerVacuna = async (req, res) => {
   const set = setData(req.body);
   const resp = await insertBd(table, set);

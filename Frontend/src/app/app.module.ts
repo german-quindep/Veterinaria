@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { NavbarModule } from './module/navbar/navbar.module';
 import { FooterModule } from './module/footer/footer.module';
 import { SectionModule } from './module/section/section.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

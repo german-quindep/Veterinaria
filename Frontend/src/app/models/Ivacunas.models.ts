@@ -1,4 +1,4 @@
-export interface Vacunas{
+export interface IVacunas{
     IdVacuna?:Number,
     Fecha?:Date,
     Tipo_Vacuna?:String,

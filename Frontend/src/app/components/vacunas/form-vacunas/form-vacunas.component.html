@@ -1,0 +1,147 @@
+<div
+  class="modal fade"
+  id="ModalVacuna"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalVacunaLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        [ngClass]="
+          this.editarVacuna
+            ? 'modal-header bg-warning text-white text text-center'
+            : 'modal-header bg-success text-white text text-center'
+        "
+      >
+        <h5 class="modal-title" id="ModalVacunaLabel">
+          {{ this.editarVacuna ? "Editar Vacuna" : "Registrar Vacuna" }}
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="volverAlModulo()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formVacuna" (ngSubmit)="enviarForm()" errorTailor>
+          <div class="mb-3">
+            <input
+              [hidden]="true"
+              type="text"
+              formControlName="IdVacunas"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVacuna.get('Fecha').touched &&
+                formVacuna.get('Fecha').invalid
+              "
+              type="date"
+              class="form-control"
+              formControlName="Fecha"
+              [controlErrorsTpl]="messageError"
+              placeholder="Fecha"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVacuna.get('Tipo_Vacuna').touched &&
+                formVacuna.get('Tipo_Vacuna').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Tipo_Vacuna"
+              [controlErrorsTpl]="messageError"
+              placeholder="Tipo_Vacuna"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formVacuna.get('Num_Dosis').touched &&
+                formVacuna.get('Num_Dosis').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Num_Dosis"
+              [controlErrorsTpl]="messageError"
+              placeholder="Numero de dosis"
+            />
+          </div>
+          <div class="mb-3 input-group">
+            <input
+              [class.is-invalid]="
+                formVacuna.get('IdMascota').touched &&
+                formVacuna.get('IdMascota').invalid
+              "
+              type="text"
+              [attr.disabled]="true"
+              class="form-control"
+              formControlName="IdMascota"
+              [controlErrorsTpl]="messageError"
+              placeholder="IdMascota"
+              arial-label="IdMascota"
+              aria-describedby="buscar-mascotas"
+            />
+            <div class="input-group-prepend text-left">
+              <button
+                class="btn btn-info"
+                type="button"
+                id="buscar-mascotas"
+                data-toggle="modal"
+                data-target="#ModalConsultMascotas"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="formVacuna.invalid"
+              class="btn"
+              type="submit"
+              [appDirectiveVacuna]="this.editarVacuna"
+            ></button>
+            <button
+              type="reset"
+              class="btn btn-outline-info"
+              tittle="Limpiar"
+              (click)="limpiarFormulario()"
+            >
+              <i class="fas fa-eraser"></i>
+              Limpiar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+              (click)="volverAlModulo()"
+            >
+              <i class="fas fa-times"></i>
+              Cerrar
+            </button>
+          </div>
+        </form>
+        <!---   MENSAJES DE ERRORES   -->
+        <ng-template let-error let-text="text" #messageError>
+          <i *ngIf="error?.minlength" class="text-danger">
+            <b>Error: </b> No cumples con los caracteres minimos que son
+            {{ error?.minlength?.requiredLength }}, ingresastes solo
+            {{ error?.minlength?.actualLength }}</i
+          >
+        </ng-template>
+        <!------>
+      </div>
+    </div>
+  </div>
+</div>
+<app-consult-mascotas (idMascotaModal)="obtenerIdMascota($event)"></app-consult-mascotas>

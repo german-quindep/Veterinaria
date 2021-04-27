@@ -1,1 +1,50 @@
-<p>list-historial works!</p>
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-success d-flex ml-auto my-2"
+  data-toggle="modal"
+  data-target="#ModalHistorial"
+  [routerLink]="['/Historial/Agregar-Historial/']"
+>
+  <i class="fas fa-user-plus"> </i>Registrar
+</button>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">IdHistorial</th>
+      <th scope="col">Motivo</th>
+      <th scope="col">Diagnostico</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let historial of allHistorial">
+      <th>{{ historial.IdHistorial }}</th>
+      <th>{{ historial.Motivo }}</th>
+      <th>{{ historial.Diagnostico }}</th>
+      <th ng-controller="ctrlFecha">
+        {{ historial.Fecha | date: "yyyy-MM-dd" }}
+      </th>
+      <th>
+        <button
+          title="Editar"
+          class="btn btn-outline-warning mx-1"
+          data-toggle="modal"
+          data-target="#ModalHistorial"
+          [routerLink]="['/Historial/Editar-Historial/', historial.IdHistorial]"
+        >
+          <i class="fas fa-edit"></i>
+        </button>
+        <button
+          title="Eliminar"
+          class="btn btn-outline-danger mx-1"
+          (click)="this.compoHistorial.eliminarHistorial(historial.IdHistorial)"
+        >
+          <i class="fas fa-user-times"></i>
+        </button>
+      </th>
+    </tr>
+  </tbody>
+</table>
+<app-formulario-historial></app-formulario-historial>

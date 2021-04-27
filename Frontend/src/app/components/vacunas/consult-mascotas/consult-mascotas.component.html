@@ -1,0 +1,60 @@
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="ModalConsultMascotas"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalConsultMascotasLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="ModalConsultMascotasLabel">
+          Consulta de Mascotas
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th scope="col">IdMascota</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Raza</th>
+              <th scope="col">Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let mascotas of allMascotas"
+              (click)="obtenerIdMascota(mascotas.IdMascota)"
+              data-dismiss="modal"
+            >
+              <th>{{ mascotas.IdMascota }}</th>
+              <th>{{ mascotas.Nombre }}</th>
+              <th>{{ mascotas.Raza }}</th>
+              <th>{{ mascotas.Color }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-dismiss="modal"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

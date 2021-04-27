@@ -3,7 +3,6 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiRestService } from '@services/api-rest.service';
 //MODELS
 import { IMascotas } from '@models/Imascotas.models';
-import { MascotasComponent } from '@Cmascotas/mascotas';
 
 @Component({
   selector: 'app-list-mascotas',

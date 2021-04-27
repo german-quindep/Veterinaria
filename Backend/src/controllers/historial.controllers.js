@@ -4,6 +4,7 @@ const {
   updateRegister,
   deleteRegister,
   allRegister,
+  consultById,
 } = require("../DAO/CrudDao.js");
 //TABLA BD
 var table = "historial";
@@ -12,6 +13,12 @@ historial.getAllHistorial = async (req, res) => {
   const resp = await allRegister(table);
   if (resp.length > 0) res.status(200).json(resp);
   else res.status(400).json({ message: "No hay registros" });
+};
+historial.getOneHistorial = async (req, res) => {
+  const where = `IdHistorial=${req.params.id}`;
+  const resp = await consultById(table, where);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay registro` });
 };
 //REGISTER
 historial.Registrar = async (req, res) => {

@@ -22,7 +22,6 @@ import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinar
   ],
   imports: [
     ReactiveFormsModule,
-    ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {

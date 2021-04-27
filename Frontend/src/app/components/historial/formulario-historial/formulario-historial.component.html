@@ -1,1 +1,125 @@
-<p>formulario-historial works!</p>
+<div
+  class="modal fade"
+  id="ModalHistorial"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalHistorialLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        [ngClass]="
+          this.editarHistorial
+            ? 'modal-header bg-warning text-white text text-center'
+            : 'modal-header bg-success text-white text text-center'
+        "
+      >
+        <h5 class="modal-title" id="ModalHistorialLabel">
+          {{
+            this.editarHistorial ? "Editar Historial" : "Registrar Historial"
+          }}
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="volverAlModulo()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="createFormHistorial"
+          (ngSubmit)="enviarForm()"
+          errorTailor
+        >
+          <div class="mb-3">
+            <input
+              [hidden]="true"
+              type="text"
+              formControlName="IdHistorial"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                createFormHistorial.get('Diagnostico').touched &&
+                createFormHistorial.get('Diagnostico').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Diagnostico"
+              [controlErrorsTpl]="messageError"
+              placeholder="Diagnostico"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                createFormHistorial.get('Motivo').touched &&
+                createFormHistorial.get('Motivo').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Motivo"
+              [controlErrorsTpl]="messageError"
+              placeholder="Motivo"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                createFormHistorial.get('Fecha').touched &&
+                createFormHistorial.get('Fecha').invalid
+              "
+              type="date"
+              class="form-control"
+              formControlName="Fecha"
+              [controlErrorsTpl]="messageError"
+              placeholder="Fecha"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="createFormHistorial.invalid"
+              class="btn"
+              type="submit"
+              [appHistorialDirective]="this.editarHistorial"
+            ></button>
+            <button
+              type="reset"
+              class="btn btn-outline-info"
+              tittle="Limpiar"
+              (click)="limpiarFormulario()"
+            >
+              <i class="fas fa-eraser"></i>
+              Limpiar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+              (click)="volverAlModulo()"
+            >
+              <i class="fas fa-times"></i>
+              Cerrar
+            </button>
+          </div>
+        </form>
+        <!---   MENSAJES DE ERRORES   -->
+        <ng-template let-error let-text="text" #messageError>
+          <i *ngIf="error?.minlength" class="text-danger">
+            <b>Error: </b> No cumples con los caracteres minimos que son
+            {{ error?.minlength?.requiredLength }}, ingresastes solo
+            {{ error?.minlength?.actualLength }}</i
+          >
+        </ng-template>
+        <!------>
+      </div>
+    </div>
+  </div>
+</div>
