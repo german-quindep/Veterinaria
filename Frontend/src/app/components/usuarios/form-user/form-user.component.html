@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto justify-content-center">
+      <form [formGroup]="formUser" (ngSubmit)="registrarUser()">
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-group"
+            formControlName="IdUser"
+            [hidden]="true"
+          />
+        </div>
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="text-email"
+              ><i class="fas fa-user"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formUser.get('email').touched && formUser.get('email').invalid
+            "
+            type="email"
+            class="form-control"
+            formControlName="email"
+            [controlErrorsTpl]="messageError"
+            placeholder="email"
+            arial-label="email"
+            aria-describedby="text-email"
+          />
+        </div>
+
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="text-Usuario"
+              ><i class="fas fa-user"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formUser.get('username').touched &&
+              formUser.get('username').invalid
+            "
+            type="text"
+            class="form-control"
+            formControlName="username"
+            [controlErrorsTpl]="messageError"
+            placeholder="Usuario"
+            arial-label="username"
+            aria-describedby="text-Usuario"
+          />
+        </div>
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="text-password"
+              ><i class="fas fa-user"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formUser.get('password').touched &&
+              formUser.get('password').invalid
+            "
+            type="password"
+            class="form-control"
+            formControlName="password"
+            [controlErrorsTpl]="messageError"
+            placeholder="Contraseña"
+            arial-label="password"
+            aria-describedby="text-password"
+          />
+        </div>
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="text-password"
+              ><i class="fas fa-user"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formUser.get('verifyPassword').touched &&
+              formUser.get('verifyPassword').invalid
+            "
+            type="password"
+            class="form-control"
+            formControlName="verifyPassword"
+            [controlErrorsTpl]="messageError"
+            placeholder="Repita la contraseña"
+            arial-label="verifyPassword"
+            aria-describedby="text-password"
+          />
+        </div>
+        <div class="mb-3 input-group">
+          <input
+            [class.is-invalid]="
+              formUser.get('IdPersona').touched &&
+              formUser.get('IdPersona').invalid
+            "
+            type="text"
+            [hidden]="true"
+            class="form-control"
+            formControlName="IdPersona"
+            [controlErrorsTpl]="messageError"
+            placeholder="IdPersona"
+            arial-label="IdPersona"
+            aria-describedby="text-IdPersona"
+          />
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-primary btn-block my-2"
+            type="submit"
+            [disabled]="formUser.invalid"
+          >
+            Registrar
+          </button>
+        </div>
+      </form>
+      <!---   MENSAJES DE ERRORES   -->
+      <ng-template let-error let-text="text" #messageError>
+        <i *ngIf="error?.minlength" class="text-danger">
+          <b>Error: </b> No cumples con los caracteres minimos que son
+          {{ error?.minlength?.requiredLength }}, ingresastes solo
+          {{ error?.minlength?.actualLength }}</i
+        >
+      </ng-template>
+      <!------>
+    </div>
+  </div>
+</div>

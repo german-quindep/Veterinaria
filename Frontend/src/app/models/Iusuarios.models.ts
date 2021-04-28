@@ -1,7 +1,7 @@
 export interface IUsuarios{
     IdUser?:Number,
-    Username?:String,
-    Email?:String,
-    Password?:String,
+    username?:String,
+    email?:String,
+    password?:String,
     IdPersona?:String,
 }

@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto justify-content-center">
+      <form [formGroup]="formLogin" (ngSubmit)="successLogin()" errorTailor>
+        <div class="mb-3 text-center text-primary">
+          <i class="fas fa-user-circle fa-6x"></i>
+        </div>
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="text-Usuario"
+              ><i class="fas fa-user"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formLogin.get('username').touched &&
+              formLogin.get('username').invalid
+            "
+            type="text"
+            class="form-control"
+            formControlName="username"
+            [controlErrorsTpl]="messageError"
+            placeholder="username"
+            arial-label="username"
+            aria-describedby="text-Usuario"
+          />
+        </div>
+        <div class="mb-3 input-group">
+          <div class="input-group-prepend text-left">
+            <span class="input-group-text" id="text-Contrasena"
+              ><i class="fas fa-lock"></i
+            ></span>
+          </div>
+          <input
+            [class.is-invalid]="
+              formLogin.get('password').touched &&
+              formLogin.get('password').invalid
+            "
+            type="password"
+            class="form-control"
+            formControlName="password"
+            [controlErrorsTpl]="messageError"
+            placeholder="Contrasena"
+            arial-label="Contrasena"
+            aria-describedby="text-Contrasena"
+          />
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-primary btn-block my-2"
+            type="submit"
+            [disabled]="formLogin.invalid"
+          >
+            Iniciar sesion
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-secondary btn-block"
+            type="button"
+            [routerLink]="['/']"
+          >
+            Regresar
+          </button>
+        </div>
+      </form>
+      <!---   MENSAJES DE ERRORES   -->
+      <ng-template let-error let-text="text" #messageError>
+        <i *ngIf="error?.minlength" class="text-danger">
+          <b>Error: </b> No cumples con los caracteres minimos que son
+          {{ error?.minlength?.requiredLength }}, ingresastes solo
+          {{ error?.minlength?.actualLength }}</i
+        >
+      </ng-template>
+      <!------>
+    </div>
+  </div>
+</div>

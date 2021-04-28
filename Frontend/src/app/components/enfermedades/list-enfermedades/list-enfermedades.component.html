@@ -1,1 +1,62 @@
-<p>list-enfermedades works!</p>
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-success d-flex ml-auto my-2"
+  data-toggle="modal"
+  data-target="#ModalEnfermedades"
+  [routerLink]="['/Enfermedades/Agregar-Enfermedades/']"
+>
+  <i class="fas fa-user-plus"> </i>Registrar
+</button>
+<table class="table table-hovwer">
+    <thead class="thead-dark">
+        <tr>
+            <th>IdEnfermedades</th>
+            <th>Descripcion</th>
+            <th>Sintomas</th>
+            <th>IdHistorial</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let enfermedad of allEnfermedades">
+            <th>{{enfermedad.IdEnfermedades}}</th>
+            <th>{{enfermedad.Descripcion}}</th>
+            <th>{{enfermedad.Sintomas}}</th>
+            <th>{{enfermedad.IdHistorial}}</th>
+            <th>
+                <button
+                title="Editar"
+                class="btn btn-outline-warning mx-1"
+                data-toggle="modal"
+                data-target="#ModalEnfermedades"
+                [routerLink]="['/Enfermedades/Editar-Enfermedades/', enfermedad.IdEnfermedades]"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                title="Eliminar"
+                class="btn btn-outline-danger mx-1"
+                (click)="this.compoEnfermedad.eliminarEnfermedad(enfermedad.IdEnfermedades)"
+              >
+                <i class="fas fa-user-times"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary mx-1 my-1"
+                data-toggle="modal"
+                data-target="#DetallesModalEnfermedadesHistorial"
+                title="Detalles de la mascotas"
+                (click)="verMasDetalles(enfermedad.IdHistorial)"
+              >
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+<app-form-enfermedades></app-form-enfermedades>
+<app-consult-historial-enfermedades
+[HistorialDetalles]="oneHistorial"
+></app-consult-historial-enfermedades>

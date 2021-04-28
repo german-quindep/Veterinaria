@@ -17,7 +17,7 @@ const routerUser = Router();
 //GET ALL USER
 routerUser.get("/all-users", getAllUser);
 //GET
-routerUser.get("/Registrarse/:id", paramsRegisterUSer);
+routerUser.get("/Registrarse/", paramsRegisterUSer);
 //POST
 routerUser.post(
   "/Registrar-User",

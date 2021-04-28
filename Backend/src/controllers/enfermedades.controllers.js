@@ -3,10 +3,24 @@ const {
   insertBd,
   updateRegister,
   deleteRegister,
+  allRegister,
+  consultById,
 } = require("../DAO/CrudDao.js");
 
 var table = "enfermedades";
-
+//GET ALL ENFERMEDADES
+controllerEnferme.getAllEnfermedades = async (req, res) => {
+  const resp = await allRegister(table);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay datos disponibles` });
+};
+//GET ONE ENFERMEDADES
+controllerEnferme.getOneEnfermedades = async (req, res) => {
+  const where = `IdEnfermedades=${req.params.id}`;
+  const resp = await consultById(table, where);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay datos disponibles` });
+};
 //REGISTRAR
 controllerEnferme.Registrar = async (req, res) => {
   const set = setData(req.body);

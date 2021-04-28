@@ -19,6 +19,15 @@
       ],
       /********USUARIOS**********/
       "@Cusuarios/usuarios": ["src/app/components/usuarios/usuarios.component"],
+      "@Cusuarios/form-users": [
+        "src/app/components/usuarios/form-user/form-user.component"
+      ],
+      "@Cusuarios/login-users": [
+        "src/app/components/usuarios/login-user/login-user.component"
+      ],
+      "@Cusuarios/registrar-personas": [
+        "src/app/components/usuarios/registrar-personas/registrar-personas.component"
+      ],
       /********PERSONAS**********/
       "@Cpersonas/personas": ["src/app/components/personas/personas.component"],
       "@Cpersonas/list-personas": [
@@ -75,6 +84,12 @@
       ],
       "@Cenfermedades/list-enfermedades": [
         "src/app/components/enfermedades/list-enfermedades/list-enfermedades.component"
+      ],
+      "@Cenfermedades/detalles-enfermedades": [
+        "src/app/components/enfermedades/detalles-historial-enfermedades/detalles-historial-enfermedades.component"
+      ],
+      "@Cenfermedades/consult-historial-enfermedades": [
+        "src/app/components/enfermedades/consult-historial-enfermedades/consult-historial-enfermedades.component"
       ],
       "@Cenfermedades/directive-enfermedades": [
         "src/app/components/enfermedades/directive/directive-enfermedades.directive"

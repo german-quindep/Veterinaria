@@ -20,7 +20,7 @@ usersController.getAllUser = async (req, res) => {
 };
 //REGISTER USER
 usersController.RegisterUser = async (req, res) => {
-  const { username } = req.body;
+  const { username, email } = req.body;
   const set = await validationRol(req.body); //VALIDO Y ENVIO EL SET NECESARIO
   const response = await insertBd(tabla, set); //ENVIO EL SET PARA LA BD
   if (response) {
@@ -29,7 +29,9 @@ usersController.RegisterUser = async (req, res) => {
     const token = jwt.sign({ id: username }, config.SecretJWT, {
       expiresIn: 60 * 60 * 24, //EXPIRACION DEL TOKEN EN DIA
     });
-    res.status(201).json({ message: "Se registro con exito", username, token });
+    res
+      .status(200)
+      .json({ message: "Se registro con exito", username, email, token });
   } else {
     //SI OCURRIO UN ERROR
     res

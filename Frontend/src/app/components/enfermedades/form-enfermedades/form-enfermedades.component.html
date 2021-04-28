@@ -1,1 +1,144 @@
-<p>form-enfermedades works!</p>
+<div
+  class="modal fade"
+  id="ModalEnfermedades"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ModalEnfermedadesLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        [ngClass]="
+          this.editarEnfermedades
+            ? 'modal-header bg-warning text-white text text-center'
+            : 'modal-header bg-success text-white text text-center'
+        "
+      >
+        <h5 class="modal-title" id="ModalEnfermedadesLabel">
+          {{
+            this.editarEnfermedades
+              ? "Editar Enfermedad"
+              : "Registrar Enfermedad"
+          }}
+        </h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="volverAlModulo()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="formEnfermedades"
+          (ngSubmit)="enviarForm()"
+          errorTailor
+        >
+          <div class="mb-3">
+            <input
+              [hidden]="true"
+              type="text"
+              formControlName="IdEnfermedades"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formEnfermedades.get('Descripcion').touched &&
+                formEnfermedades.get('Descripcion').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Descripcion"
+              [controlErrorsTpl]="messageError"
+              placeholder="Descripcion"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              [class.is-invalid]="
+                formEnfermedades.get('Sintomas').touched &&
+                formEnfermedades.get('Sintomas').invalid
+              "
+              type="text"
+              class="form-control"
+              formControlName="Sintomas"
+              [controlErrorsTpl]="messageError"
+              placeholder="Sintomas"
+            />
+          </div>
+          <div class="mb-3 input-group">
+            <input
+              [class.is-invalid]="
+                formEnfermedades.get('IdHistorial').touched &&
+                formEnfermedades.get('IdHistorial').invalid
+              "
+              type="text"
+              [attr.disabled]="true"
+              class="form-control"
+              formControlName="IdHistorial"
+              [controlErrorsTpl]="messageError"
+              placeholder="IdHistorial"
+              arial-label="IdHistorial"
+              aria-describedby="buscar-historial"
+            />
+            <div class="input-group-prepend text-left">
+              <button
+                class="btn btn-info"
+                type="button"
+                id="buscar-historial"
+                data-toggle="modal"
+                data-target="#ModalConsultHistorial"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="formEnfermedades.invalid"
+              class="btn"
+              type="submit"
+              [appDirectiveEnfermedades]="this.editarEnfermedades"
+            ></button>
+            <button
+              type="reset"
+              class="btn btn-outline-info"
+              tittle="Limpiar"
+              (click)="limpiarFormulario()"
+            >
+              <i class="fas fa-eraser"></i>
+              Limpiar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-dismiss="modal"
+              (click)="volverAlModulo()"
+            >
+              <i class="fas fa-times"></i>
+              Cerrar
+            </button>
+          </div>
+        </form>
+        <!---   MENSAJES DE ERRORES   -->
+        <ng-template let-error let-text="text" #messageError>
+          <i *ngIf="error?.minlength" class="text-danger">
+            <b>Error: </b> No cumples con los caracteres minimos que son
+            {{ error?.minlength?.requiredLength }}, ingresastes solo
+            {{ error?.minlength?.actualLength }}</i
+          >
+        </ng-template>
+        <!------>
+      </div>
+    </div>
+  </div>
+</div>
+<app-detalles-historial-enfermedades
+  (idHistorialModal)="obtenerIdEnfermedades($event)"
+></app-detalles-historial-enfermedades>

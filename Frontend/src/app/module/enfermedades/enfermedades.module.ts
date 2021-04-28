@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 //ROUTING
 import { EnfermedadesRoutingModule } from '@module/enfermedades/enfermedades-routing.module';
 //SERVICES
@@ -11,12 +12,17 @@ import { ApiRestService } from '@services/api-rest.service';
 import { EnfermedadesComponent } from '@Cenfermedades/enfermedades';
 import { FormEnfermedadesComponent } from '@Cenfermedades/form-enfermedades';
 import { ListEnfermedadesComponent } from '@Cenfermedades/list-enfermedades';
+import { DetallesHistorialEnfermedadesComponent } from '@Cenfermedades/detalles-enfermedades';
+import { ConsultHistorialEnfermedadesComponent } from '@Cenfermedades/consult-historial-enfermedades';
+//DIRECTIVES
 import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enfermedades';
 @NgModule({
   declarations: [
     EnfermedadesComponent,
     FormEnfermedadesComponent,
     ListEnfermedadesComponent,
+    DetallesHistorialEnfermedadesComponent,
+    ConsultHistorialEnfermedadesComponent,
     DirectiveEnfermedadesDirective,
   ],
   imports: [
@@ -40,6 +46,7 @@ import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enferme
     ApiRestService,
     FormEnfermedadesComponent,
     ListEnfermedadesComponent,
+    DatePipe,
   ],
 })
 export class EnfermedadesModule {}

@@ -17,16 +17,14 @@ controllerPerson.getAllPerson = async (req, res) => {
       .json({ message: `Aun no existen registros de las personas` });
 };
 //GET ONE PERSONA
-controllerPerson.getOnePerson= async(req,res)=>{
+controllerPerson.getOnePerson = async (req, res) => {
   const { id } = req.params;
   const where = `IdPersona=${id}`;
-  const resp = await consultById(table,where);
+  const resp = await consultById(table, where);
   if (resp.length > 0) res.status(200).json(resp);
   else
-    res
-      .status(400)
-      .json({ message: `Aun no existen registros de la persona` });
-}
+    res.status(400).json({ message: `Aun no existen registros de la persona` });
+};
 //REGISTER PERSON
 controllerPerson.RegisterPerson = async (req, res) => {
   const set = setData(req.body);
@@ -35,6 +33,7 @@ controllerPerson.RegisterPerson = async (req, res) => {
     //SI VIENE ALGO RESPONDO EXITO
     res.status(201).json({
       message: `Se agrego con exito a ${req.body.Nombre} ${req.body.Apellido}`,
+      result: response.insertId,
     });
   //return res.send(Cedula);
   //SI HAY ERRORES

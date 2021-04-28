@@ -28,15 +28,17 @@ export class VacunasComponent implements OnInit {
   //REGISTRAR EDITAR
   regiterUpdateVacunas(form) {
     if (form.IdVacunas) {
-      this.apiRest.editApiData('Actualizar-Vacuna/', form.IdVacunas, form).subscribe(
-        (res) => {
-          console.log(res);
-          this.getAllVacunas();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      this.apiRest
+        .editApiData('Actualizar-Vacuna/', form.IdVacunas, form)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.getAllVacunas();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
     } else {
       this.apiRest.postApiData('Registrar-Vacuna', form).subscribe(
         (res) => {
@@ -52,7 +54,7 @@ export class VacunasComponent implements OnInit {
   //ELIMINAR
   eliminarVacuna(id) {
     if (confirm(`Esta seguro de eliminar la vacuna con id: ${id}`)) {
-      this.apiRest.deleteApiData('', id).subscribe(
+      this.apiRest.deleteApiData('Eliminar-Vacuna/', id).subscribe(
         (res) => {
           console.log(res);
           this.getAllVacunas();
