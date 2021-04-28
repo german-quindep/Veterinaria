@@ -111,7 +111,14 @@
       "@Cvacunas/directive-vacunas": [
         "src/app/components/vacunas/directive/directive-vacuna.directive"
       ],
-
+      /************ADMINISTRADOR*************/
+      "@Cadmin/admin": [
+        "src/app/components/admin/admin.component"
+      ],
+      /************CLIENTE******************/
+      "@Ccliente/cliente": [
+        "src/app/components/cliente/cliente.component"
+      ],
       /********MENU DE USUARIOS**********/
       "@Cusers-menu/*": ["src/app/components/users-menu/*"],
       /********SECTIONS**********/

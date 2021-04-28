@@ -4,6 +4,7 @@ const {
   updateUser,
   deleteUser,
   getAllUser,
+  getOneUsers,
 } = require("../controllers/users.controllers");
 const { verifyToken, verifyAdmin } = require("../validations/verifyToken"); //SE VERIFICA EL TOKEN CON ROLES
 const {
@@ -16,8 +17,11 @@ const { regisUsersVerify } = require("../middleware/errorsValidate");
 const routerUser = Router();
 //GET ALL USER
 routerUser.get("/all-users", getAllUser);
+//GET ONE USER
+routerUser.get("/one-users/:id", getOneUsers);
 //GET
 routerUser.get("/Registrarse/", paramsRegisterUSer);
+
 //POST
 routerUser.post(
   "/Registrar-User",

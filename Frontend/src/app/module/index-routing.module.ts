@@ -42,6 +42,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('@module/vacunas/vacunas.module').then((m) => m.VacunasModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/client/client.module').then((m) => m.ClientModule),
+  },
 ];
 
 @NgModule({

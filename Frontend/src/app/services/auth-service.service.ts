@@ -15,12 +15,16 @@ export class AuthServiceService {
   registerUser(url, form: any) {
     return this.http
       .post(`${this.Url_api}/` + url, form, { headers: this.headers })
-      .pipe(map(data => data));
+      .pipe(map((data) => data));
   }
   loginUser(url, form: any): Observable<any> {
     return this.http
       .post<any>(`${this.Url_api}/` + url, form, { headers: this.headers })
       .pipe(map((data) => data));
+  }
+  //TRAER ROL
+  getOneDataRol(url, id: string): Observable<any> {
+    return this.http.get<any>(`${this.Url_api}/` + url + id);
   }
   //GUARDO EL USUARIO
   setUser(users) {

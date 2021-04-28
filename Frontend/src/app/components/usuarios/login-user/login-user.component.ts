@@ -31,15 +31,36 @@ export class LoginUserComponent implements OnInit {
         (res) => {
           this.apiRestAuth.setUser(res.result);
           this.apiRestAuth.setToken(res.token);
-          this.route.navigate['/'];
+          this.verifyRol(res.result);
         },
         (err) => {
           console.log(err);
         }
       );
   }
-  logoutLogin(){
-    
+  //LOGOUT
+  logoutLogin() {}
+  //VERIFY ROL
+  verifyRol(rol) {
+    this.apiRestAuth
+      .getOneDataRol('one-users/', rol[0].IdUser)
+      .subscribe((res) => {
+        const verificarRol = res[0].Nombre;
+        switch (verificarRol) {
+          case 'Administrador':
+            this.route.navigate(['Admin/welcome']);
+            break;
+          case 'Empleado':
+            this.route.navigate(['Empleado/welcome']);
+            break;
+          case 'Cliente':
+            this.route.navigate(['cliente/welcome']);
+            break;
+          default:
+            console.log('no existe ese rol');
+            this.apiRestAuth.logoutUser();
+        }
+      });
   }
   //CREATE FORM
   createFormLogin() {

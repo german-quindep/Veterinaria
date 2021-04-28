@@ -3,7 +3,7 @@ const {
   insertBd,
   updateRegister,
   deleteRegister,
-  allRegister,
+  getJoinRestriccion,
 } = require("../DAO/CrudDao");
 //JWT
 const jwt = require("jsonwebtoken");
@@ -15,6 +15,15 @@ const tabla = "username";
 //GET USERS
 usersController.getAllUser = async (req, res) => {
   const resp = await allRegister(tabla);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay usuarios` });
+};
+//GET ONE USERS
+usersController.getOneUsers = async (req, res) => {
+  const table = `us.username,us.email,rol.Nombre,per.nombre,per.cedula from username as us`;
+  const join = `persona as per ON us.IdPersona=per.IdPersona JOIN roles as rol ON us.IdRoles=rol.IdRol`;
+  const where = `IdUser=${req.params.id}`;
+  const resp = await getJoinRestriccion(table, join, where);
   if (resp.length > 0) res.status(200).json(resp);
   else res.status(400).json({ message: `No hay usuarios` });
 };
