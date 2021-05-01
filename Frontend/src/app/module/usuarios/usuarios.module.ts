@@ -13,7 +13,9 @@ import { UsuariosComponent } from '@Cusuarios/usuarios';
 import { FormUserComponent } from '@Cusuarios/form-users';
 import { LoginUserComponent } from '@Cusuarios/login-users';
 import { RegistrarPersonasComponent } from '@Cusuarios/registrar-personas';
-
+//SHARED
+import { BaseFormLogin } from '@Shared/BaseFormLogin';
+import { BaseFormPerson } from '@Shared/BaseFormPerson';
 @NgModule({
   declarations: [
     UsuariosComponent,
@@ -38,6 +40,11 @@ import { RegistrarPersonasComponent } from '@Cusuarios/registrar-personas';
     HttpClientModule,
     CommonModule,
   ],
-  providers: [ApiRestService, AuthServiceService],
+  providers: [
+    ApiRestService,
+    AuthServiceService,
+    BaseFormLogin,
+    BaseFormPerson,
+  ],
 })
 export class UsuariosModule {}

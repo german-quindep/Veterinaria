@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //ROUTING
@@ -13,6 +14,9 @@ import { FormularioVeterinarioComponent } from '@CVeterinario/form-veterinario';
 import { ListVeterinarioComponent } from '@CVeterinario/list-veterinario';
 //DIRECTIVES
 import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinario';
+//SHARED
+import { BaseFormPerson } from '@Shared/BaseFormPerson';
+
 @NgModule({
   declarations: [
     VeterinarioComponent,
@@ -21,6 +25,8 @@ import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinar
     DirectiveVeterinarioDirective,
   ],
   imports: [
+    VeterinarioRoutingModule,
+    RouterModule,
     ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
@@ -35,13 +41,13 @@ import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinar
     FormsModule,
     HttpClientModule,
     CommonModule,
-    VeterinarioRoutingModule,
   ],
 
   providers: [
     ApiRestService,
     FormularioVeterinarioComponent,
     ListVeterinarioComponent,
+    BaseFormPerson,
   ],
 })
 export class VeterinarioModule {}

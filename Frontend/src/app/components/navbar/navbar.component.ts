@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +6,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private route: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
   onLogout() {
     //this.authServi.logoutUser();
-    this.route.navigate(['/']);
   }
+
 }

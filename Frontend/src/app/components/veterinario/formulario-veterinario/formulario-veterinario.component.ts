@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
+//SHARED
+import { BaseFormPerson } from '@Shared/BaseFormPerson';
 @Component({
   selector: 'app-formulario-veterinario',
   templateUrl: './formulario-veterinario.component.html',
@@ -12,17 +14,15 @@ import { VeterinarioComponent } from '@Cveterinario/veterinario';
 })
 export class FormularioVeterinarioComponent implements OnInit {
   //VARIABLES
-  public formVeterinario: FormGroup;
   editarVetarinario: boolean = false;
   idVeterinario;
   constructor(
-    private apiRest: ApiRestService,
-    private formBuilder: FormBuilder,
     private router: Router,
     private aRoute: ActivatedRoute,
-    public compoVete:VeterinarioComponent,
+    private apiRest: ApiRestService,
+    public compoVete: VeterinarioComponent,
+    public formVeteriBase: BaseFormPerson
   ) {
-    this.formVeterinario = this.crearFormGroup();
     this.idVeterinario = this.aRoute.snapshot.paramMap.get('id');
   }
   ngOnInit(): void {
@@ -30,16 +30,14 @@ export class FormularioVeterinarioComponent implements OnInit {
   }
   //REGISTRAR VETERINARIO
   enviarForm() {
-    this.compoVete.registerUpdateVeterinario(this.formVeterinario.value);
-    this.limpiarFormulario();
+    this.compoVete.registerUpdateVeterinario(
+      this.formVeteriBase.formVeterinario.value
+    );
+    this.formVeteriBase.limpiarFormularioVete();
   }
   //VOLVER AL MODULO PRINCIPAL
   volverAlModulo() {
     this.router.navigate(['/Veterinario/']);
-  }
-  //LIMPIAR FORMULARIO
-  limpiarFormulario() {
-    this.formVeterinario.reset();
   }
   setEditVeterinarioForm() {
     this.editarVetarinario = true;
@@ -48,7 +46,7 @@ export class FormularioVeterinarioComponent implements OnInit {
         .getOneDataApi('Un-Veterinario/', this.idVeterinario)
         .subscribe(
           (res) => {
-            this.formVeterinario.setValue({
+            this.formVeteriBase.formVeterinario.setValue({
               IdVeterinario: res[0]['IdVeterinario'],
               Nombre: res[0]['Nombre'],
               Apellido: res[0]['Apellido'],
@@ -64,56 +62,5 @@ export class FormularioVeterinarioComponent implements OnInit {
     } else {
       this.editarVetarinario = false;
     }
-  }
-  //CREANDO FORMULARIO CON VALIDACIONES
-  crearFormGroup() {
-    return this.formBuilder.group({
-      IdVeterinario: [''],
-      Nombre: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Apellido: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Cedula: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-          Validators.pattern(/^[0-9]{10}$/),
-        ],
-      ],
-      Telefono: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-          Validators.pattern(/^[0-9]{10}$/),
-        ],
-      ],
-      Direccion: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(50),
-          Validators.pattern(/^[A-Za-z0-9]+$/g),
-        ],
-      ],
-    });
   }
 }

@@ -35,13 +35,13 @@ export class FormEnfermedadesComponent implements OnInit {
     this.compoVacuna.regiterUpdateEnfermedad(this.formEnfermedades.value);
     this.limpiarFormulario();
   }
-  //OBTENER ID
+  //OBTENER ID HISOTORIAL
   obtenerIdEnfermedades($id) {
     this.formEnfermedades.patchValue({ IdHistorial: $id });
   }
   //VOLVER AL MODULO PRINCIPAL
   volverAlModulo() {
-    this.router.navigate(['/Enfermedades/']);
+    this.router.navigate(['/Enfermedades/ListadoEnfermedades/']);
   }
   //LIMPIAR FORMULARIO
   limpiarFormulario() {

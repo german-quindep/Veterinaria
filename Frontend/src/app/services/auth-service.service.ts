@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
+  //VARIABLES
   Url_api: string = 'http://localhost:3000/api';
+  private sesionUser = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
   headers: HttpHeaders = new HttpHeaders({
     'Content-type': 'application/json',
@@ -15,12 +18,29 @@ export class AuthServiceService {
   registerUser(url, form: any) {
     return this.http
       .post(`${this.Url_api}/` + url, form, { headers: this.headers })
-      .pipe(map((data) => data));
+      .pipe(
+        map((data) => {
+          this.setUser(data);
+          this.setToken(data['token']);
+          this.sesionUser.next(true);
+          return data;
+        })
+      );
   }
   loginUser(url, form: any): Observable<any> {
     return this.http
       .post<any>(`${this.Url_api}/` + url, form, { headers: this.headers })
-      .pipe(map((data) => data));
+      .pipe(
+        map((data) => {
+          this.setUser(data);
+          this.sesionUser.next(true);
+          return data;
+        })
+      );
+  }
+  //RETURNAMOS EL OBSERVABLE
+  getisLoged(): Observable<boolean> {
+    return this.sesionUser.asObservable();
   }
   //TRAER ROL
   getOneDataRol(url, id: string): Observable<any> {
@@ -51,6 +71,7 @@ export class AuthServiceService {
   //DESLOGUEARSE
   logoutUser() {
     let accessToken = localStorage.getItem('access-token');
+    this.sesionUser.next(false);
     //ELIMINAR EL LOCALSTORAGE
     localStorage.removeItem('access-token');
     localStorage.removeItem('Current-user');

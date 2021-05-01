@@ -4,10 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { MascotasComponent } from '@Cmascotas/mascotas';
 import { FormularioMascotasComponent } from '@Cmascotas/form-mascotas';
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'Mascotas', component: MascotasComponent },
-  { path: 'Mascotas/Registrar-Mascotas', component: FormularioMascotasComponent },
-  { path: 'Mascotas/Editar-Mascotas/:id', component: FormularioMascotasComponent },
+  {
+    path: '',
+    children: [
+      { path: 'ListadoMascotas', component: MascotasComponent },
+      { path: 'Registrar-Mascotas', component: FormularioMascotasComponent },
+      { path: 'Editar-Mascotas/:id', component: FormularioMascotasComponent },
+      { path: '**', redirectTo: 'ListadoMascotas' },
+    ],
+  },
 ];
 
 @NgModule({

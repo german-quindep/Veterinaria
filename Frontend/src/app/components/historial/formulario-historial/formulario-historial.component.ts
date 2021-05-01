@@ -34,7 +34,7 @@ export class FormularioHistorialComponent implements OnInit {
   }
 
   volverAlModulo() {
-    this.router.navigate(['/Historial/']);
+    this.router.navigate(['/Historial/ListadoHistorial/']);
   }
   enviarForm() {
     this.compoHistorial.registrarEditHistorial(this.createFormHistorial.value);

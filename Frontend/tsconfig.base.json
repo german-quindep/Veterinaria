@@ -112,13 +112,9 @@
         "src/app/components/vacunas/directive/directive-vacuna.directive"
       ],
       /************ADMINISTRADOR*************/
-      "@Cadmin/admin": [
-        "src/app/components/admin/admin.component"
-      ],
+      "@Cadmin/admin": ["src/app/components/admin/admin.component"],
       /************CLIENTE******************/
-      "@Ccliente/cliente": [
-        "src/app/components/cliente/cliente.component"
-      ],
+      "@Ccliente/cliente": ["src/app/components/cliente/cliente.component"],
       /********MENU DE USUARIOS**********/
       "@Cusers-menu/*": ["src/app/components/users-menu/*"],
       /********SECTIONS**********/
@@ -132,7 +128,9 @@
       /********MODELS**********/
       "@models/*": ["src/app/models/*"],
       /********MODULE**********/
-      "@module/*": ["src/app/module/*"]
+      "@module/*": ["src/app/module/*"],
+      /*********SHARED********/
+      "@Shared/*": ["src/app/shared/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

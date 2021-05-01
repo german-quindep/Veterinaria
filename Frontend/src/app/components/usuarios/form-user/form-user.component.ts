@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 //SERVICES
 import { AuthServiceService } from '@services/auth-service.service';
+//SHARED
+import { BaseFormLogin } from '@Shared/BaseFormLogin';
 
 @Component({
   selector: 'app-form-user',
@@ -10,80 +11,50 @@ import { AuthServiceService } from '@services/auth-service.service';
   styleUrls: ['./form-user.component.css'],
 })
 export class FormUserComponent implements OnInit {
-  public formUser: FormGroup;
+  //VARIABLES
   idPersona;
   constructor(
-    private formBuilde: FormBuilder,
     private aRouter: ActivatedRoute,
     private router: Router,
-    private authApi: AuthServiceService
+    private authApi: AuthServiceService,
+    public formBaseUser: BaseFormLogin
   ) {
-    this.formUser = this.createFromUser();
+    //OBTENGO EL ID DE LA URL
     this.idPersona = this.aRouter.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
+    //VERIFICO SI ES UN ID
     this.verifyIdPersona();
   }
+  //VERIFICO SI ES UN ID
   verifyIdPersona() {
     if (this.idPersona !== null) {
-      this.formUser.patchValue({ IdPersona: this.idPersona });
+      this.formBaseUser.formUser.patchValue({ IdPersona: this.idPersona });
     } else {
       console.log('Debe estar registrado con un id la persona');
       this.router.navigate(['/Personas/']);
     }
   }
+  //REGISTRO EL USUARIO
   registrarUser() {
-    if (this.formUser.value.password !== this.formUser.value.verifyPassword)
+    if (
+      this.formBaseUser.formUser.value.password !==
+      this.formBaseUser.formUser.value.verifyPassword
+    )
       console.log('no coinciden la contraseña');
     else {
       this.authApi
-        .registerUser('Registrar-User', this.formUser.value)
+        .registerUser('Registrar-User', this.formBaseUser.formUser.value)
         .subscribe(
           (res) => {
-            this.authApi.setUser(res);
-            this.authApi.setToken(res['token']);
-            //this.router.navigate(['/']);
+            console.log(res);
+            this.router.navigate(['/cliente/welcome/']);
           },
           (err) => {
             console.log(err);
           }
         );
     }
-  }
-
-  createFromUser() {
-    return this.formBuilde.group({
-      IdUser: [''],
-      email: ['', [Validators.required, Validators.email]],
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z0-9]+$/g),
-        ],
-      ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z0-9]+$/g),
-        ],
-      ],
-      verifyPassword: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z0-9]+$/g),
-        ],
-      ],
-      IdPersona: ['', [Validators.required]],
-    });
   }
 }

@@ -5,10 +5,18 @@ import { FormUserComponent } from '@Cusuarios/form-users';
 import { LoginUserComponent } from '@Cusuarios/login-users';
 import { RegistrarPersonasComponent } from '@Cusuarios/registrar-personas';
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  {path:'Usuarios/Registrar-Personas',component:RegistrarPersonasComponent},
-  { path: 'Usuarios/Registrar/:id', component: FormUserComponent },
-  { path: 'Usuarios/Login-Users', component: LoginUserComponent },
+  {
+    path: '',
+    children: [
+      {
+        path: 'Registrar-Personas',
+        component: RegistrarPersonasComponent,
+      },
+      { path: 'Registrar/:id', component: FormUserComponent },
+      { path: 'auth/Login-Users', component: LoginUserComponent },
+      { path: '**', redirectTo: 'Registrar-Personas' },
+    ],
+  },
 ];
 
 @NgModule({

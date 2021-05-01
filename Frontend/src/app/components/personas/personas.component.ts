@@ -16,6 +16,17 @@ export class PersonasComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPersonas();
   }
+  //TRAER LAS PERSONAS
+  getAllPersonas() {
+    this.serviApi.getAllDataApi(this.url_post).subscribe(
+      (res: IPersona) => {
+        this.Personas = res;
+      },
+      (error: any) => {
+        console.log('Hubo un error', error);
+      }
+    );
+  }
   //REGISTRO Y EDITAR
   registerAndEdit(form) {
     if (!form.IdPersona) {
@@ -43,17 +54,6 @@ export class PersonasComponent implements OnInit {
           }
         );
     }
-  }
-  //TRAER LAS PERSONAS
-  getAllPersonas() {
-    this.serviApi.getAllDataApi(this.url_post).subscribe(
-      (res: IPersona) => {
-        this.Personas = res;
-      },
-      (error: any) => {
-        console.log('Hubo un error', error);
-      }
-    );
   }
   //ELIMINAR
   eliminar(id: number) {

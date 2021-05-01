@@ -3,15 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { HistorialComponent } from '@Chistorial/historial';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'Historial', component: HistorialComponent },
   {
-    path: 'Historial/Agregar-Historial',
-    component: HistorialComponent,
-  },
-  {
-    path: 'Historial/Editar-Historial/:id',
-    component: HistorialComponent,
+    path: '',
+    children: [
+      { path: 'ListadoHistorial', component: HistorialComponent },
+      {
+        path: 'Agregar-Historial',
+        component: HistorialComponent,
+      },
+      {
+        path: 'Editar-Historial/:id',
+        component: HistorialComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'ListadoHistorial',
+      },
+    ],
   },
 ];
 

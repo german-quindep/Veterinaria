@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-4 mx-auto justify-content-center">
-      <form [formGroup]="formLogin" (ngSubmit)="successLogin()" errorTailor>
+      <form
+        [formGroup]="formBase.formLogin"
+        (ngSubmit)="successLogin()"
+        errorTailor
+      >
         <div class="mb-3 text-center text-primary">
           <i class="fas fa-user-circle fa-6x"></i>
         </div>
@@ -13,8 +17,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formLogin.get('username').touched &&
-              formLogin.get('username').invalid
+              formBase.formLogin.get('username').touched &&
+              formBase.formLogin.get('username').invalid
             "
             type="text"
             class="form-control"
@@ -33,8 +37,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formLogin.get('password').touched &&
-              formLogin.get('password').invalid
+              formBase.formLogin.get('password').touched &&
+              formBase.formLogin.get('password').invalid
             "
             type="password"
             class="form-control"
@@ -49,7 +53,7 @@
           <button
             class="btn btn-outline-primary btn-block my-2"
             type="submit"
-            [disabled]="formLogin.invalid"
+            [disabled]="formBase.formLogin.invalid"
           >
             Iniciar sesion
           </button>

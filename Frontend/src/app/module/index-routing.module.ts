@@ -2,43 +2,43 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
-    path: '',
+    path: 'Personas',
     loadChildren: () =>
       import('@module/personas/personas.module').then((m) => m.PersonasModule),
   },
   {
-    path: '',
+    path: 'Usuarios',
     loadChildren: () =>
       import('@module/usuarios/usuarios.module').then((m) => m.UsuariosModule),
   },
   {
-    path: '',
+    path: 'Veterinario',
     loadChildren: () =>
       import('@module/veterinario/veterinario.module').then(
         (m) => m.VeterinarioModule
       ),
   },
   {
-    path: '',
+    path: 'Historial',
     loadChildren: () =>
       import('@module/historial/historial.module').then(
         (m) => m.HistorialModule
       ),
   },
   {
-    path: '',
+    path: 'Mascotas',
     loadChildren: () =>
       import('@module/mascotas/mascotas.module').then((m) => m.MascotasModule),
   },
   {
-    path: '',
+    path: 'Enfermedades',
     loadChildren: () =>
       import('@module/enfermedades/enfermedades.module').then(
         (m) => m.EnfermedadesModule
       ),
   },
   {
-    path: '',
+    path: 'Vacunas',
     loadChildren: () =>
       import('@module/vacunas/vacunas.module').then((m) => m.VacunasModule),
   },

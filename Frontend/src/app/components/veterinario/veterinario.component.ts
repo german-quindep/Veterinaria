@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiRestService } from '@services/api-rest.service';
-import { IVeterinario } from '@models/Iveterinario.models';
 //SERVICES
+import { ApiRestService } from '@services/api-rest.service';
+//MODELS
+import { IVeterinario } from '@models/Iveterinario.models';
 @Component({
   selector: 'app-veterinario',
   templateUrl: './veterinario.component.html',
   styleUrls: ['./veterinario.component.css']
 })
 export class VeterinarioComponent implements OnInit {
+  //VARIABLES
   public allVeterinario:IVeterinario;
   constructor(private apiRest:ApiRestService) { }
 
@@ -25,6 +27,7 @@ export class VeterinarioComponent implements OnInit {
       }
     );
   }
+  //REGISTRAR O ACTUALIZAR
   registerUpdateVeterinario(form){
       //ACTUALIZAR
       if (form.IdVeterinario) {

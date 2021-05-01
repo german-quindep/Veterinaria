@@ -30,7 +30,7 @@
       </div>
       <div class="modal-body">
         <form
-          [formGroup]="formVeterinario"
+          [formGroup]="formVeteriBase.formVeterinario"
           (ngSubmit)="enviarForm()"
           errorTailor
         >
@@ -45,8 +45,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVeterinario.get('Nombre').touched &&
-                formVeterinario.get('Nombre').invalid
+                formVeteriBase.formVeterinario.get('Nombre').touched &&
+                formVeteriBase.formVeterinario.get('Nombre').invalid
               "
               type="text"
               class="form-control"
@@ -58,8 +58,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVeterinario.get('Apellido').touched &&
-                formVeterinario.get('Apellido').invalid
+                formVeteriBase.formVeterinario.get('Apellido').touched &&
+                formVeteriBase.formVeterinario.get('Apellido').invalid
               "
               type="text"
               class="form-control"
@@ -71,8 +71,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVeterinario.get('Cedula').touched &&
-                formVeterinario.get('Cedula').invalid
+                formVeteriBase.formVeterinario.get('Cedula').touched &&
+                formVeteriBase.formVeterinario.get('Cedula').invalid
               "
               type="text"
               class="form-control"
@@ -84,8 +84,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVeterinario.get('Telefono').touched &&
-                formVeterinario.get('Telefono').invalid
+                formVeteriBase.formVeterinario.get('Telefono').touched &&
+                formVeteriBase.formVeterinario.get('Telefono').invalid
               "
               type="text"
               class="form-control"
@@ -97,8 +97,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVeterinario.get('Direccion').touched &&
-                formVeterinario.get('Direccion').invalid
+                formVeteriBase.formVeterinario.get('Direccion').touched &&
+                formVeteriBase.formVeterinario.get('Direccion').invalid
               "
               type="text"
               class="form-control"
@@ -109,18 +109,16 @@
           </div>
           <div class="modal-footer">
             <button
-              [disabled]="formVeterinario.invalid"
+              [disabled]="formVeteriBase.formVeterinario.invalid"
               class="btn"
               type="submit"
               [appDirectiveVeterinario]="this.editarVetarinario"
-            >
-              
-            </button>
+            ></button>
             <button
               type="reset"
               class="btn btn-outline-info"
               tittle="Limpiar"
-              (click)="limpiarFormulario()"
+              (click)="formVeteriBase.limpiarFormularioVete()"
             >
               <i class="fas fa-eraser"></i>
               Limpiar

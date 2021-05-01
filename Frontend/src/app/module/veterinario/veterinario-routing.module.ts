@@ -3,12 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 //COMPONENTS
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'Veterinario', component: VeterinarioComponent },
-  { path: 'Veterinario/Agregar-Veterinario', component: VeterinarioComponent },
   {
-    path: 'Veterinario/Editar-Veterinario/:id',
-    component: VeterinarioComponent,
+    path: '',
+    children: [
+      { path: 'Listados', component: VeterinarioComponent },
+      {
+        path: 'Agregar-Veterinario',
+        component: VeterinarioComponent,
+      },
+      {
+        path: 'Editar-Veterinario/:id',
+        component: VeterinarioComponent,
+      },
+      {
+        path: '**',
+        redirectTo:'Listados'
+      },
+    ],
   },
 ];
 

@@ -14,6 +14,8 @@ import { FormularioComponent } from '@Cpersonas/form-persona';
 import { ListPersonasComponent } from '@Cpersonas/list-personas';
 //DIRECTIVES
 import { EstadoDirective } from '@Cpersonas/directive-persona';
+//SHARED
+import { BaseFormPerson } from '@Shared/BaseFormPerson';
 @NgModule({
   declarations: [
     PersonasComponent,
@@ -22,6 +24,7 @@ import { EstadoDirective } from '@Cpersonas/directive-persona';
     EstadoDirective,
   ],
   imports: [
+    PersonasRoutingModule,
     ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
@@ -35,10 +38,14 @@ import { EstadoDirective } from '@Cpersonas/directive-persona';
     }),
     FormsModule,
     UsersMenuModule,
-    PersonasRoutingModule,
     HttpClientModule,
     CommonModule,
   ],
-  providers: [ApiRestService,ListPersonasComponent, FormularioComponent],
+  providers: [
+    ApiRestService,
+    ListPersonasComponent,
+    FormularioComponent,
+    BaseFormPerson,
+  ],
 })
 export class PersonasModule {}

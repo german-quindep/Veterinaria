@@ -1,6 +1,6 @@
 <div class="row mx-auto justify-content-center">
   <form
-    [formGroup]="formPersona"
+    [formGroup]="baseFormPerson.formPersona"
     (ngSubmit)="registerAndEditFormulario()"
     errorTailor
   >
@@ -16,7 +16,8 @@
     <div class="mb-3">
       <input
         [class.is-invalid]="
-          formPersona.get('Nombre').touched && formPersona.get('Nombre').invalid
+          baseFormPerson.formPersona.get('Nombre').touched &&
+          baseFormPerson.formPersona.get('Nombre').invalid
         "
         type="text"
         class="form-control"
@@ -28,8 +29,8 @@
     <div class="mb-3">
       <input
         [class.is-invalid]="
-          formPersona.get('Apellido').touched &&
-          formPersona.get('Apellido').invalid
+          baseFormPerson.formPersona.get('Apellido').touched &&
+          baseFormPerson.formPersona.get('Apellido').invalid
         "
         type="text"
         class="form-control"
@@ -41,7 +42,8 @@
     <div class="mb-3">
       <input
         [class.is-invalid]="
-          formPersona.get('Cedula').touched && formPersona.get('Cedula').invalid
+          baseFormPerson.formPersona.get('Cedula').touched &&
+          baseFormPerson.formPersona.get('Cedula').invalid
         "
         type="text"
         class="form-control"
@@ -53,8 +55,8 @@
     <div class="mb-3">
       <input
         [class.is-invalid]="
-          formPersona.get('Telefono').touched &&
-          formPersona.get('Telefono').invalid
+          baseFormPerson.formPersona.get('Telefono').touched &&
+          baseFormPerson.formPersona.get('Telefono').invalid
         "
         type="text"
         class="form-control"
@@ -66,8 +68,8 @@
     <div class="mb-3">
       <input
         [class.is-invalid]="
-          formPersona.get('Direccion').touched &&
-          formPersona.get('Direccion').invalid
+          baseFormPerson.formPersona.get('Direccion').touched &&
+          baseFormPerson.formPersona.get('Direccion').invalid
         "
         type="text"
         class="form-control"
@@ -78,15 +80,17 @@
     </div>
     <div class="modal-footer">
       <button
-        [disabled]="formPersona.invalid"
+        [disabled]="baseFormPerson.formPersona.invalid"
         class="btn btn-outline-success"
         type="submit"
-      >Guardar</button>
+      >
+        Guardar
+      </button>
       <button
         type="reset"
         class="btn btn-outline-info"
         tittle="Limpiar"
-        (click)="limpiarFormulario()"
+        (click)="baseFormPerson.limpiarFormulario()"
       >
         <i class="fas fa-eraser"></i>
         Limpiar

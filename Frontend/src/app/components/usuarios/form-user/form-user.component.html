@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-4 mx-auto justify-content-center">
-      <form [formGroup]="formUser" (ngSubmit)="registrarUser()">
+      <form [formGroup]="formBaseUser.formUser" (ngSubmit)="registrarUser()">
         <div class="mb-3">
           <input
             type="text"
@@ -18,7 +18,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formUser.get('email').touched && formUser.get('email').invalid
+              formBaseUser.formUser.get('email').touched &&
+              formBaseUser.formUser.get('email').invalid
             "
             type="email"
             class="form-control"
@@ -38,8 +39,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formUser.get('username').touched &&
-              formUser.get('username').invalid
+              formBaseUser.formUser.get('username').touched &&
+              formBaseUser.formUser.get('username').invalid
             "
             type="text"
             class="form-control"
@@ -58,8 +59,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formUser.get('password').touched &&
-              formUser.get('password').invalid
+              formBaseUser.formUser.get('password').touched &&
+              formBaseUser.formUser.get('password').invalid
             "
             type="password"
             class="form-control"
@@ -78,8 +79,8 @@
           </div>
           <input
             [class.is-invalid]="
-              formUser.get('verifyPassword').touched &&
-              formUser.get('verifyPassword').invalid
+              formBaseUser.formUser.get('verifyPassword').touched &&
+              formBaseUser.formUser.get('verifyPassword').invalid
             "
             type="password"
             class="form-control"
@@ -93,8 +94,8 @@
         <div class="mb-3 input-group">
           <input
             [class.is-invalid]="
-              formUser.get('IdPersona').touched &&
-              formUser.get('IdPersona').invalid
+              formBaseUser.formUser.get('IdPersona').touched &&
+              formBaseUser.formUser.get('IdPersona').invalid
             "
             type="text"
             [hidden]="true"
@@ -110,7 +111,7 @@
           <button
             class="btn btn-outline-primary btn-block my-2"
             type="submit"
-            [disabled]="formUser.invalid"
+            [disabled]="formBaseUser.formUser.invalid"
           >
             Registrar
           </button>
