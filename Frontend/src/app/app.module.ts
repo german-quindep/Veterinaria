@@ -10,18 +10,16 @@ import { AuthRolService } from '@services/auth-rol.service';
 import { NavbarModule } from '@module/navbar/navbar.module';
 import { FooterModule } from '@module/footer/footer.module';
 import { SectionModule } from '@module/section/section.module';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
-
-  AppRoutingModule,
+    AppRoutingModule,
     BrowserModule,
     NavbarModule,
     SectionModule,
     FooterModule,
   ],
-  providers: [ApiRestService, AuthServiceService,AuthRolService],
+  providers: [ApiRestService, AuthServiceService, AuthRolService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

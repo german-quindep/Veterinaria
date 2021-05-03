@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { VacunasRoutingModule } from '@module/vacunas/vacunas-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
 //COMPONENTS
 import { VacunasComponent } from '@Cvacunas/vacunas';
 import { FormVacunasComponent } from '@Cvacunas/form-vacunas';
@@ -41,6 +42,7 @@ import { BaseFormVacunas } from '@Shared/FormsReactive/BaseFormVacunas';
     }),
     FormsModule,
     HttpClientModule,
+    UsersMenuModule,
     VacunasRoutingModule,
     CommonModule,
   ],

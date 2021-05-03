@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { EnfermedadesRoutingModule } from '@module/enfermedades/enfermedades-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
 //COMPONENTS
 import { EnfermedadesComponent } from '@Cenfermedades/enfermedades';
 import { FormEnfermedadesComponent } from '@Cenfermedades/form-enfermedades';
@@ -37,6 +38,7 @@ import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades
       },
     }),
     FormsModule,
+    UsersMenuModule,
     HttpClientModule,
     EnfermedadesRoutingModule,
     CommonModule,

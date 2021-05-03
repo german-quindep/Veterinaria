@@ -6,6 +6,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { HistorialRoutingModule } from '@module/historial/historial-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
 //COMPONENTS
 import { HistorialComponent } from '@Chistorial/historial';
 import { FormularioHistorialComponent } from '@Chistorial/form-historial';
@@ -34,6 +35,7 @@ import { BaseFormHistorial } from '@Shared/FormsReactive/BaseFormHistorial';
       },
     }),
     ReactiveFormsModule,
+    UsersMenuModule,
     HistorialRoutingModule,
     HttpClientModule,
     CommonModule,

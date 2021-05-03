@@ -6,7 +6,6 @@ import { ApiRestService } from '@services/api-rest.service';
 import { EnfermedadesComponent } from '@Cenfermedades/enfermedades';
 //SHARED
 import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades';
-BaseFormEnfermedades
 @Component({
   selector: 'app-form-enfermedades',
   templateUrl: './form-enfermedades.component.html',

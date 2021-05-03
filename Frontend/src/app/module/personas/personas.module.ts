@@ -35,14 +35,10 @@ import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
       },
     }),
     FormsModule,
-    UsersMenuModule,
     HttpClientModule,
+    UsersMenuModule,
     CommonModule,
   ],
-  providers: [
-    ListPersonasComponent,
-    FormularioComponent,
-    BaseFormPerson,
-  ],
+  providers: [ListPersonasComponent, FormularioComponent, BaseFormPerson],
 })
 export class PersonasModule {}

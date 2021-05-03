@@ -1,0 +1,30 @@
+ng-sidebar-container{
+    height: 100vh;
+    top:-20px;
+}
+
+::ng-deep .ng-sidebar{
+    background-color: #BA68C8;
+    width: 290px;
+    padding:2em 3em;
+    box-shadow: 0 0 2.0em rgba(85,85,85,0.5);
+}
+.menu{
+    margin-top:2em;
+    display:block;
+
+}
+.menu li{
+    margin-bottom: 15px;
+}
+.menu li a {
+    display:block;
+    width:100%;
+}
+.menu li a:hover{
+    border-radius: 25px 25px 25px 25px;
+    -moz-border-radius: 25px 25px 25px 25px;
+    -webkit-border-radius: 25px 25px 25px 25px;
+    border: 0px solid #CE93D8;
+    background-color: #CE93D8;
+}

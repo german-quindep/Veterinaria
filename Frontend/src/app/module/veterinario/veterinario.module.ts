@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //ROUTING
 import { VeterinarioRoutingModule } from '@module/veterinario/veterinario-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
 //COMPONENTS
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
 import { FormularioVeterinarioComponent } from '@CVeterinario/form-veterinario';
@@ -37,6 +38,7 @@ import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
       },
     }),
     FormsModule,
+    UsersMenuModule,
     HttpClientModule,
     CommonModule,
   ],

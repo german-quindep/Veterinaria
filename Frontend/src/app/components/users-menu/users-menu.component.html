@@ -1,29 +1,91 @@
-<div class="wrapper fixed-left">
-  <nav class="sidebar">
-    <div class="sidebar-header">
-      <h3><i class="fas fa-user"></i>Usuario</h3>
+<ng-sidebar-container>
+  <!---SLIDEBAR-->
+  <ng-sidebar [opened]="opened">
+    <div class="row">
+      <div class="col-3">
+        <button
+          type="button"
+          class="close text-white text-left"
+          title="cerrar sesion"
+          (click)="cerrarSesion()"
+          [routerLink]="['/Usuarios/auth/Login-Users']"
+        >
+          <i class="fas fa-power-off" style="color: #fff"></i>
+        </button>
+      </div>
+      <div class="col-6 ">
+        <p class="text text-center text-white">Menu</p>
+      </div>
+      <div class="col-3">
+        <button
+          type="button"
+          class="close text-white"
+          title="cerrar menu"
+          (click)="toggleSlideBar()"
+        >
+          <i class="fas fa-times-circle" style="color: #fff"></i>
+        </button>
+      </div>
     </div>
-    <ul class="list-unstyled components">
-      <li>
-        <a href="">
-          <i class="fas fa-home"></i>Inicio
-        </a>
+
+    <ul class="navbar-nav text-white menu">
+      <li class="nav-item text-center">
+        <i class="fas fa-user-circle fa-4x"></i>
       </li>
-      <li>
-        <a [routerLink]="['/Perfil/Users']">
-          <i class="fas fa-user-cog" ></i>Perfil
-        </a>
+      <li class="nav-item">
+        <a class="nav-link text-white"
+          ><i class="fas fa-users-cog mx-1"></i>Perfil</a
+        >
       </li>
-      <li>
-        <a href="">
-          <i class="fas fa-info"></i>Acerca de nosotros
-        </a>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/Personas/Listados/']"
+          ><i class="fas fa-user-plus mx-1"></i>Modulo de Personas</a
+        >
       </li>
-      <li>
-        <a href="">
-          <i class="fas fa-sign-out-alt"></i>Cerrar Sesion
-        </a>
+      <li clas="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/Veterinario/Listados/']"
+          ><i class="fas fa-user-md mx-1"></i>Modulo de Veterinario</a
+        >
+      </li>
+      <li clas="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLink]="['/Mascotas/ListadoMascotas/']"
+          ><i class="fas fa-bone mx-1"></i>Modulo de Mascotas</a
+        >
+      </li>
+      <li clas="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLink]="['/Enfermedades/ListadoEnfermedades/']"
+          ><i class="fas fa-viruses mx-1"></i>Modulo de Enfermedades</a
+        >
+      </li>
+      <li clas="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLink]="['/Vacunas/ListadoVacunas/']"
+          ><i class="fas fa-syringe mx-1"></i>Modulo de Vacunas</a
+        >
+      </li>
+      <li clas="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLink]="['/Historial/ListadoHistorial/']"
+          ><i class="fas fa-book-medical mx-1"></i>Modulo de Historial</a
+        >
       </li>
     </ul>
-  </nav>
-</div>
+  </ng-sidebar>
+  <div ng-sidebar-content>
+    <!----PAGE CONTENTS-->
+    <button
+      class="btn mx-3 text-white"
+      (click)="toggleSlideBar()"
+      title="Menu de Usuarios"
+      style="background-color: #ba68c8"
+    >
+      <i class="fas fa-sliders-h" style="color: #fff"></i> Menu
+    </button>
+  </div>
+</ng-sidebar-container>

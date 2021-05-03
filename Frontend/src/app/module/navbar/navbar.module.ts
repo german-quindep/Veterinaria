@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [NavbarComponent],
-  imports: [CommonModule, RouterModule,HttpClientModule],
+  imports: [CommonModule, RouterModule, HttpClientModule],
+  providers: [],
   exports: [NavbarComponent],
 })
 export class NavbarModule {}

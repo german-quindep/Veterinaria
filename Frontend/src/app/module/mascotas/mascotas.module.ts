@@ -6,6 +6,7 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { MascotasRoutingModule } from '@module/mascotas/mascotas-routing.module';
+import { UsersMenuModule } from '@module/users-menu/users-menu.module';
 //COMPONENTS
 import { MascotasComponent } from '@Cmascotas/mascotas';
 import { FormularioMascotasComponent } from '@Cmascotas/form-mascotas';
@@ -43,6 +44,7 @@ import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
       },
     }),
     FormsModule,
+    UsersMenuModule,
     HttpClientModule,
     CommonModule,
     MascotasRoutingModule,
