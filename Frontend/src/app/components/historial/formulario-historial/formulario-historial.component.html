@@ -32,7 +32,7 @@
       </div>
       <div class="modal-body">
         <form
-          [formGroup]="createFormHistorial"
+          [formGroup]="formHisto.createFormHistorial"
           (ngSubmit)="enviarForm()"
           errorTailor
         >
@@ -47,8 +47,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                createFormHistorial.get('Diagnostico').touched &&
-                createFormHistorial.get('Diagnostico').invalid
+                formHisto.createFormHistorial.get('Diagnostico').touched &&
+                formHisto.createFormHistorial.get('Diagnostico').invalid
               "
               type="text"
               class="form-control"
@@ -60,8 +60,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                createFormHistorial.get('Motivo').touched &&
-                createFormHistorial.get('Motivo').invalid
+                formHisto.createFormHistorial.get('Motivo').touched &&
+                formHisto.createFormHistorial.get('Motivo').invalid
               "
               type="text"
               class="form-control"
@@ -73,8 +73,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                createFormHistorial.get('Fecha').touched &&
-                createFormHistorial.get('Fecha').invalid
+                formHisto.createFormHistorial.get('Fecha').touched &&
+                formHisto.createFormHistorial.get('Fecha').invalid
               "
               type="date"
               class="form-control"
@@ -85,7 +85,7 @@
           </div>
           <div class="modal-footer">
             <button
-              [disabled]="createFormHistorial.invalid"
+              [disabled]="formHisto.createFormHistorial.invalid"
               class="btn"
               type="submit"
               [appHistorialDirective]="this.editarHistorial"

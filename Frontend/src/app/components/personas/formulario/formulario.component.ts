@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { PersonasComponent } from '@Cpersonas/personas';
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 
 @Component({
   selector: 'app-formulario',

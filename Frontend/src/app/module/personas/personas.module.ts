@@ -6,8 +6,6 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 //ROUTING
 import { PersonasRoutingModule } from '@module/personas/personas-routing.module';
 import { UsersMenuModule } from '@module/users-menu/users-menu.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { PersonasComponent } from '@Cpersonas/personas';
 import { FormularioComponent } from '@Cpersonas/form-persona';
@@ -15,7 +13,7 @@ import { ListPersonasComponent } from '@Cpersonas/list-personas';
 //DIRECTIVES
 import { EstadoDirective } from '@Cpersonas/directive-persona';
 //SHARED
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 @NgModule({
   declarations: [
     PersonasComponent,
@@ -42,7 +40,6 @@ import { BaseFormPerson } from '@Shared/BaseFormPerson';
     CommonModule,
   ],
   providers: [
-    ApiRestService,
     ListPersonasComponent,
     FormularioComponent,
     BaseFormPerson,

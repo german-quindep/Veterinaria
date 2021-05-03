@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 //SERVICES
 import { AuthServiceService } from '@services/auth-service.service';
 //SHARED
-import { BaseFormLogin } from '@Shared/BaseFormLogin';
+import { BaseFormLogin } from '@Shared/FormsReactive/BaseFormLogin';
 
 @Component({
   selector: 'app-form-user',
@@ -48,8 +48,7 @@ export class FormUserComponent implements OnInit {
         .registerUser('Registrar-User', this.formBaseUser.formUser.value)
         .subscribe(
           (res) => {
-            console.log(res);
-            this.router.navigate(['/cliente/welcome/']);
+            this.router.navigate(['/Usuarios/auth/Login-Users/']);
           },
           (err) => {
             console.log(err);

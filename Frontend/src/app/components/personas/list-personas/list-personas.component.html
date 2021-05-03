@@ -1,52 +1,52 @@
 <!-- Button trigger modal -->
-<button
-  type="button"
-  class="btn btn-success d-flex ml-auto my-2"
-  data-toggle="modal"
-  data-target="#ModalPersonas"
-  [routerLink]="['/Personas/Agregar-Personas/']"
->
-  <i class="fas fa-user-plus"> </i>Registrar
-</button>
-<!--     LIST PERSONAS   -->
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Cedula</th>
-      <th scope="col">Telefono</th>
-      <th scope="col">Direccion</th>
-      <th scope="col">Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let persona of Personas">
-      <th scope="row">{{ persona.IdPersona }}</th>
-      <td>{{ persona.Nombre }}</td>
-      <td>{{ persona.Apellido }}</td>
-      <td>{{ persona.Cedula }}</td>
-      <td>{{ persona.Telefono }}</td>
-      <td>{{ persona.Direccion }}</td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-outline-warning mr-2"
-          data-toggle="modal"
-          data-target="#ModalPersonas"
-          [routerLink]="['/Personas/Editar-Personas/', persona.IdPersona]"
-        >
-          <i class="fas fa-edit"></i>Editar
-        </button>
-        <a
-          class="btn btn-outline-danger"
-          (click)="this.componePerson.eliminar(persona.IdPersona)"
-        >
-          <i class="fas fa-user-times"></i>Eliminar
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<app-formulario></app-formulario>
+  <button
+    type="button"
+    class="btn btn-success d-flex ml-auto my-2"
+    data-toggle="modal"
+    data-target="#ModalPersonas"
+    [routerLink]="['/Personas/Agregar-Personas/']"
+  >
+    <i class="fas fa-user-plus"> </i>Registrar
+  </button>
+  <!--     LIST PERSONAS   -->
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Cedula</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let persona of Personas">
+        <th scope="row">{{ persona.IdPersona }}</th>
+        <td>{{ persona.Nombre }}</td>
+        <td>{{ persona.Apellido }}</td>
+        <td>{{ persona.Cedula }}</td>
+        <td>{{ persona.Telefono }}</td>
+        <td>{{ persona.Direccion }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-warning mr-2"
+            data-toggle="modal"
+            data-target="#ModalPersonas"
+            [routerLink]="['/Personas/Editar-Personas/', persona.IdPersona]"
+          >
+            <i class="fas fa-edit"></i>Editar
+          </button>
+          <a
+            class="btn btn-outline-danger"
+            (click)="this.componePerson.eliminar(persona.IdPersona)"
+          >
+            <i class="fas fa-user-times"></i>Eliminar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-formulario></app-formulario>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 //API REST
 import { ApiRestService } from '@services/api-rest.service';
 //SHARED
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 
 @Component({
   selector: 'app-registrar-personas',

@@ -24,6 +24,7 @@ export class EnfermedadesComponent implements OnInit {
       }
     );
   }
+  //REGISTER AND UPDATE
   regiterUpdateEnfermedad(form) {
     if (form.IdEnfermedades) {
       this.apiRest

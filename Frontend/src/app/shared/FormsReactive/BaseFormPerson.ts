@@ -7,6 +7,7 @@ export class BaseFormPerson {
   public formVeterinario: FormGroup;
   public formPersona: FormGroup;
   constructor(private formBuilder: FormBuilder, private router: Router) {
+    //BUSCO LA RUTA EN QUE SE ENCUENTRA EL USUARIO PARA ASIGNARLE EL FORMULARIO DETERMINADO
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (event.url.match('/Veterinario')) {
@@ -21,7 +22,7 @@ export class BaseFormPerson {
   limpiarFormularioVete() {
     this.formVeterinario.reset();
   }
-  limpiarFormulario(){
+  limpiarFormulario() {
     this.formPersona.reset();
   }
   //CREANDO FORMULARIO VETERINARIO

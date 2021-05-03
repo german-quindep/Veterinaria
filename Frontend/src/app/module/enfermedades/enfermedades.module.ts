@@ -6,8 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { EnfermedadesRoutingModule } from '@module/enfermedades/enfermedades-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { EnfermedadesComponent } from '@Cenfermedades/enfermedades';
 import { FormEnfermedadesComponent } from '@Cenfermedades/form-enfermedades';
@@ -16,6 +14,7 @@ import { DetallesHistorialEnfermedadesComponent } from '@Cenfermedades/detalles-
 import { ConsultHistorialEnfermedadesComponent } from '@Cenfermedades/consult-historial-enfermedades';
 //DIRECTIVES
 import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enfermedades';
+import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades';
 @NgModule({
   declarations: [
     EnfermedadesComponent,
@@ -26,7 +25,7 @@ import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enferme
     DirectiveEnfermedadesDirective,
   ],
   imports: [
-    ReactiveFormsModule,
+  ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {
@@ -43,7 +42,7 @@ import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enferme
     CommonModule,
   ],
   providers: [
-    ApiRestService,
+    BaseFormEnfermedades,
     FormEnfermedadesComponent,
     ListEnfermedadesComponent,
     DatePipe,

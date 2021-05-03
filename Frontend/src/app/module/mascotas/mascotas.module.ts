@@ -6,8 +6,6 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { MascotasRoutingModule } from '@module/mascotas/mascotas-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { MascotasComponent } from '@Cmascotas/mascotas';
 import { FormularioMascotasComponent } from '@Cmascotas/form-mascotas';
@@ -18,6 +16,8 @@ import { ListMascotasVeterinarioComponent } from '@Cmascotas/list-veterinario-ma
 import { ListUsuariosComponent } from '@Cmascotas/list-usuarios-mascotas';
 //DIRECTIVES
 import { EstadoMascotasDirective } from '@Cmascotas/directives-mascotas';
+//SHARED
+import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { EstadoMascotasDirective } from '@Cmascotas/directives-mascotas';
     MascotasRoutingModule,
   ],
   providers: [
-    ApiRestService,
+    BaseFormMascotas,
     ListMascotasHistorialComponent,
     ListMascotasVeterinarioComponent,
     ListUsuariosComponent,

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
-import { BehaviorSubject } from 'rxjs';
+//SERVICES
+import { AuthRolService } from '@services/auth-rol.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,7 +13,14 @@ export class AuthServiceService {
   //VARIABLES
   Url_api: string = 'http://localhost:3000/api';
   private sesionUser = new BehaviorSubject<boolean>(false);
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authRol: AuthRolService) {
+    this.checkTokenUser();
+  }
+  //RETURNAMOS EL OBSERVABLE
+  get isLogged(): Observable<boolean> {
+    return this.sesionUser.asObservable();
+  }
+  //HEADERS
   headers: HttpHeaders = new HttpHeaders({
     'Content-type': 'application/json',
   });
@@ -20,9 +29,6 @@ export class AuthServiceService {
       .post(`${this.Url_api}/` + url, form, { headers: this.headers })
       .pipe(
         map((data) => {
-          this.setUser(data);
-          this.setToken(data['token']);
-          this.sesionUser.next(true);
           return data;
         })
       );
@@ -33,18 +39,17 @@ export class AuthServiceService {
       .pipe(
         map((data) => {
           this.setUser(data);
+          this.setToken(data['token']);
           this.sesionUser.next(true);
+          const rol = data.result[0].Rol;
+          this.authRol.ObservableCheckRol(rol);
           return data;
         })
       );
   }
-  //RETURNAMOS EL OBSERVABLE
-  getisLoged(): Observable<boolean> {
-    return this.sesionUser.asObservable();
-  }
-  //TRAER ROL
-  getOneDataRol(url, id: string): Observable<any> {
-    return this.http.get<any>(`${this.Url_api}/` + url + id);
+  private checkTokenUser() {
+    const userToken = localStorage.getItem('access-token');
+    userToken ? this.sesionUser.next(true) : this.sesionUser.next(false);
   }
   //GUARDO EL USUARIO
   setUser(users) {
@@ -59,6 +64,7 @@ export class AuthServiceService {
   getToken() {
     return localStorage.getItem('access-token');
   }
+  //ENVIAR USER
   getCurrentUser() {
     let user_string = localStorage.getItem('Current-user');
     if (!isNullOrUndefined(user_string)) {
@@ -70,12 +76,11 @@ export class AuthServiceService {
   }
   //DESLOGUEARSE
   logoutUser() {
-    let accessToken = localStorage.getItem('access-token');
+    this.authRol.logoutRol(); //FUNCION DEL ROL LOGOUT
     this.sesionUser.next(false);
     //ELIMINAR EL LOCALSTORAGE
     localStorage.removeItem('access-token');
     localStorage.removeItem('Current-user');
-    //SE ELIMINA EL TOKEN DEL SERVIDOR
-    //return this.http.post(url,{headers:this.headers});
+    localStorage.removeItem('rol-user');
   }
 }

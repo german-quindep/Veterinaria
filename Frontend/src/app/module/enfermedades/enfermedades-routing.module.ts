@@ -8,11 +8,11 @@ const routes: Routes = [
     children: [
       { path: 'ListadoEnfermedades', component: EnfermedadesComponent },
       {
-        path: 'Enfermedades/Agregar-Enfermedades',
+        path: 'Agregar-Enfermedades',
         component: EnfermedadesComponent,
       },
       {
-        path: 'Enfermedades/Editar-Enfermedades/:id',
+        path: 'Editar-Enfermedades/:id',
         component: EnfermedadesComponent,
       },
       {

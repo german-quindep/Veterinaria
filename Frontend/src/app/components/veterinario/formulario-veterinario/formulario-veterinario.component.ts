@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 //SERVICES
 import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
 //SHARED
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 @Component({
   selector: 'app-formulario-veterinario',
   templateUrl: './formulario-veterinario.component.html',

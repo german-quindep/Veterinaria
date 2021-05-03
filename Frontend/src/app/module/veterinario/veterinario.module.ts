@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //ROUTING
 import { VeterinarioRoutingModule } from '@module/veterinario/veterinario-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
 import { FormularioVeterinarioComponent } from '@CVeterinario/form-veterinario';
@@ -15,7 +13,7 @@ import { ListVeterinarioComponent } from '@CVeterinario/list-veterinario';
 //DIRECTIVES
 import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinario';
 //SHARED
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 
 @NgModule({
   declarations: [
@@ -44,7 +42,6 @@ import { BaseFormPerson } from '@Shared/BaseFormPerson';
   ],
 
   providers: [
-    ApiRestService,
     FormularioVeterinarioComponent,
     ListVeterinarioComponent,
     BaseFormPerson,

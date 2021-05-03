@@ -5,17 +5,14 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //ROUTING
 import { UsuariosRoutingModule } from './usuarios-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
-import { AuthServiceService } from '@services/auth-service.service';
 //COMPONENTS
 import { UsuariosComponent } from '@Cusuarios/usuarios';
 import { FormUserComponent } from '@Cusuarios/form-users';
 import { LoginUserComponent } from '@Cusuarios/login-users';
 import { RegistrarPersonasComponent } from '@Cusuarios/registrar-personas';
 //SHARED
-import { BaseFormLogin } from '@Shared/BaseFormLogin';
-import { BaseFormPerson } from '@Shared/BaseFormPerson';
+import { BaseFormLogin } from '@Shared/FormsReactive/BaseFormLogin';
+import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
 @NgModule({
   declarations: [
     UsuariosComponent,
@@ -41,8 +38,6 @@ import { BaseFormPerson } from '@Shared/BaseFormPerson';
     CommonModule,
   ],
   providers: [
-    ApiRestService,
-    AuthServiceService,
     BaseFormLogin,
     BaseFormPerson,
   ],

@@ -29,7 +29,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="formVacuna" (ngSubmit)="enviarForm()" errorTailor>
+        <form
+          [formGroup]="formVacu.formVacuna"
+          (ngSubmit)="enviarForm()"
+          errorTailor
+        >
           <div class="mb-3">
             <input
               [hidden]="true"
@@ -41,8 +45,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVacuna.get('Fecha').touched &&
-                formVacuna.get('Fecha').invalid
+                formVacu.formVacuna.get('Fecha').touched &&
+                formVacu.formVacuna.get('Fecha').invalid
               "
               type="date"
               class="form-control"
@@ -54,8 +58,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVacuna.get('Tipo_Vacuna').touched &&
-                formVacuna.get('Tipo_Vacuna').invalid
+                formVacu.formVacuna.get('Tipo_Vacuna').touched &&
+                formVacu.formVacuna.get('Tipo_Vacuna').invalid
               "
               type="text"
               class="form-control"
@@ -67,8 +71,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formVacuna.get('Num_Dosis').touched &&
-                formVacuna.get('Num_Dosis').invalid
+                formVacu.formVacuna.get('Num_Dosis').touched &&
+                formVacu.formVacuna.get('Num_Dosis').invalid
               "
               type="text"
               class="form-control"
@@ -80,8 +84,8 @@
           <div class="mb-3 input-group">
             <input
               [class.is-invalid]="
-                formVacuna.get('IdMascota').touched &&
-                formVacuna.get('IdMascota').invalid
+                formVacu.formVacuna.get('IdMascota').touched &&
+                formVacu.formVacuna.get('IdMascota').invalid
               "
               type="text"
               [attr.disabled]="true"
@@ -106,7 +110,7 @@
           </div>
           <div class="modal-footer">
             <button
-              [disabled]="formVacuna.invalid"
+              [disabled]="formVacu.formVacuna.invalid"
               class="btn"
               type="submit"
               [appDirectiveVacuna]="this.editarVacuna"
@@ -144,4 +148,6 @@
     </div>
   </div>
 </div>
-<app-consult-mascotas (idMascotaModal)="obtenerIdMascota($event)"></app-consult-mascotas>
+<app-consult-mascotas
+  (idMascotaModal)="obtenerIdMascota($event)"
+></app-consult-mascotas>

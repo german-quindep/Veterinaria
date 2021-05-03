@@ -34,7 +34,7 @@
       </div>
       <div class="modal-body">
         <form
-          [formGroup]="formEnfermedades"
+          [formGroup]="formEnferme.formEnfermedades"
           (ngSubmit)="enviarForm()"
           errorTailor
         >
@@ -49,8 +49,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formEnfermedades.get('Descripcion').touched &&
-                formEnfermedades.get('Descripcion').invalid
+              formEnferme.formEnfermedades.get('Descripcion').touched &&
+              formEnferme.formEnfermedades.get('Descripcion').invalid
               "
               type="text"
               class="form-control"
@@ -62,8 +62,8 @@
           <div class="mb-3">
             <input
               [class.is-invalid]="
-                formEnfermedades.get('Sintomas').touched &&
-                formEnfermedades.get('Sintomas').invalid
+              formEnferme.formEnfermedades.get('Sintomas').touched &&
+              formEnferme.formEnfermedades.get('Sintomas').invalid
               "
               type="text"
               class="form-control"
@@ -75,8 +75,8 @@
           <div class="mb-3 input-group">
             <input
               [class.is-invalid]="
-                formEnfermedades.get('IdHistorial').touched &&
-                formEnfermedades.get('IdHistorial').invalid
+              formEnferme.formEnfermedades.get('IdHistorial').touched &&
+              formEnferme.formEnfermedades.get('IdHistorial').invalid
               "
               type="text"
               [attr.disabled]="true"
@@ -101,7 +101,7 @@
           </div>
           <div class="modal-footer">
             <button
-              [disabled]="formEnfermedades.invalid"
+              [disabled]="formEnferme.formEnfermedades.invalid"
               class="btn"
               type="submit"
               [appDirectiveEnfermedades]="this.editarEnfermedades"

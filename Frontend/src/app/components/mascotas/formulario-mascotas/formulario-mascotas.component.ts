@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 //SERVICES
 import { ApiRestService } from '@services/api-rest.service';
-
+//SHARED
+import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
 
 @Component({
   selector: 'app-formulario-mascotas',
@@ -12,41 +12,50 @@ import { ApiRestService } from '@services/api-rest.service';
   styleUrls: ['./formulario-mascotas.component.css'],
 })
 export class FormularioMascotasComponent implements OnInit {
-  createMascotas: FormGroup;
   editar: boolean = false;
   id: string | null;
   date;
   constructor(
-    private apiRest: ApiRestService,
     private router: Router,
-    private _fb: FormBuilder,
     private aRoute: ActivatedRoute,
     private datePipe: DatePipe,
+    private apiRest: ApiRestService,
+    public formMasco: BaseFormMascotas
   ) {
-    this.createMascotas = this.createFormBuilder();
     //OBTENGO EL ID
     this.id = this.aRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
+    this.limpiarFormulario();
     this.selectedEdit();
   }
   //OBTENER EL OUTPUT
   obtenerIdUser(mensaje) {
-    this.createMascotas.patchValue({ IdUser: mensaje });
+    this.formMasco.createMascotas.patchValue({ IdUser: mensaje });
   }
   obtenerIdVeterinario(mensaje) {
-    this.createMascotas.patchValue({ IdVeterinario: mensaje });
+    this.formMasco.createMascotas.patchValue({ IdVeterinario: mensaje });
   }
   obtenerIdHistorial(mensaje) {
-    this.createMascotas.patchValue({ IdHistorial: mensaje });
+    this.formMasco.createMascotas.patchValue({ IdHistorial: mensaje });
   }
- //REGISTRAR Y ACTUALIZAR
- registerAndUpdateMascotas(form) {
-  if (form.IdMascota) {
-    this.apiRest
-      .editApiData('Actualizar-Mascotas/', form.IdMascota, form)
-      .subscribe(
+  //REGISTRAR Y ACTUALIZAR
+  registerAndUpdateMascotas(form) {
+    if (form.IdMascota) {
+      this.apiRest
+        .editApiData('Actualizar-Mascotas/', form.IdMascota, form)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.volverAlModulo();
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } else {
+      this.apiRest.postApiData('Registrar-Mascotas', form).subscribe(
         (res) => {
           console.log(res);
           this.volverAlModulo();
@@ -55,18 +64,8 @@ export class FormularioMascotasComponent implements OnInit {
           console.log(err);
         }
       );
-  } else {
-    this.apiRest.postApiData('Registrar-Mascotas', form).subscribe(
-      (res) => {
-        console.log(res);
-        this.volverAlModulo();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    }
   }
-}
   //SELECCION DE USUARIO
   selectedEdit() {
     this.editar = true;
@@ -78,7 +77,7 @@ export class FormularioMascotasComponent implements OnInit {
             this.date,
             'yyyy-MM-dd'
           ); //TRANSFORMAR LA FECHA
-          this.createMascotas.setValue({
+          this.formMasco.createMascotas.setValue({
             IdMascota: res[0]['IdMascota'],
             Nombre: res[0]['Nombre'],
             FechaNacimiento: tranformarFecha,
@@ -102,90 +101,9 @@ export class FormularioMascotasComponent implements OnInit {
   }
   //LIMPIAR FORM
   limpiarFormulario() {
-    this.createMascotas.reset();
+    this.formMasco.createMascotas.reset();
   }
   volverAlModulo() {
     this.router.navigate(['/Mascotas']);
-  }
-  createFormBuilder() {
-    return (this.createMascotas = this._fb.group({
-      IdMascota: [''],
-      Nombre: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      FechaNacimiento: ['', [Validators.required]],
-      Edad: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(2),
-          Validators.pattern(/^[0-9]*$/),
-        ],
-      ],
-      Raza: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Color: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Peso: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(2),
-          Validators.pattern(/^[0-9]*$/),
-        ],
-      ],
-      Especie: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      IdUser: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[0-9]*$/),
-        ],
-      ],
-      IdVeterinario: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[0-9]*$/),
-        ],
-      ],
-      IdHistorial: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[0-9]*$/),
-        ],
-      ],
-    }));
   }
 }

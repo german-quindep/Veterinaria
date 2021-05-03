@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 //SERVICES
 import { ApiRestService } from '../../../services/api-rest.service';
 //COMPONENTS
 import { HistorialComponent } from '@Chistorial/historial';
+//SHARED
+import { BaseFormHistorial } from '@Shared/FormsReactive/BaseFormHistorial';
 
 @Component({
   selector: 'app-formulario-historial',
@@ -13,19 +14,18 @@ import { HistorialComponent } from '@Chistorial/historial';
   styleUrls: ['./formulario-historial.component.css'],
 })
 export class FormularioHistorialComponent implements OnInit {
-  public createFormHistorial: FormGroup;
+  //VARIABLES
   editarHistorial: boolean = false;
   idHistorialSet;
   date;
   constructor(
-    private apiRest: ApiRestService,
-    private formBuilder: FormBuilder,
     private router: Router,
     private aRoute: ActivatedRoute,
     private datePipe: DatePipe,
-    private compoHistorial: HistorialComponent
+    private apiRest: ApiRestService,
+    private compoHistorial: HistorialComponent,
+    public formHisto: BaseFormHistorial
   ) {
-    this.createFormHistorial = this.crearFormGroup();
     this.idHistorialSet = this.aRoute.snapshot.paramMap.get('id');
   }
 
@@ -37,12 +37,14 @@ export class FormularioHistorialComponent implements OnInit {
     this.router.navigate(['/Historial/ListadoHistorial/']);
   }
   enviarForm() {
-    this.compoHistorial.registrarEditHistorial(this.createFormHistorial.value);
-    this.createFormHistorial.reset();
+    this.compoHistorial.registrarEditHistorial(
+      this.formHisto.createFormHistorial.value
+    );
+    this.limpiarFormulario();
   }
   //LIMPIAR FORMULARIO
   limpiarFormulario() {
-    this.createFormHistorial.reset();
+    this.formHisto.createFormHistorial.reset();
   }
   //SET ID HISTORIAL
   setEditHistorialForm() {
@@ -57,7 +59,7 @@ export class FormularioHistorialComponent implements OnInit {
               this.date,
               'yyyy-MM-dd'
             ); //TRANSFORMAR LA FECHA
-            this.createFormHistorial.setValue({
+            this.formHisto.createFormHistorial.setValue({
               IdHistorial: res[0]['IdHistorial'],
               Diagnostico: res[0]['Diagnostico'],
               Motivo: res[0]['Motivo'],
@@ -71,30 +73,5 @@ export class FormularioHistorialComponent implements OnInit {
     } else {
       this.editarHistorial = false;
     }
-  }
-  //CREANDO FORMULARIO CON VALIDACIONES
-  crearFormGroup() {
-    return this.formBuilder.group({
-      IdHistorial: [''],
-      Diagnostico: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Motivo: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Fecha: ['', [Validators.required]],
-    });
   }
 }

@@ -3,6 +3,7 @@ const {
   insertBd,
   updateRegister,
   deleteRegister,
+  allRegister,
   getJoinRestriccion,
 } = require("../DAO/CrudDao");
 //JWT
@@ -40,7 +41,13 @@ usersController.RegisterUser = async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: "Se registro con exito", username, email, token });
+      .json({
+        message: "Se registro con exito",
+        username,
+        email,
+        token,
+        rol: "Cliente",
+      });
   } else {
     //SI OCURRIO UN ERROR
     res

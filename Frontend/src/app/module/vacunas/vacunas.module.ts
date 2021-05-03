@@ -6,8 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { VacunasRoutingModule } from '@module/vacunas/vacunas-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { VacunasComponent } from '@Cvacunas/vacunas';
 import { FormVacunasComponent } from '@Cvacunas/form-vacunas';
@@ -16,6 +14,8 @@ import { DetalleMascotasVacunasComponent } from '@Cvacunas/detalle-vacunas-masco
 import { ConsultMascotasComponent } from '@Cvacunas/consult-mascotas';
 //DIRECTIVES
 import { DirectiveVacunaDirective } from '@Cvacunas/directive-vacunas';
+//SHARED
+import { BaseFormVacunas } from '@Shared/FormsReactive/BaseFormVacunas';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { DirectiveVacunaDirective } from '@Cvacunas/directive-vacunas';
     DirectiveVacunaDirective,
   ],
   imports: [
-    ReactiveFormsModule,
+
+  ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {
@@ -44,7 +45,7 @@ import { DirectiveVacunaDirective } from '@Cvacunas/directive-vacunas';
     CommonModule,
   ],
   providers: [
-    ApiRestService,
+    BaseFormVacunas,
     FormVacunasComponent,
     ConsultMascotasComponent,
     DatePipe,

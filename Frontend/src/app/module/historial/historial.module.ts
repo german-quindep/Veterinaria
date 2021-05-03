@@ -6,14 +6,14 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
 import { DatePipe } from '@angular/common';
 //ROUTING
 import { HistorialRoutingModule } from '@module/historial/historial-routing.module';
-//SERVICES
-import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { HistorialComponent } from '@Chistorial/historial';
 import { FormularioHistorialComponent } from '@Chistorial/form-historial';
 import { ListHistorialComponent } from '@Chistorial/list-historial';
 //DIRECTIVES
 import { HistorialDirectiveDirective } from '@Chistorial/directive-historial';
+//SHARED
+import { BaseFormHistorial } from '@Shared/FormsReactive/BaseFormHistorial';
 @NgModule({
   declarations: [
     HistorialComponent,
@@ -40,7 +40,7 @@ import { HistorialDirectiveDirective } from '@Chistorial/directive-historial';
   ],
 
   providers: [
-    ApiRestService,
+    BaseFormHistorial,
     FormularioHistorialComponent,
     ListHistorialComponent,
     DatePipe,

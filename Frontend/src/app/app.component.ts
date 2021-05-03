@@ -18,7 +18,9 @@ export class AppComponent {
           event.url.match('/Vacunas') ||
           event.url.match('/Enfermedades') ||
           event.url.match('/Historial') ||
-          event.url.match('/Veterinario')
+          event.url.match('/Veterinario') ||
+          event.url.match('/Usuarios/Registrar-Personas') ||
+          event.url.match('/Usuarios/auth/Login-Users')
         ) {
           this.hideElement = true;
         } else {

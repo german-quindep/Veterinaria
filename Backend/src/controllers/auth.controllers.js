@@ -1,21 +1,20 @@
 //ARRAY OF FUNCTIONS
 const authControllers = {};
 const {
-  ValidarLogin,
   desencriptarPassword,
 } = require("../validations/validationsUsers");
 //BOOKSTORES
 const jwt = require("jsonwebtoken");
-//DAO BD
-const tabla = "username";
-const { consultById } = require("../DAO/CrudDao");
+const { getJoinRestriccion } = require("../DAO/CrudDao");
 //CONFIG
 const config = require("../config");
 //AUTH LOGIN USERS
 authControllers.authLogin = async (req, res) => {
   const { username, password } = req.body;
+  const table="us.username,us.email,us.password,rol.Nombre as Rol,per.nombre,per.cedula from username as us"
+  const join="persona as per ON us.IdPersona=per.IdPersona JOIN roles as rol ON us.IdRoles=rol.IdRol"
   const set = `username = '${username}'`; //ASIGNO EL USER PARA LUEGO HACER CONSULTA
-  const result = await consultById(tabla, set); //CONSULTO SI EXISTE
+  const result = await getJoinRestriccion(table,join, set); //CONSULTO SI EXISTE
   if (result) {
     //PREGUNTO SI TIENE ALGO LA PETICION
     if (result.length > 0) {

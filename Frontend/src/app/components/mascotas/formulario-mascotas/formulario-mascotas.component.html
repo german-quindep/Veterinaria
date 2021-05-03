@@ -11,8 +11,8 @@
     </div>
     <div class="card-body">
       <form
-        [formGroup]="createMascotas"
-        (ngSubmit)="registerAndUpdateMascotas(createMascotas.value)"
+        [formGroup]="formMasco.createMascotas"
+        (ngSubmit)="registerAndUpdateMascotas(formMasco.createMascotas.value)"
       >
         <input
           [hidden]="true"
@@ -24,8 +24,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Nombre').touched &&
-                createMascotas.get('Nombre').invalid
+                formMasco.createMascotas.get('Nombre').touched &&
+                formMasco.createMascotas.get('Nombre').invalid
               "
               type="text"
               class="form-control"
@@ -37,8 +37,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('FechaNacimiento').touched &&
-                createMascotas.get('FechaNacimiento').invalid
+                formMasco.createMascotas.get('FechaNacimiento').touched &&
+                formMasco.createMascotas.get('FechaNacimiento').invalid
               "
               type="date"
               class="form-control"
@@ -52,8 +52,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Edad').touched &&
-                createMascotas.get('Edad').invalid
+                formMasco.createMascotas.get('Edad').touched &&
+                formMasco.createMascotas.get('Edad').invalid
               "
               type="text"
               class="form-control"
@@ -65,8 +65,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Raza').touched &&
-                createMascotas.get('Raza').invalid
+                formMasco.createMascotas.get('Raza').touched &&
+                formMasco.createMascotas.get('Raza').invalid
               "
               type="text"
               class="form-control"
@@ -80,8 +80,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Color').touched &&
-                createMascotas.get('Color').invalid
+                formMasco.createMascotas.get('Color').touched &&
+                formMasco.createMascotas.get('Color').invalid
               "
               type="text"
               class="form-control"
@@ -93,8 +93,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Peso').touched &&
-                createMascotas.get('Peso').invalid
+                formMasco.createMascotas.get('Peso').touched &&
+                formMasco.createMascotas.get('Peso').invalid
               "
               type="text"
               class="form-control"
@@ -108,8 +108,8 @@
           <div class="col-5">
             <input
               [class.is-invalid]="
-                createMascotas.get('Especie').touched &&
-                createMascotas.get('Especie').invalid
+                formMasco.createMascotas.get('Especie').touched &&
+                formMasco.createMascotas.get('Especie').invalid
               "
               type="text"
               class="form-control"
@@ -121,8 +121,8 @@
           <div class="col-5 input-group">
             <input
               [class.is-invalid]="
-                createMascotas.get('IdUser').touched &&
-                createMascotas.get('IdUser').invalid
+                formMasco.createMascotas.get('IdUser').touched &&
+                formMasco.createMascotas.get('IdUser').invalid
               "
               type="text"
               class="form-control"
@@ -150,8 +150,8 @@
           <div class="col-5 input-group">
             <input
               [class.is-invalid]="
-                createMascotas.get('IdVeterinario').touched &&
-                createMascotas.get('IdVeterinario').invalid
+                formMasco.createMascotas.get('IdVeterinario').touched &&
+                formMasco.createMascotas.get('IdVeterinario').invalid
               "
               type="text"
               class="form-control"
@@ -177,8 +177,8 @@
           <div class="col-5 input-group">
             <input
               [class.is-invalid]="
-                createMascotas.get('IdHistorial').touched &&
-                createMascotas.get('IdHistorial').invalid
+                formMasco.createMascotas.get('IdHistorial').touched &&
+                formMasco.createMascotas.get('IdHistorial').invalid
               "
               type="text"
               class="form-control"
@@ -205,7 +205,7 @@
         <div class="row my-3 col-9 mx-auto">
           <div class="col-4 justify-content-center mx-auto">
             <button
-              [disabled]="createMascotas.invalid"
+              [disabled]="formMasco.createMascotas.invalid"
               class="btn"
               [appEstadoMascotas]="this.editar"
               type="submit"

@@ -1,30 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 //SERVIES
 import { ApiRestService } from '@services/api-rest.service';
 //COMPONENTS
 import { EnfermedadesComponent } from '@Cenfermedades/enfermedades';
-
+//SHARED
+import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades';
+BaseFormEnfermedades
 @Component({
   selector: 'app-form-enfermedades',
   templateUrl: './form-enfermedades.component.html',
   styleUrls: ['./form-enfermedades.component.css'],
 })
 export class FormEnfermedadesComponent implements OnInit {
-  //VARIABLES
-  public formEnfermedades: FormGroup;
   editarEnfermedades: boolean = false;
   idEnfermedades;
   date;
   constructor(
-    private apiRest: ApiRestService,
-    private formBuilder: FormBuilder,
     private router: Router,
     private aRoute: ActivatedRoute,
-    public compoVacuna: EnfermedadesComponent
+    private apiRest: ApiRestService,
+    public compoVacuna: EnfermedadesComponent,
+    public formEnferme:BaseFormEnfermedades
   ) {
-    this.formEnfermedades = this.crearFormGroup();
     this.idEnfermedades = this.aRoute.snapshot.paramMap.get('id');
   }
   ngOnInit(): void {
@@ -32,12 +30,12 @@ export class FormEnfermedadesComponent implements OnInit {
   }
   //REGISTRAR VETERINARIO
   enviarForm() {
-    this.compoVacuna.regiterUpdateEnfermedad(this.formEnfermedades.value);
+    this.compoVacuna.regiterUpdateEnfermedad(this.formEnferme.formEnfermedades.value);
     this.limpiarFormulario();
   }
   //OBTENER ID HISOTORIAL
   obtenerIdEnfermedades($id) {
-    this.formEnfermedades.patchValue({ IdHistorial: $id });
+    this.formEnferme.formEnfermedades.patchValue({ IdHistorial: $id });
   }
   //VOLVER AL MODULO PRINCIPAL
   volverAlModulo() {
@@ -45,7 +43,7 @@ export class FormEnfermedadesComponent implements OnInit {
   }
   //LIMPIAR FORMULARIO
   limpiarFormulario() {
-    this.formEnfermedades.reset();
+    this.formEnferme.formEnfermedades.reset();
   }
   setEditVeterinarioForm() {
     this.editarEnfermedades = true;
@@ -54,7 +52,7 @@ export class FormEnfermedadesComponent implements OnInit {
         .getOneDataApi('one-Enfermedades/', this.idEnfermedades)
         .subscribe(
           (res) => {
-            this.formEnfermedades.setValue({
+            this.formEnferme.formEnfermedades.setValue({
               IdEnfermedades: res[0]['IdEnfermedades'],
               Descripcion: res[0]['Descripcion'],
               Sintomas: res[0]['Sintomas'],
@@ -68,30 +66,5 @@ export class FormEnfermedadesComponent implements OnInit {
     } else {
       this.editarEnfermedades = false;
     }
-  }
-  //CREANDO FORMULARIO CON VALIDACIONES
-  crearFormGroup() {
-    return this.formBuilder.group({
-      IdEnfermedades: [''],
-      Descripcion: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(50),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      Sintomas: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(50),
-          Validators.pattern(/^[A-Za-z\s]+$/i),
-        ],
-      ],
-      IdHistorial: ['', [Validators.required]],
-    });
   }
 }

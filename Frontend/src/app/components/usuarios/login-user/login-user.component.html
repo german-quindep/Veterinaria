@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-4 mx-auto justify-content-center">
+    <div class="col-lg-4 col-xl-4 col-md-8 col-sm-10 col-12 mx-auto justify-content-center my-5">
       <form
         [formGroup]="formBase.formLogin"
         (ngSubmit)="successLogin()"
@@ -70,7 +70,7 @@
       </form>
       <!---   MENSAJES DE ERRORES   -->
       <ng-template let-error let-text="text" #messageError>
-        <i *ngIf="error?.minlength" class="text-danger">
+        <i *ngIf="error?.minlength" class="text" style="color: #ef5350">
           <b>Error: </b> No cumples con los caracteres minimos que son
           {{ error?.minlength?.requiredLength }}, ingresastes solo
           {{ error?.minlength?.actualLength }}</i
