@@ -1,0 +1,17 @@
+.card{
+    border:1px solid #fff;
+    -webkit-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+    box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+}
+.icons-hove{
+    background: #fff;
+    color:#fff;
+}
+.icons-hover:hover{
+    color:#ce93d8;
+    cursor: pointer;
+}
+.card-collapse{
+    background: rgb(186, 104, 200,.4);
+}

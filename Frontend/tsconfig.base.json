@@ -130,7 +130,9 @@
       /********MODULE**********/
       "@module/*": ["src/app/module/*"],
       /*********SHARED********/
-      "@Shared/*": ["src/app/shared/*"]
+      "@Shared/*": ["src/app/shared/*"],
+      /*********ASSETS IMG*****/
+      "@Assets/*": ["src/assets/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

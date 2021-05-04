@@ -1,0 +1,52 @@
+.main-header {
+  background: url("../../../assets/img/fondo_section.jpg");
+  background-size: cover;
+  min-height: 700px;
+  position: relative;
+}
+.background-overlay {
+  background: rgba(142, 68, 173, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+}
+.card-img-top {
+  width: 100%;
+  height: 50%;
+}
+.container-section {
+  background-color: #ba68c8;
+  position: relative;
+  top: -24px;
+}
+.card {
+  background: rgba(142, 68, 173, 0.4);
+  box-shadow: 2px 2px 5px #0000;
+  opacity: 0.9;
+  border: 1px solid #fff;
+  -webkit-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+  -moz-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+  box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+}
+.card .btn-card {
+  background: #7e57c2;
+  -webkit-box-shadow: -1px 57px 29px -13px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: -1px 57px 29px -13px rgba(0, 0, 0, 0.55);
+  box-shadow: -1px 57px 29px -13px rgba(0, 0, 0, 0.55);
+}
+.card .btn-card:hover{
+  background: #4f348d;
+}
+.container-section-2{
+  background: #CE93D8;
+  position: relative;
+  top: -24px;
+}
+.card .card-img-edit{
+  height: 250px;
+}
+
+

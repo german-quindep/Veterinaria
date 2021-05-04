@@ -1,3 +1,4 @@
-.colorNavbar{
-    background-color:#052c65;
+.navbar {
+  box-shadow: 2px 2px 5px #0000;
+  opacity: 0.9;
 }

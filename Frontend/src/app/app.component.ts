@@ -16,11 +16,13 @@ export class AppComponent {
           event.url.match('/Mascotas') ||
           event.url.match('/Veterinario') ||
           event.url.match('/Vacunas') ||
+          event.url.match('/Personas') ||
           event.url.match('/Enfermedades') ||
           event.url.match('/Historial') ||
           event.url.match('/Veterinario') ||
-          event.url.match('/Usuarios/Registrar-Personas') ||
-          event.url.match('/Usuarios/auth/Login-Users')
+          event.url.match('/Usuarios') ||
+          event.url.match('/Nosotros') ||
+          event.url.match('/Servicios')
         ) {
           this.hideElement = true;
         } else {

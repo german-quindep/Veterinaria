@@ -53,6 +53,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('@module/client/client.module').then((m) => m.ClientModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/servicios/servicios.module').then(
+        (m) => m.ServiciosModule
+      ),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('@module/nosotros/nosotros.module').then((m) => m.NosotrosModule),
+  },
 ];
 
 @NgModule({
