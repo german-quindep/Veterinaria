@@ -8,10 +8,28 @@ const {
 } = require("../controllers/vacunas.controller");
 const routeVacunas = Router();
 const { validarVacunas } = require("../middleware/errorsValidate");
-routeVacunas.get("/all-vacunas", getAllVacunas);
-routeVacunas.get("/one-vacunas/:id", getIdVacunas);
-routeVacunas.post("/Registrar-Vacuna", validarVacunas, registerVacuna);
-routeVacunas.put("/Actualizar-Vacuna/:id", validarVacunas, actualizarVacuna);
-routeVacunas.delete("/Eliminar-Vacuna/:id", eliminarVacuna);
+const { verifyToken, verifyAdmin } = require("../validations/verifyToken");
+routeVacunas.get("/all-vacunas", verifyToken, getAllVacunas);
+routeVacunas.get("/one-vacunas/:id", verifyToken, getIdVacunas);
+routeVacunas.post(
+  "/Registrar-Vacuna",
+  verifyToken,
+  verifyAdmin,
+  validarVacunas,
+  registerVacuna
+);
+routeVacunas.put(
+  "/Actualizar-Vacuna/:id",
+  verifyToken,
+  verifyAdmin,
+  validarVacunas,
+  actualizarVacuna
+);
+routeVacunas.delete(
+  "/Eliminar-Vacuna/:id",
+  verifyToken,
+  verifyAdmin,
+  eliminarVacuna
+);
 
 module.exports = routeVacunas;

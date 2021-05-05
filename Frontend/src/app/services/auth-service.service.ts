@@ -20,13 +20,10 @@ export class AuthServiceService {
   get isLogged(): Observable<boolean> {
     return this.sesionUser.asObservable();
   }
-  //HEADERS
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-type': 'application/json',
-  });
+  //REGISTRAR USUARIO
   registerUser(url, form: any) {
     return this.http
-      .post(`${this.Url_api}/` + url, form, { headers: this.headers })
+      .post(`${this.Url_api}/` + url, form)
       .pipe(
         map((data) => {
           return data;
@@ -35,7 +32,7 @@ export class AuthServiceService {
   }
   loginUser(url, form: any): Observable<any> {
     return this.http
-      .post<any>(`${this.Url_api}/` + url, form, { headers: this.headers })
+      .post<any>(`${this.Url_api}/` + url, form)
       .pipe(
         map((data) => {
           this.setUser(data);

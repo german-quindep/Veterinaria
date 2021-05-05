@@ -20,7 +20,7 @@ export class FormEnfermedadesComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private apiRest: ApiRestService,
     public compoVacuna: EnfermedadesComponent,
-    public formEnferme:BaseFormEnfermedades
+    public formEnferme: BaseFormEnfermedades
   ) {
     this.idEnfermedades = this.aRoute.snapshot.paramMap.get('id');
   }
@@ -29,7 +29,9 @@ export class FormEnfermedadesComponent implements OnInit {
   }
   //REGISTRAR VETERINARIO
   enviarForm() {
-    this.compoVacuna.regiterUpdateEnfermedad(this.formEnferme.formEnfermedades.value);
+    this.compoVacuna.regiterUpdateEnfermedad(
+      this.formEnferme.formEnfermedades.value
+    );
     this.limpiarFormulario();
   }
   //OBTENER ID HISOTORIAL
@@ -46,24 +48,17 @@ export class FormEnfermedadesComponent implements OnInit {
   }
   setEditVeterinarioForm() {
     this.editarEnfermedades = true;
-    if (this.idEnfermedades !== null) {
-      this.apiRest
-        .getOneDataApi('one-Enfermedades/', this.idEnfermedades)
-        .subscribe(
-          (res) => {
-            this.formEnferme.formEnfermedades.setValue({
-              IdEnfermedades: res[0]['IdEnfermedades'],
-              Descripcion: res[0]['Descripcion'],
-              Sintomas: res[0]['Sintomas'],
-              IdHistorial: res[0]['IdHistorial'],
-            });
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } else {
-      this.editarEnfermedades = false;
-    }
+    this.idEnfermedades !== null
+      ? this.apiRest //HAGO LA CONDICION
+          .getOneDataApi('one-Enfermedades/', this.idEnfermedades)
+          .subscribe(
+            (res) => {
+              this.formEnferme.formEnfermedades.setValue({ ...res[0] });
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+      : this.editarEnfermedades = false; //SI NO VIENE NADA
   }
 }

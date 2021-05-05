@@ -49,29 +49,23 @@ export class FormularioHistorialComponent implements OnInit {
   //SET ID HISTORIAL
   setEditHistorialForm() {
     this.editarHistorial = true;
-    if (this.idHistorialSet !== null) {
-      this.apiRest
-        .getOneDataApi('one-historial/', this.idHistorialSet)
-        .subscribe(
-          (res) => {
-            this.date = res[0]['Fecha']; //TRANSFORMAR LA FECHA
-            let tranformarFecha = this.datePipe.transform(
-              this.date,
-              'yyyy-MM-dd'
-            ); //TRANSFORMAR LA FECHA
-            this.formHisto.createFormHistorial.setValue({
-              IdHistorial: res[0]['IdHistorial'],
-              Diagnostico: res[0]['Diagnostico'],
-              Motivo: res[0]['Motivo'],
-              Fecha: tranformarFecha,
-            });
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } else {
-      this.editarHistorial = false;
-    }
+    this.idHistorialSet !== null
+      ? this.apiRest
+          .getOneDataApi('one-historial/', this.idHistorialSet)
+          .subscribe(
+            (res) => {
+              this.date = res[0]['Fecha']; //TRANSFORMAR LA FECHA
+              let tranformarFecha = this.datePipe.transform(
+                this.date,
+                'yyyy-MM-dd'
+              ); //TRANSFORMAR LA FECHA
+              res[0]['Fecha'] = tranformarFecha;
+              this.formHisto.createFormHistorial.setValue({ ...res[0] });
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+      : (this.editarHistorial = false);
   }
 }

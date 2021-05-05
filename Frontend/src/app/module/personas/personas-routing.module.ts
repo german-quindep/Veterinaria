@@ -1,13 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+//COMPONENTS
 import { PersonasComponent } from '@Cpersonas/personas';
+//GUARDS
+import { GuardsAdminGuard } from '@Shared/guards/guards-admin.guard';
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'Listados', component: PersonasComponent },
-      { path: 'Agregar-Personas', component: PersonasComponent },
-      { path: 'Editar-Personas/:id', component: PersonasComponent },
+      {
+        path: 'Listados',
+        canActivate: [GuardsAdminGuard],
+        component: PersonasComponent,
+      },
+      {
+        path: 'Agregar-Personas',
+        canActivate: [GuardsAdminGuard],
+        component: PersonasComponent,
+      },
+      {
+        path: 'Editar-Personas/:id',
+        canActivate: [GuardsAdminGuard],
+        component: PersonasComponent,
+      },
       { path: '**', redirectTo: 'Listados' },
     ],
   },

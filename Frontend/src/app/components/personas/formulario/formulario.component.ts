@@ -47,25 +47,16 @@ export class FormularioComponent implements OnInit {
   //ENVIAR PERSONA AL INPUT
   selectedPersona() {
     this.editarPersona = true;
-    if (this.idPersona !== null) {
-      this.apiRest.getOneDataApi('one-Persona/', this.idPersona).subscribe(
-        (res) => {
-          this.baseFormPerson.limpiarFormulario();
-          this.baseFormPerson.formPersona.setValue({
-            IdPersona: res[0]['IdPersona'],
-            Nombre: res[0]['Nombre'],
-            Apellido: res[0]['Apellido'],
-            Cedula: res[0]['Cedula'],
-            Telefono: res[0]['Telefono'],
-            Direccion: res[0]['Direccion'],
-          });
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    } else {
-      this.editarPersona = false;
-    }
+    this.idPersona !== null
+      ? this.apiRest.getOneDataApi('one-Persona/', this.idPersona).subscribe(
+          (res) => {
+            this.baseFormPerson.limpiarFormulario();
+            this.baseFormPerson.formPersona.setValue({ ...res[0] }); //ASIGNO LO QUE VIENE DE LA CONSULTA
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      : (this.editarPersona = false);
   }
 }

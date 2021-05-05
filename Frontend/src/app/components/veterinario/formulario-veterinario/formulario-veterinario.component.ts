@@ -45,14 +45,7 @@ export class FormularioVeterinarioComponent implements OnInit {
         .getOneDataApi('Un-Veterinario/', this.idVeterinario)
         .subscribe(
           (res) => {
-            this.formVeteriBase.formVeterinario.setValue({
-              IdVeterinario: res[0]['IdVeterinario'],
-              Nombre: res[0]['Nombre'],
-              Apellido: res[0]['Apellido'],
-              Cedula: res[0]['Cedula'],
-              Telefono: res[0]['Telefono'],
-              Direccion: res[0]['Direccion'],
-            });
+            this.formVeteriBase.formVeterinario.setValue({ ...res[0] });
           },
           (err) => {
             console.log(err);

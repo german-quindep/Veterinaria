@@ -10,7 +10,7 @@ export class AuthRolService {
   private sesionEmpleado = new BehaviorSubject<boolean>(false);
   private sesionCliente = new BehaviorSubject<boolean>(false);
   constructor() {
-    this.checkRol;
+    this.checkRol();
   }
   //RETURNO EL AS OBSERVABLE
   get isAdmin(): Observable<boolean> {

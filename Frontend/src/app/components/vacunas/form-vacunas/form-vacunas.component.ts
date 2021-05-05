@@ -49,28 +49,21 @@ export class FormVacunasComponent implements OnInit {
   }
   setEditVeterinarioForm() {
     this.editarVacuna = true;
-    if (this.idVacuna !== null) {
-      this.apiRest.getOneDataApi('one-vacunas/', this.idVacuna).subscribe(
-        (res) => {
-          this.date = res[0]['Fecha']; //TRANSFORMAR LA FECHA
-          let tranformarFecha = this.datePipe.transform(
-            this.date,
-            'yyyy-MM-dd'
-          ); //TRANSFORMAR LA FECHA
-          this.formVacu.formVacuna.setValue({
-            IdVacunas: res[0]['IdVacunas'],
-            Fecha: tranformarFecha,
-            Tipo_Vacuna: res[0]['Tipo_Vacuna'],
-            Num_Dosis: res[0]['Num_Dosis'],
-            IdMascota: res[0]['IdMascota'],
-          });
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    } else {
-      this.editarVacuna = false;
-    }
+    this.idVacuna !== null
+      ? this.apiRest.getOneDataApi('one-vacunas/', this.idVacuna).subscribe(
+          (res) => {
+            this.date = res[0]['Fecha']; //TRANSFORMAR LA FECHA
+            let tranformarFecha = this.datePipe.transform(
+              this.date,
+              'yyyy-MM-dd'
+            ); //TRANSFORMAR LA FECHA
+            res[0]['Fecha'] = tranformarFecha;
+            this.formVacu.formVacuna.setValue({ ...res[0] });
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      : (this.editarVacuna = false);
   }
 }

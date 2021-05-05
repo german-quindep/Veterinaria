@@ -12,6 +12,5 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     const rol = localStorage.getItem('Current-user');
     const tranform = JSON.parse(rol);
-    console.log(tranform.result[0]['IdUser']);
   }
 }

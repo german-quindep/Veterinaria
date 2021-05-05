@@ -69,35 +69,22 @@ export class FormularioMascotasComponent implements OnInit {
   //SELECCION DE USUARIO
   selectedEdit() {
     this.editar = true;
-    if (this.id !== null) {
-      this.apiRest.getOneDataApi('Mascotas-one/', this.id).subscribe(
-        (res) => {
-          this.date = res[0]['FechaNacimiento']; //TRANSFORMAR LA FECHA
-          let tranformarFecha = this.datePipe.transform(
-            this.date,
-            'yyyy-MM-dd'
-          ); //TRANSFORMAR LA FECHA
-          this.formMasco.createMascotas.setValue({
-            IdMascota: res[0]['IdMascota'],
-            Nombre: res[0]['Nombre'],
-            FechaNacimiento: tranformarFecha,
-            Edad: res[0]['Edad'],
-            Raza: res[0]['Raza'],
-            Color: res[0]['Color'],
-            Peso: res[0]['Peso'],
-            Especie: res[0]['Especie'],
-            IdUser: res[0]['IdUser'],
-            IdVeterinario: res[0]['IdVeterinario'],
-            IdHistorial: res[0]['IdHistorial'],
-          });
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    } else {
-      this.editar = false;
-    }
+    this.id !== null
+      ? this.apiRest.getOneDataApi('Mascotas-one/', this.id).subscribe(
+          (res) => {
+            this.date = res[0]['FechaNacimiento']; //TRANSFORMAR LA FECHA
+            let tranformarFecha = this.datePipe.transform(
+              this.date,
+              'yyyy-MM-dd'
+            ); //TRANSFORMAR LA FECHA
+            res[0]['FechaNacimiento'] = tranformarFecha;
+            this.formMasco.createMascotas.setValue({ ...res[0] });
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      : (this.editar = false);
   }
   //LIMPIAR FORM
   limpiarFormulario() {
