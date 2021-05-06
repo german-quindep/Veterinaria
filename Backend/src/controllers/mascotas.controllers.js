@@ -6,6 +6,7 @@ const {
   updateRegister,
   deleteRegister,
   consultById,
+  getJoinConsult,
   getJoinRestriccion,
 } = require("../DAO/CrudDao");
 var table = "mascota";
@@ -17,6 +18,17 @@ mascotasControllers.todasLasMascotas = async (req, res) => {
     res
       .status(400)
       .json({ message: `Aun no existen registros de las mascotas` });
+};
+//VER DETALLES DE LA MASCOTA POR USUARIO
+mascotasControllers.getAllMascotasUsers = async (req, res) => {
+  const join = `AS m JOIN username as us ON m.IdUser=us.IdUser`;
+  const where = `us.username='${req.params.username}'`;
+  const resp = await getJoinConsult(table, join, where);
+  if (resp.length > 0) res.status(200).json(resp);
+  else
+    res
+      .status(400)
+      .json({ message: `Aun no tiene mascota registrada en el sistema` });
 };
 //VER DETALLES
 mascotasControllers.verDetallesMascotas = async (req, res) => {

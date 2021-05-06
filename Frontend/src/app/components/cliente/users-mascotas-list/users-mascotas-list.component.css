@@ -1,0 +1,22 @@
+.card .card-header {
+  background: #b23cfd;
+}
+.card:hover {
+    transition: 0.5s;
+  -webkit-box-shadow: 14px 26px 15px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 14px 26px 15px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 14px 26px 15px -4px rgba(0, 0, 0, 0.75);
+}
+.card-body {
+  background: #ab47bc;
+}
+.card-footer {
+  background: #b23cfd;
+}
+.btn {
+  background: #6a1b9a;
+  color: #fff;
+}
+.btn:hover {
+  background: #9c27b0;
+}

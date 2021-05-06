@@ -22,7 +22,8 @@ export class AppComponent {
           event.url.match('/Veterinario') ||
           event.url.match('/Usuarios') ||
           event.url.match('/Nosotros') ||
-          event.url.match('/Servicios')
+          event.url.match('/Servicios') ||
+          event.url.match('/cliente') 
         ) {
           this.hideElement = true;
         } else {

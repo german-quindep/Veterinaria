@@ -115,6 +115,18 @@
       "@Cadmin/admin": ["src/app/components/admin/admin.component"],
       /************CLIENTE******************/
       "@Ccliente/cliente": ["src/app/components/cliente/cliente.component"],
+      "@Ccliente/allMascotas": [
+        "src/app/components/cliente/users-mascotas-list/users-mascotas-list.component"
+      ],
+      "@Ccliente/modalVeterinario": [
+        "src/app/components/cliente/modal-veterinario/modal-veterinario.component"
+      ],
+      "@Ccliente/modalVacunas": [
+        "src/app/components/cliente/modal-vacunas/modal-vacunas.component"
+      ],
+      "@Ccliente/modalHistorial": [
+        "src/app/components/cliente/modal-historial/modal-historial.component"
+      ],
       /********MENU DE USUARIOS**********/
       "@Cusers-menu/*": ["src/app/components/users-menu/*"],
       /********SECTIONS**********/

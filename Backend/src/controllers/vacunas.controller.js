@@ -4,12 +4,22 @@ const {
   updateRegister,
   deleteRegister,
   allRegister,
+  getJoinConsult,
   consultById,
 } = require("../DAO/CrudDao");
 var table = "vacunas";
 
 controllerVacunas.getAllVacunas = async (req, res) => {
   const resp = await allRegister(table);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: `No hay datos aun` });
+};
+//TRAER LAS VACUNAS DE LAS MASCOTAS
+controllerVacunas.getVacunasMascotas = async (req, res) => {
+  const join =
+    "as vacu JOIN mascota as masco ON vacu.IdMascota=masco.IdMascota";
+  const where = `masco.IdMascota=${req.params.id}`;
+  const resp = await getJoinConsult(table, join, where);
   if (resp.length > 0) res.status(200).json(resp);
   else res.status(400).json({ message: `No hay datos aun` });
 };

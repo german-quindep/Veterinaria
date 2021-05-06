@@ -40,19 +40,17 @@ export class FormularioVeterinarioComponent implements OnInit {
   }
   setEditVeterinarioForm() {
     this.editarVetarinario = true;
-    if (this.idVeterinario !== null) {
-      this.apiRest
-        .getOneDataApi('Un-Veterinario/', this.idVeterinario)
-        .subscribe(
-          (res) => {
-            this.formVeteriBase.formVeterinario.setValue({ ...res[0] });
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } else {
-      this.editarVetarinario = false;
-    }
+    this.idVeterinario !== null
+      ? this.apiRest
+          .getOneDataApi('Un-Veterinario/', this.idVeterinario)
+          .subscribe(
+            (res) => {
+              this.formVeteriBase.formVeterinario.setValue({ ...res[0] });
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+      : (this.editarVetarinario = false);
   }
 }

@@ -6,6 +6,7 @@ const {
   ActualizarMascotas,
   EliminarMascotas,
   registerMascotas,
+  getAllMascotasUsers,
   verDetallesMascotas,
 } = require("../controllers/mascotas.controllers");
 const { validarMascotas } = require("../middleware/errorsValidate");
@@ -13,6 +14,8 @@ const routeMascotas = Router();
 const { verifyToken, verifyAdmin } = require("../validations/verifyToken"); //SE VERIFICA EL TOKEN CON ROLES
 //TODAS LAS MASCOTAS
 routeMascotas.get("/Mascotas-All", verifyToken, todasLasMascotas);
+//MASCOTAS DE LOS USUARIOS
+routeMascotas.get('/All-mascotas-users/:username',verifyToken,getAllMascotasUsers);
 //REGISTRAR MASCOTAS
 routeMascotas.post(
   "/Registrar-Mascotas",

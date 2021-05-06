@@ -4,6 +4,7 @@ const {
   updateRegister,
   deleteRegister,
   allRegister,
+  getJoinConsult,
   consultById,
 } = require("../DAO/CrudDao.js");
 //TABLA BD
@@ -11,6 +12,15 @@ var table = "historial";
 //ALREGISTER
 historial.getAllHistorial = async (req, res) => {
   const resp = await allRegister(table);
+  if (resp.length > 0) res.status(200).json(resp);
+  else res.status(400).json({ message: "No hay registros" });
+};
+//TRAER EL HISTORIAL Y ENFERMEDAD DE LA MASCOTA
+historial.getHistoEnferMascotas = async (req, res) => {
+  const join =
+    "as his JOIN enfermedades as enfer on his.IdHistorial=enfer.IdHistorial";
+  const where = `his.IdHistorial=${req.params.id}`;
+  const resp = await getJoinConsult(table, join, where);
   if (resp.length > 0) res.status(200).json(resp);
   else res.status(400).json({ message: "No hay registros" });
 };
