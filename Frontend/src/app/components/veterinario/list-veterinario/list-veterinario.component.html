@@ -21,6 +21,7 @@
     </tr>
   </thead>
   <tbody>
+    <ng-template *ngIf="allVeterinario else notData">
     <tr *ngFor="let veterinario of allVeterinario">
       <th>{{ veterinario.IdVeterinario }}</th>
       <th>{{ veterinario.Nombre }}</th>
@@ -43,6 +44,12 @@
         </button>
       </th>
     </tr>
+  </ng-template>
+  <ng-template #notData>
+    <tr>
+      <th class="text text-danger text-center">No hay Datos Aun en la lista</th>
+    </tr>
+  </ng-template>
   </tbody>
 </table>
 <app-formulario-veterinario></app-formulario-veterinario>

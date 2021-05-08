@@ -16,59 +16,64 @@
       <th scope="col">Color</th>
       <th scope="col">Peso</th>
       <th scope="col">Especie</th>
-     <!--- <th scope="col">IdUsuario</th>
+      <!--- <th scope="col">IdUsuario</th>
       <th scope="col">IdVeterinario</th>
       <th scope="col">IdHistorial</th>-->
       <th scope="col">Opciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let mascota of Mascotas">
-      <th scope="col">{{ mascota.IdMascota }}</th>
-      <th>{{ mascota.Nombre }}</th>
-      <th ng-controller="ctrlFecha">
-        {{ mascota.FechaNacimiento | date: "yyyy-MM-d" }}
-      </th>
-      <th>{{ mascota.Edad }} años</th>
-      <th>{{ mascota.Raza }}</th>
-      <th>{{ mascota.Color }}</th>
-      <th>{{ mascota.Peso }}</th>
-      <th>{{ mascota.Especie }}</th>
-     <!--- <th>{{ mascota.IdUser }}</th>
+    <ng-template *ngIf="Mascotas; else notData">
+      <tr *ngFor="let mascota of Mascotas">
+        <th scope="col">{{ mascota.IdMascota }}</th>
+        <th>{{ mascota.Nombre }}</th>
+        <th ng-controller="ctrlFecha">
+          {{ mascota.FechaNacimiento | date: "yyyy-MM-d" }}
+        </th>
+        <th>{{ mascota.Edad }} años</th>
+        <th>{{ mascota.Raza }}</th>
+        <th>{{ mascota.Color }}</th>
+        <th>{{ mascota.Peso }}</th>
+        <th>{{ mascota.Especie }}</th>
+        <!--- <th>{{ mascota.IdUser }}</th>
       <th>{{ mascota.IdVeterinario }}</th>
       <th>{{ mascota.IdHistorial }}</th>-->
-      <th>
-        <button
-          type="button"
-          class="btn btn-outline-warning mx-1 my-1"
-          [routerLink]="['/Mascotas/Editar-Mascotas/', mascota.IdMascota]"
-          title="Editar"
-        >
-          <i class="fas fa-edit"></i>
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-danger mx-1 my-1"
-          (click)="obtenerIdMascota(mascota.IdMascota)"
-          title="Eliminar"
-        >
-          <i class="fas fa-user-times"></i>
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-primary mx-1 my-1"
-          data-toggle="modal"
-          data-target="#DetallesModalMascotas"
-          title="Detalles de la mascotas"
-          (click)="verMasDetalles(mascota.IdMascota)"
-        >
-          <i class="fas fa-info-circle"></i>
-        </button>
-      </th>
-    </tr>
+        <th>
+          <button
+            type="button"
+            class="btn btn-outline-warning mx-1 my-1"
+            [routerLink]="['/Mascotas/Editar-Mascotas/', mascota.IdMascota]"
+            title="Editar"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger mx-1 my-1"
+            (click)="obtenerIdMascota(mascota.IdMascota)"
+            title="Eliminar"
+          >
+            <i class="fas fa-user-times"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-primary mx-1 my-1"
+            data-toggle="modal"
+            data-target="#DetallesModalMascotas"
+            title="Detalles de la mascotas"
+            (click)="verMasDetalles(mascota.IdMascota)"
+          >
+            <i class="fas fa-info-circle"></i>
+          </button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #notData>
+      <tr>
+        <th class="text text-danger text-center">No hay datos en la lista</th>
+      </tr>
+    </ng-template>
   </tbody>
 </table>
 
-<app-detalles-mascotas
-  [MascotasDetalles]="oneMascotas"
-></app-detalles-mascotas>
+<app-detalles-mascotas [MascotasDetalles]="oneMascotas"></app-detalles-mascotas>

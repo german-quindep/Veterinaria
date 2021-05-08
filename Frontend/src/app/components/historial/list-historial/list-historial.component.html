@@ -19,32 +19,46 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let historial of allHistorial">
-      <th>{{ historial.IdHistorial }}</th>
-      <th>{{ historial.Motivo }}</th>
-      <th>{{ historial.Diagnostico }}</th>
-      <th ng-controller="ctrlFecha">
-        {{ historial.Fecha | date: "yyyy-MM-dd" }}
-      </th>
-      <th>
-        <button
-          title="Editar"
-          class="btn btn-outline-warning mx-1"
-          data-toggle="modal"
-          data-target="#ModalHistorial"
-          [routerLink]="['/Historial/Editar-Historial/', historial.IdHistorial]"
-        >
-          <i class="fas fa-edit"></i>
-        </button>
-        <button
-          title="Eliminar"
-          class="btn btn-outline-danger mx-1"
-          (click)="this.compoHistorial.eliminarHistorial(historial.IdHistorial)"
-        >
-          <i class="fas fa-user-times"></i>
-        </button>
-      </th>
-    </tr>
+    <ng-template *ngIf="allHistorial; else notData">
+      <tr *ngFor="let historial of allHistorial">
+        <th>{{ historial.IdHistorial }}</th>
+        <th>{{ historial.Motivo }}</th>
+        <th>{{ historial.Diagnostico }}</th>
+        <th ng-controller="ctrlFecha">
+          {{ historial.Fecha | date: "yyyy-MM-dd" }}
+        </th>
+        <th>
+          <button
+            title="Editar"
+            class="btn btn-outline-warning mx-1"
+            data-toggle="modal"
+            data-target="#ModalHistorial"
+            [routerLink]="[
+              '/Historial/Editar-Historial/',
+              historial.IdHistorial
+            ]"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+            title="Eliminar"
+            class="btn btn-outline-danger mx-1"
+            (click)="
+              this.compoHistorial.eliminarHistorial(historial.IdHistorial)
+            "
+          >
+            <i class="fas fa-user-times"></i>
+          </button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #notData>
+      <tr>
+        <th class="text text-danger text-center">
+          No hay datos aun disponible
+        </th>
+      </tr>
+    </ng-template>
   </tbody>
 </table>
 <app-formulario-historial></app-formulario-historial>

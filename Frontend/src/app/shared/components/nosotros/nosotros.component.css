@@ -1,17 +1,61 @@
-.card{
-    border:1px solid #fff;
-    -webkit-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
-    -moz-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
-    box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+.card {
+  border: 1px solid #fff;
+  -webkit-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+  -moz-box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
+  box-shadow: 15px 14px 55px 1px rgba(0, 0, 0, 0.68);
 }
-.icons-hove{
-    background: #fff;
-    color:#fff;
+.icons-hove {
+  background: #fff;
+  color: #fff;
 }
-.icons-hover:hover{
-    color:#ce93d8;
-    cursor: pointer;
+.icons-hover:hover {
+  color: #ce93d8;
+  cursor: pointer;
 }
-.card-collapse{
-    background: rgb(186, 104, 200,.4);
+.card-collapse {
+  background: rgb(186, 104, 200, 0.4);
+}
+.card:hover {
+  transition: 0.3s;
+  -webkit-box-shadow: -7px -14px 16px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -7px -14px 16px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: -7px -14px 16px 1px rgba(0, 0, 0, 0.75);
+}
+.section-3 {
+    background: #e570e7;
+    background: -moz-radial-gradient(center, ellipse cover, #e570e7 0%, #de20e5 0%, #a849a3 47%);
+    background: -webkit-radial-gradient(center, ellipse cover, #e570e7 0%,#de20e5 0%,#a849a3 47%);
+    background: radial-gradient(ellipse at center, #e570e7 0%,#de20e5 0%,#a849a3 47%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=1 );
+}
+.card-section-3 {
+  outline: 5px ridge #d457cb;
+  outline-offset: 4px;
+}
+.card-section-3 .card-header {
+  background: #cf58e4;
+  background: -moz-linear-gradient(top, #cf58e4 0%, #b64ac4 47%, #96409e 83%);
+  background: -webkit-linear-gradient(
+    top,
+    #cf58e4 0%,
+    #b64ac4 47%,
+    #96409e 83%
+  );
+  background: linear-gradient(to bottom, #cf58e4 0%, #b64ac4 47%, #96409e 83%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf58e4', endColorstr='#96409e',GradientType=0 );
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+}
+.card-section-3 .card-body {
+  background: #e570e7;
+  background: -moz-linear-gradient(top, #e570e7 0%, #c85ec7 47%, #a849a3 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #e570e7 0%,
+    #c85ec7 47%,
+    #a849a3 100%
+  );
+  background: linear-gradient(to bottom, #e570e7 0%, #c85ec7 47%, #a849a3 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 );
+  color: #fff;
 }

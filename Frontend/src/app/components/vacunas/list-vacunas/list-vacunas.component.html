@@ -20,43 +20,50 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let vacunas of allVacunas">
-      <th>{{ vacunas.IdVacunas }}</th>
-      <th ng-controller="ctrlFecha">
-        {{ vacunas.Fecha | date: "yyyy-MM-dd" }}
-      </th>
-      <th>{{ vacunas.Tipo_Vacuna }}</th>
-      <th>{{ vacunas.Num_Dosis }}</th>
-      <th>{{ vacunas.IdMascota }}</th>
-      <th>
-        <button
-          title="Editar"
-          class="btn btn-outline-warning mx-1"
-          data-toggle="modal"
-          data-target="#ModalVacuna"
-          [routerLink]="['/Vacunas/Editar-Vacuna/', vacunas.IdVacunas]"
-        >
-          <i class="fas fa-edit"></i>
-        </button>
-        <button
-          title="Eliminar"
-          class="btn btn-outline-danger mx-1"
-          (click)="this.compoVacunas.eliminarVacuna(vacunas.IdVacunas)"
-        >
-          <i class="fas fa-user-times"></i>
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-primary mx-1 my-1"
-          data-toggle="modal"
-          data-target="#DetallesModalMascotasVacunas"
-          title="Detalles de la mascotas"
-          (click)="verMasDetalles(vacunas.IdMascota)"
-        >
-          <i class="fas fa-info-circle"></i>
-        </button>
-      </th>
-    </tr>
+    <ng-template *ngIf="allVacunas; else notData">
+      <tr *ngFor="let vacunas of allVacunas">
+        <th>{{ vacunas.IdVacunas }}</th>
+        <th ng-controller="ctrlFecha">
+          {{ vacunas.Fecha | date: "yyyy-MM-dd" }}
+        </th>
+        <th>{{ vacunas.Tipo_Vacuna }}</th>
+        <th>{{ vacunas.Num_Dosis }}</th>
+        <th>{{ vacunas.IdMascota }}</th>
+        <th>
+          <button
+            title="Editar"
+            class="btn btn-outline-warning mx-1"
+            data-toggle="modal"
+            data-target="#ModalVacuna"
+            [routerLink]="['/Vacunas/Editar-Vacuna/', vacunas.IdVacunas]"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+            title="Eliminar"
+            class="btn btn-outline-danger mx-1"
+            (click)="this.compoVacunas.eliminarVacuna(vacunas.IdVacunas)"
+          >
+            <i class="fas fa-user-times"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-primary mx-1 my-1"
+            data-toggle="modal"
+            data-target="#DetallesModalMascotasVacunas"
+            title="Detalles de la mascotas"
+            (click)="verMasDetalles(vacunas.IdMascota)"
+          >
+            <i class="fas fa-info-circle"></i>
+          </button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #notData>
+      <tr>
+        <th class="text text-danger text-center">No hay datos en la lista</th>
+      </tr>
+    </ng-template>
   </tbody>
 </table>
 <app-form-vacunas></app-form-vacunas>

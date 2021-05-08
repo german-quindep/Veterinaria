@@ -1,51 +1,60 @@
 <div class="container my-5">
-  <h1 class="text text-info py-3 text-center">Mascota del usuario {{ username }}</h1>
+  <h1 class="text text-info py-3 text-center">
+    Mascota del usuario {{ username }}
+  </h1>
   <div class="row py-5">
-    <div class="col-lg-4 py-3 h-100" *ngFor="let allMascotas of userMascotas">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="text text-white text-center">{{ allMascotas.Nombre }}</h4>
-        </div>
-        <div class="card-body text-white">
-          <h6>Datos de la mascota</h6>
-          <p>Fecha de Nacimiento: {{ allMascotas.FechaNacimiento }}</p>
-          <p>Edad: {{ allMascotas.Edad }}</p>
-          <p>Raza: {{ allMascotas.Raza }}</p>
-          <p>Peso: {{ allMascotas.Raza }}</p>
-        </div>
-        <div class="card-footer">
-          <button
-            type="button"
-            class="btn mx-1"
-            title="veterinario"
-            data-toggle="modal"
-            data-target="#ModalClientVeterinario"
-            (click)="idVeterinario(allMascotas.IdVeterinario)"
-          >
-            Veterinario
-          </button>
-          <button
-          type="button"
-            class="btn mx-1"
-            title="historial"
-            data-toggle="modal"
-            data-target="#ModalClientHistory"
-            (click)="idHistorial(allMascotas.IdHistorial)"
-          >
-            Historial
-          </button>
-          <button
-            class="btn"
-            title="vacunas"
-            data-toggle="modal"
-            data-target="#ModalClientVacunas"
-            (click)="idVacunas(allMascotas.IdMascota)"
-          >
-            Vacunas
-          </button>
+    <ng-container *ngIf="userMascotas; else notData">
+      <div class="col-lg-4 py-3 h-100" *ngFor="let allMascotas of userMascotas">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="text text-white text-center">
+              {{ allMascotas.Nombre }}
+            </h4>
+          </div>
+          <div class="card-body text-white">
+            <h6>Datos de la mascota</h6>
+            <p>Fecha de Nacimiento: {{ allMascotas.FechaNacimiento }}</p>
+            <p>Edad: {{ allMascotas.Edad }}</p>
+            <p>Raza: {{ allMascotas.Raza }}</p>
+            <p>Peso: {{ allMascotas.Raza }}</p>
+          </div>
+          <div class="card-footer">
+            <button
+              type="button"
+              class="btn mx-1"
+              title="veterinario"
+              data-toggle="modal"
+              data-target="#ModalClientVeterinario"
+              (click)="idVeterinario(allMascotas.IdVeterinario)"
+            >
+              Veterinario
+            </button>
+            <button
+              type="button"
+              class="btn mx-1"
+              title="historial"
+              data-toggle="modal"
+              data-target="#ModalClientHistory"
+              (click)="idHistorial(allMascotas.IdHistorial)"
+            >
+              Historial
+            </button>
+            <button
+              class="btn"
+              title="vacunas"
+              data-toggle="modal"
+              data-target="#ModalClientVacunas"
+              (click)="idVacunas(allMascotas.IdMascota)"
+            >
+              Vacunas
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #notData class="text-center">
+      <h3 class="text text-center text-danger">No hay datos que mostrar, aun no tiene registrada la mascota</h3>
+    </ng-template>
   </div>
 </div>
 <app-modal-historial [allHistorial]="allHistorial"></app-modal-historial>

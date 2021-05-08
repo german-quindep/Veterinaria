@@ -24,7 +24,6 @@ export class UsersMascotasListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMascotas();
   }
-
   getAllMascotas() {
     const user = this.authServi.getCurrentUser();
     this.username = user.result[0].username;
