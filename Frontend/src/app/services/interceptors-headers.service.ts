@@ -20,9 +20,11 @@ export class InterceptorsHeaders implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     //OBTENGO EL TOKEN
     if (this.authServi.getToken()) {
+      const username = this.authServi.getCurrentUser();
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'x-access-token': this.authServi.getToken(),
+        'x-rol-user': username.result[0].username,
       });
       //TRABAJAMOS CON UN CLON
       const reqClone = req.clone({

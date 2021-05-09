@@ -15,6 +15,7 @@ import { ListHistorialComponent } from '@Chistorial/list-historial';
 import { HistorialDirectiveDirective } from '@Chistorial/directive-historial';
 //SHARED
 import { BaseFormHistorial } from '@Shared/FormsReactive/BaseFormHistorial';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @NgModule({
   declarations: [
     HistorialComponent,
@@ -46,6 +47,7 @@ import { BaseFormHistorial } from '@Shared/FormsReactive/BaseFormHistorial';
     FormularioHistorialComponent,
     ListHistorialComponent,
     DatePipe,
+    ToastRMessage,
   ],
 })
 export class HistorialModule {}

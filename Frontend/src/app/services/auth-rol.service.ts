@@ -41,6 +41,10 @@ export class AuthRolService {
         this.logoutRol();
     }
   }
+  //OBTENGO EL ROL
+  getRol() {
+    return localStorage.getItem('rol-user');
+  }
   //VERIFICAR ROL DEL USUARIO
   private checkRol() {
     const userRol = localStorage.getItem('rol-user');

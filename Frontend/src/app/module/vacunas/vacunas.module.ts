@@ -17,7 +17,7 @@ import { ConsultMascotasComponent } from '@Cvacunas/consult-mascotas';
 import { DirectiveVacunaDirective } from '@Cvacunas/directive-vacunas';
 //SHARED
 import { BaseFormVacunas } from '@Shared/FormsReactive/BaseFormVacunas';
-
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @NgModule({
   declarations: [
     VacunasComponent,
@@ -28,8 +28,7 @@ import { BaseFormVacunas } from '@Shared/FormsReactive/BaseFormVacunas';
     DirectiveVacunaDirective,
   ],
   imports: [
-
-  ReactiveFormsModule,
+    ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {
@@ -52,6 +51,7 @@ import { BaseFormVacunas } from '@Shared/FormsReactive/BaseFormVacunas';
     ConsultMascotasComponent,
     DatePipe,
     ListVacunasComponent,
+    ToastRMessage,
   ],
 })
 export class VacunasModule {}

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '@services/api-rest.service';
 import { IEnfermedades } from '@models/Ienfermedades.models';
-
+//SHARED
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @Component({
   selector: 'app-enfermedades',
   templateUrl: './enfermedades.component.html',
@@ -9,7 +10,7 @@ import { IEnfermedades } from '@models/Ienfermedades.models';
 })
 export class EnfermedadesComponent implements OnInit {
   public allEnfermedades: IEnfermedades;
-  constructor(private apiRest: ApiRestService) {}
+  constructor(private apiRest: ApiRestService, private toast: ToastRMessage) {}
 
   ngOnInit(): void {
     this.getAllEnfermedades();
@@ -20,7 +21,7 @@ export class EnfermedadesComponent implements OnInit {
         this.allEnfermedades = res;
       },
       (err) => {
-        console.log(err);
+        this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
       }
     );
   }
@@ -31,21 +32,21 @@ export class EnfermedadesComponent implements OnInit {
         .editApiData('Actualizar-Enfermedades/', form.IdEnfermedades, form)
         .subscribe(
           (res) => {
-            console.log(res);
             this.getAllEnfermedades();
+            this.toast.showWarning(res.message, 'Actualizado con exito');
           },
           (err) => {
-            console.log(err);
+            this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
           }
         );
     } else {
       this.apiRest.postApiData('Registrar-Enfermedades', form).subscribe(
         (res) => {
-          console.log(res);
           this.getAllEnfermedades();
+          this.toast.showSuccess(res.message, 'Registrado con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
         }
       );
     }
@@ -55,11 +56,11 @@ export class EnfermedadesComponent implements OnInit {
     if (confirm(`Esta seguro de eliminar la vacuna con id: ${id}`)) {
       this.apiRest.deleteApiData('Eliminar-Enfermedades/', id).subscribe(
         (res) => {
-          console.log(res);
           this.getAllEnfermedades();
+          this.toast.showDanger(res.message, 'Eliminado con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
         }
       );
     }

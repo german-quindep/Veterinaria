@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { ApiRestService } from '@services/api-rest.service';
 //SHARED
 import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 
 @Component({
   selector: 'app-formulario-mascotas',
@@ -20,7 +21,8 @@ export class FormularioMascotasComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private datePipe: DatePipe,
     private apiRest: ApiRestService,
-    public formMasco: BaseFormMascotas
+    public formMasco: BaseFormMascotas,
+    private toast: ToastRMessage
   ) {
     //OBTENGO EL ID
     this.id = this.aRoute.snapshot.paramMap.get('id');
@@ -47,21 +49,21 @@ export class FormularioMascotasComponent implements OnInit {
         .editApiData('Actualizar-Mascotas/', form.IdMascota, form)
         .subscribe(
           (res) => {
-            console.log(res);
             this.volverAlModulo();
+            this.toast.showWarning(res.message, 'Actualizado con exito');
           },
           (err) => {
-            console.log(err);
+            this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
           }
         );
     } else {
       this.apiRest.postApiData('Registrar-Mascotas', form).subscribe(
         (res) => {
-          console.log(res);
           this.volverAlModulo();
+          this.toast.showWarning(res.message, 'Registrado con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
         }
       );
     }
@@ -81,7 +83,7 @@ export class FormularioMascotasComponent implements OnInit {
             this.formMasco.createMascotas.setValue({ ...res[0] });
           },
           (err) => {
-            console.log(err);
+            this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
           }
         )
       : (this.editar = false);

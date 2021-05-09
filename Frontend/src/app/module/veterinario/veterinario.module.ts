@@ -15,6 +15,7 @@ import { ListVeterinarioComponent } from '@CVeterinario/list-veterinario';
 import { DirectiveVeterinarioDirective } from '@CVeterinario/directive-veterinario';
 //SHARED
 import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
     FormularioVeterinarioComponent,
     ListVeterinarioComponent,
     BaseFormPerson,
+    ToastRMessage,
   ],
 })
 export class VeterinarioModule {}

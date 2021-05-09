@@ -14,6 +14,7 @@ import { ListPersonasComponent } from '@Cpersonas/list-personas';
 import { EstadoDirective } from '@Cpersonas/directive-persona';
 //SHARED
 import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @NgModule({
   declarations: [
     PersonasComponent,
@@ -39,6 +40,11 @@ import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
     UsersMenuModule,
     CommonModule,
   ],
-  providers: [ListPersonasComponent, FormularioComponent, BaseFormPerson],
+  providers: [
+    ListPersonasComponent,
+    FormularioComponent,
+    BaseFormPerson,
+    ToastRMessage,
+  ],
 })
 export class PersonasModule {}

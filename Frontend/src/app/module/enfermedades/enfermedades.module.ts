@@ -16,6 +16,7 @@ import { ConsultHistorialEnfermedadesComponent } from '@Cenfermedades/consult-hi
 //DIRECTIVES
 import { DirectiveEnfermedadesDirective } from '@Cenfermedades/directive-enfermedades';
 import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @NgModule({
   declarations: [
     EnfermedadesComponent,
@@ -26,7 +27,7 @@ import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades
     DirectiveEnfermedadesDirective,
   ],
   imports: [
-  ReactiveFormsModule,
+    ReactiveFormsModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {
@@ -48,6 +49,7 @@ import { BaseFormEnfermedades } from '@Shared/FormsReactive/BaseFormEnfermedades
     FormEnfermedadesComponent,
     ListEnfermedadesComponent,
     DatePipe,
+    ToastRMessage,
   ],
 })
 export class EnfermedadesModule {}

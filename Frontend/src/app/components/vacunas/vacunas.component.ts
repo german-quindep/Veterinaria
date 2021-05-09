@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '@services/api-rest.service';
 //MODELS
 import { IVacunas } from '@models/Ivacunas.models';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @Component({
   selector: 'app-vacunas',
   templateUrl: './vacunas.component.html',
@@ -10,7 +11,7 @@ import { IVacunas } from '@models/Ivacunas.models';
 })
 export class VacunasComponent implements OnInit {
   public allVacunas: IVacunas;
-  constructor(private apiRest: ApiRestService) {}
+  constructor(private apiRest: ApiRestService, private toast: ToastRMessage) {}
 
   ngOnInit(): void {
     this.getAllVacunas();
@@ -21,7 +22,7 @@ export class VacunasComponent implements OnInit {
         this.allVacunas = res;
       },
       (err) => {
-        console.log(err);
+        this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
       }
     );
   }
@@ -34,9 +35,10 @@ export class VacunasComponent implements OnInit {
           (res) => {
             console.log(res);
             this.getAllVacunas();
+            this.toast.showWarning(res.message, 'Se actualizo con exito');
           },
           (err) => {
-            console.log(err);
+            this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
           }
         );
     } else {
@@ -44,9 +46,10 @@ export class VacunasComponent implements OnInit {
         (res) => {
           console.log(res);
           this.getAllVacunas();
+          this.toast.showSuccess(res.message, 'Se registro con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
         }
       );
     }
@@ -58,9 +61,10 @@ export class VacunasComponent implements OnInit {
         (res) => {
           console.log(res);
           this.getAllVacunas();
+          this.toast.showDanger(res.message, 'Se elimino con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
         }
       );
     }

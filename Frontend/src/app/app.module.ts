@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 //SERVICES
 import { AuthServiceService } from '@services/auth-service.service';
 import { ApiRestService } from '@services/api-rest.service';
@@ -18,6 +20,15 @@ import { SectionModule } from '@module/section/section.module';
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      closeButton: true,
+    }),
     BrowserModule,
     NavbarModule,
     SectionModule,

@@ -19,6 +19,7 @@ import { ListUsuariosComponent } from '@Cmascotas/list-usuarios-mascotas';
 import { EstadoMascotasDirective } from '@Cmascotas/directives-mascotas';
 //SHARED
 import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { BaseFormMascotas } from '@Shared/FormsReactive/BaseFormMascotas';
     ListMascotasVeterinarioComponent,
     ListUsuariosComponent,
     ListMascotasComponent,
+    ToastRMessage,
     DatePipe,
   ],
 })

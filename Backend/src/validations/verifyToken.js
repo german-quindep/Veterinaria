@@ -1,12 +1,13 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config");
-const { consultById, getJoinRegister } = require("../DAO/CrudDao");
+const { consultById, getJoinConsult } = require("../DAO/CrudDao");
 const verify = {};
 var table = "username";
 verify.verifyToken = async (req, res, next) => {
   try {
     const token = req.headers["x-access-token"]; //PREGUNTO SI VIENE DE LA CABEZERA EL TOKEN
-    if (!token) { //SI NO HAY TOKEN
+    if (!token) {
+      //SI NO HAY TOKEN
       return res.status(401).json({
         auth: false,
         message: "Hace falta un token para hacer la peticion",
@@ -26,14 +27,17 @@ verify.verifyToken = async (req, res, next) => {
 //ROL ADMIN
 verify.verifyAdmin = async (req, res, next) => {
   try {
+    const rolUserHeader = req.headers["x-rol-user"];
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;
-    var where = `user.username="${req.UserToken}"`;
-    const rolAutorizacion = await getJoinRegister(table, join, where);//JOIN PARA LA CONSULTA
+    var where = `user.username="${rolUserHeader}"`;
+    console.log(join,where);
+    const rolAutorizacion = await getJoinConsult(table, join, where); //JOIN PARA LA CONSULTA
     const rolUser = rolAutorizacion[0]["Nombre"];
-    if (rolUser == "Administrador") {//SI ES ADMIN 
+    if (rolUser == "Administrador") {
+      //SI ES ADMIN
       next();
       return;
-    }//SI NO ES ADMIN
+    } //SI NO ES ADMIN
     res.status(403).json({ message: "No tiene el rol suficiente" });
   } catch (error) {
     res.status(401).json({ message: "No esta autorizado" });
@@ -42,9 +46,10 @@ verify.verifyAdmin = async (req, res, next) => {
 //ROL EMPLEADO
 verify.verifyEmploye = async (req, res, next) => {
   try {
+    const rolUserHeader = req.headers["x-rol-user"];
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;
-    var where = `user.username="${req.UserToken}"`;
-    const rolAutorizacion = await getJoinRegister(table, join, where);
+    var where = `user.username="${rolUserHeader}"`;
+    const rolAutorizacion = await getJoinConsult(table, join, where);
     const rolUser = rolAutorizacion[0]["Nombre"];
     if (rolUser == "Empleado") {
       next();
@@ -58,9 +63,10 @@ verify.verifyEmploye = async (req, res, next) => {
 //ROL CLIENTE
 verify.verifyClient = async (req, res, next) => {
   try {
+    const rolUserHeader = req.headers["x-rol-user"];
     var join = `as user JOIN roles as rol ON user.IdRoles=rol.IdRol`;
-    var where = `user.username="${req.UserToken}"`;
-    const rolAutorizacion = await getJoinRegister(table, join, where);
+    var where = `user.username="${rolUserHeader}"`;
+    const rolAutorizacion = await getJoinConsult(table, join, where);
     const rolUser = rolAutorizacion[0]["Nombre"];
     if (rolUser == "Cliente") {
       next();

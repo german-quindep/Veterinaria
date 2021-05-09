@@ -6,6 +6,7 @@ import { ApiRestService } from '@services/api-rest.service';
 import { VeterinarioComponent } from '@Cveterinario/veterinario';
 //SHARED
 import { BaseFormPerson } from '@Shared/FormsReactive/BaseFormPerson';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @Component({
   selector: 'app-formulario-veterinario',
   templateUrl: './formulario-veterinario.component.html',
@@ -20,7 +21,8 @@ export class FormularioVeterinarioComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private apiRest: ApiRestService,
     public compoVete: VeterinarioComponent,
-    public formVeteriBase: BaseFormPerson
+    public formVeteriBase: BaseFormPerson,
+    private toast: ToastRMessage
   ) {
     this.idVeterinario = this.aRoute.snapshot.paramMap.get('id');
   }
@@ -48,7 +50,7 @@ export class FormularioVeterinarioComponent implements OnInit {
               this.formVeteriBase.formVeterinario.setValue({ ...res[0] });
             },
             (err) => {
-              console.log(err);
+              this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
             }
           )
       : (this.editarVetarinario = false);

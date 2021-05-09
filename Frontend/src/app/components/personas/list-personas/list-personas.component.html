@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    <ng-template *ngIf="Personas; else notData">
+    <ng-container *ngIf="Personas; else notData">
       <tr *ngFor="let persona of Personas">
         <th scope="row">{{ persona.IdPersona }}</th>
         <td>{{ persona.Nombre }}</td>
@@ -48,12 +48,10 @@
           </a>
         </td>
       </tr>
-    </ng-template>
-    <ng-template #notData>
-      <tr>
-        <th class="text text-danger">No hay datos que mostrar</th>
-      </tr>
-    </ng-template>
+    </ng-container>
   </tbody>
 </table>
+<ng-template #notData>
+  <p class="text text-danger">No hay datos que mostrar</p>
+</ng-template>
 <app-formulario></app-formulario>

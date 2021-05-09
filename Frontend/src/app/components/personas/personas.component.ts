@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '@services/api-rest.service';
 //MODELS
 import { IPersona } from '@models/Ipersona.models';
+//SHARED
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 @Component({
   selector: 'app-personas',
   templateUrl: './personas.component.html',
@@ -12,7 +14,7 @@ export class PersonasComponent implements OnInit {
   //VARIABLES
   public Personas: IPersona;
   url_post: string = 'Todas-Persona';
-  constructor(public serviApi: ApiRestService) {}
+  constructor(public serviApi: ApiRestService, private toast: ToastRMessage) {}
   ngOnInit(): void {
     this.getAllPersonas();
   }
@@ -23,7 +25,7 @@ export class PersonasComponent implements OnInit {
         this.Personas = res;
       },
       (error: any) => {
-        console.log('Hubo un error', error);
+        this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
       }
     );
   }
@@ -33,11 +35,11 @@ export class PersonasComponent implements OnInit {
       //REGISTRAR
       this.serviApi.postApiData('Registrar-Persona', form).subscribe(
         (res) => {
-          console.log(res);
           this.getAllPersonas();
+          this.toast.showSuccess(res.message, `Registrado con exito`);
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
         }
       );
     } else {
@@ -46,11 +48,11 @@ export class PersonasComponent implements OnInit {
         .editApiData('Actualizar-Persona/', form.IdPersona, form)
         .subscribe(
           (res) => {
-            console.log(res);
             this.getAllPersonas();
+            this.toast.showWarning(res.message, `Actualizado con exito`);
           },
           (err) => {
-            console.log(err);
+            this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
           }
         );
     }
@@ -60,11 +62,11 @@ export class PersonasComponent implements OnInit {
     if (confirm('Esta seguro de eliminar al usuario: ' + id)) {
       this.serviApi.deleteApiData('Eliminar-Persona/', id).subscribe(
         (res) => {
-          console.log(res);
           this.getAllPersonas();
+          this.toast.showDanger(res.message, `Eliminado con exito`);
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Hubo un error');
         }
       );
     }

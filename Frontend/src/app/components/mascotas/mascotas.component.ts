@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '@services/api-rest.service';
 //MODELS
 import { IMascotas } from '@models/Imascotas.models';
+import { ToastRMessage } from '@Shared/Toast/ToastR';
 
 @Component({
   selector: 'app-mascotas',
@@ -11,7 +12,7 @@ import { IMascotas } from '@models/Imascotas.models';
 })
 export class MascotasComponent implements OnInit {
   public Mascotas: IMascotas;
-  constructor(private apiRest: ApiRestService) {}
+  constructor(private apiRest: ApiRestService, private toast: ToastRMessage) {}
 
   ngOnInit(): void {
     this.getAllMascotas();
@@ -23,7 +24,7 @@ export class MascotasComponent implements OnInit {
         this.Mascotas = res;
       },
       (err) => {
-        console.log(err);
+        this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
       }
     );
   }
@@ -32,11 +33,11 @@ export class MascotasComponent implements OnInit {
     if (confirm(`Estas seguro de eliminar al id: ${id}`)) {
       this.apiRest.deleteApiData('Eliminar-Mascotas/', id).subscribe(
         (res) => {
-          console.log(res);
           this.getAllMascotas();
+          this.toast.showDanger(res.message, 'Eliminado con exito');
         },
         (err) => {
-          console.log(err);
+          this.toast.showDanger('Intentelo mas tarde', 'Ocurrio un error');
         }
       );
     }
